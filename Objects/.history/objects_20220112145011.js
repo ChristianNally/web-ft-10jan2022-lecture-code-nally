@@ -8,48 +8,50 @@
 
 // The following is NOT the best way to organize a set of data, you can't loop over it!
 
-// let voterOneName = 'Peter';
-// const voterOneSIN = 123456789;
-// const voterOneAge = 33;
+let voterOneName = 'Peter';
+const voterOneSIN = 123456789;
+const voterOneAge = 33;
 
-// const voterTwoName = 'Paul';
-// var voterTwoTheyDidVote = false;
-// const voterTwoAge = 36;
+const voterTwoName = 'Paul';
+var voterTwoTheyDidVote = false;
+const voterTwoAge = 36;
 
-// const voterThreeName = 'Mary';
-// const voterThreeAge = 39;
+const voterThreeName = 'Mary';
+const voterThreeAge = 39;
 
 
 // let animal; // ( this is a Declaration )
 // animal = 'Monkey'; //  ( this is an Initialization using a string 'literal' )
 //       OR
-// let beast = 'Chimp'; // ( Declaration AND an Initialization using a string 'literal' )
+let beast = 'Chimp'; // ( Declaration AND an Initialization using a string 'literal' )
 
 
-// // //
-// // // OBJECT LITERALS
-// // //
+//
+// OBJECT LITERALS
+//
 
-// let voter = {
-//   name: 'Lefty Larry',
-//   age: 49,
-//   theyDidVote: false,
-//   sin_number: 123456789,
-// };
+let voter = {
+  name: 'Lefty Larry',
+  age: 49,
+  theyDidVote: {yesterday: true, tomorrow: false },
+  sin_number: 123456789,
+};
+
 // console.log('typeof voter:',typeof voter);
 // console.log('voter:',voter);
 
-// // dot notation
+// dot notation
 // console.log("voter.theyDidVote:",voter.theyDidVote);
 
 // // update a value on an object
-// voter.age += 1;
+voter.age = voter.age + 1;
 // console.log("voter after update:",voter);
 
-// // square brackets notation
+// square brackets notation
 // const nameOfProperty = 'age';
-// console.log("voter[nameOfProperty]:",voter[nameOfProperty]);
+// console.log("voter.age:",voter.age);
 // console.log("voter['age']:",voter['age']);
+// console.log("voter[nameOfProperty]:",voter[nameOfProperty]);
 
 // // square brackets notation is useful when your key name is stored in a variable.
 // const key = 'name';
@@ -58,15 +60,52 @@
 // // typeof operator evaluates to the type of the expression... check out this type:
 // console.log('typeof voter:',typeof voter);
 
-// //
-// // An Array of Objects
-// //
+//
+// An Array of Objects
+//
 // const voters = [];
 
 // voters.push(voter);
 // voters.push({name: 'Peter',age: 45, sin_number: 123456789});
-// voters.push({name: 'Paul',age: 46, sin_number: 987654321});
+// voters.push({name: 'Paul', sin_number: 987654321});
 // voters.push({name: 'Mary',age: 47, sin_number: 246813579});
+
+
+
+const grabBag = {
+  'key1': {name: 'Bob', age: 44, gender: 'male'},
+  'key2': {name: 'Alice', age: 45, gender: 'female'}
+};
+console.log('grabBag',grabBag);
+
+const newObj = {};
+
+newObj['name'] = grabBag['key1'].name;
+newObj['age'] = grabBag['key1'].age;
+
+console.log('newObj',newObj);
+
+
+
+
+// console.log('voters:', voters);
+
+
+//
+// // For Week 1 Day 3 students are unhappy with .forEach and with arrow functions.
+// refactor this for C loops? https://stackoverflow.com/questions/5048371/are-javascript-arrays-primitives-strings-objects
+//
+
+// let total = 0;
+// for (let j = 0; j < voters.length; j++) {
+//   console.log(`voters[${j}].age:`, voters[j].age);
+// }
+
+
+// for (let key in voters) {
+//   console.log(`voters[${key}].age:`, voters[key].age);
+// }
+
 
 // voters.forEach(
 //   (item)=>{
@@ -81,27 +120,43 @@
 
 
 // // Functions defined on objects (a.k.a. METHODS)
-// voter = {
-//   name: 'Lefty Larry',
-//   age: 49,
-//   sin_number: 123456789,
-//   speak: function(message){
-//     console.log('Hello, Cruel World!:',message);
-//   },
-//   vote: function(candidate){ // cannot use an arrow function here
-//     console.log('I am voting for:',candidate);
-//     console.log('My SIN number is:',this.sin_number);
-//   },
-// };
+voter = {
+  name: 'Lefty Larry',
+  age: 49,
+  sin_number: 123456789,
+  speak: function(message){
+    console.log('Hello, Cruel World!:',message);
+  },
+  vote: function(candidate){ // cannot use an arrow function here
+    console.log('I am voting for:',candidate);
+    console.log('My SIN number is:',this.sin_number);
+  },
+};
 
-// voter.speak("Chicken McNuggets!");
+//  voter.speak("Chicken McNuggets!");
 // // voter.vote("Cheese McBurger");
 
 // // //
 // // // e.g. Math object
 // // //
 
-// // console.log("Math:",Math.PI);
+// console.log("Math:",Math.PI);
+
+const consule = 444;
+
+
+//
+//
+//
+
+///
+
+
+
+
+// consule.log('monkey fuzz!!!');
+
+
 
 // // console.log("Math.random():",Math.random());
 
