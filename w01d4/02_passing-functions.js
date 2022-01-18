@@ -10,11 +10,9 @@
 function processor(arg1, callback){
   // does some stuff
 
-  callback();
+  callback('stuff');
 
 }
-
-processor(1);
 
 
 
@@ -28,6 +26,7 @@ const sayHello2 = function(name) {
   console.log("sayHello2 logs:",`hola!! ${name}`);
 };
 
+processor(1, sayHello2);
 
 
 
