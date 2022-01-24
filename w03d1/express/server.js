@@ -49,4 +49,6 @@ app.get('*',(req,res)=>{
 });
 
 // have the app listen on the port
-app.listen(port,console.log(`Server is listening on port ${port}`));
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
