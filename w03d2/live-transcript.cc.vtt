@@ -1,0 +1,3161 @@
+WEBVTT
+
+00:00:17.000 --> 00:00:21.000
+Okay. Well,
+
+00:00:21.000 --> 00:00:33.000
+welcome to day two week three, we're going to do, tiny app stuff, let me turn on the video.
+
+00:00:33.000 --> 00:00:39.000
+Right, week three day two, we're going to talk about.
+
+00:00:39.000 --> 00:00:56.000
+Baby basically building routes routes in Express, and building up a server that can help us build an application where we're peddling widgets.
+
+00:00:56.000 --> 00:01:01.000
+Working with, you know, some entity of one form or another.
+
+00:01:01.000 --> 00:01:13.000
+Where we have routes standard routes that are useful for saving interacting with those entities.
+
+00:01:13.000 --> 00:01:20.000
+Right. Having a page that goes with each one of them, and all that sort of stuff.
+
+00:01:20.000 --> 00:01:34.000
+And we'll be using Express for this. And so we'll get another iteration another review and other bit of practice with how that all holds together.
+
+00:01:34.000 --> 00:01:44.000
+Um, and so we'll set up the basics of a server will do a review of ETS templates again.
+
+00:01:44.000 --> 00:02:04.000
+And we're going to work with one or the other have an acronym probably Brad.
+
+00:02:04.000 --> 00:02:08.000
+Anybody seen this before.
+
+00:02:08.000 --> 00:02:12.000
+Bread.
+
+00:02:12.000 --> 00:02:27.000
+So, crud. If people are more familiar with that one, create, read, update and delete. Right, so so you have an entity to work with, and you're trying to manage all the processes that you would need for that entity.
+
+00:02:27.000 --> 00:02:50.000
+Yeah, bread, browse read edit, delete Thank you Adrian. Yeah, so the only difference really between crowd and bread in terms of the acronym is that bread has both a browse and a read right and so the Browse is meant for the action of obtaining a list
+
+00:02:50.000 --> 00:03:00.000
+of all the entities, so that you can browse through the list and scroll down and scroll down if you have hundreds or many, many of them or whatever it may be a pageant ate them, right, that type of thing.
+
+00:03:00.000 --> 00:03:10.000
+Whereas read is intended for the individual entity, right, you want to go in after one particular entity, you're going to use the read
+
+00:03:10.000 --> 00:03:14.000
+word out of the acronym, either way.
+
+00:03:14.000 --> 00:03:20.000
+So where credit has update, read has edit their intended for the same thing.
+
+00:03:20.000 --> 00:03:27.000
+In both cases, making a new entity.
+
+00:03:27.000 --> 00:03:37.000
+Interestingly doesn't seem to be included in there, one of the acronyms, and yet it's there, right. So I think with either of them, edit or update. Oh no, add right with bread you have ADD.
+
+00:03:37.000 --> 00:03:40.000
+And
+
+00:03:40.000 --> 00:03:44.000
+now, even better. So either way you go about it.
+
+00:03:44.000 --> 00:03:53.000
+They're great acronyms for keeping in the back of your mind to say something like, Oh, I need to make sure I get all the routes that I need.
+
+00:03:53.000 --> 00:03:55.000
+Right.
+
+00:03:55.000 --> 00:04:00.000
+And so, we're going to be doing precisely that.
+
+00:04:00.000 --> 00:04:14.000
+Today, we will work with the bread acronym, I think I like it a little bit better. It's a little bit more complete right a little bit more of a distinction, or nuance in it.
+
+00:04:14.000 --> 00:04:19.000
+And so, routes.
+
+00:04:19.000 --> 00:04:23.000
+Browse
+
+00:04:23.000 --> 00:04:24.000
+read.
+
+00:04:24.000 --> 00:04:35.000
+Edit.
+
+00:04:35.000 --> 00:04:38.000
+So,
+
+00:04:38.000 --> 00:04:41.000
+and we're going to be doing this and express.
+
+00:04:41.000 --> 00:04:51.000
+Right. So we do a lot of the same sort of thing that we do every time with an express app contest.
+
+00:04:51.000 --> 00:04:59.000
+Express, equals require Express, like so.
+
+00:04:59.000 --> 00:05:08.000
+Followed by Comcast AP equals and then we run the factory function like we did yesterday.
+
+00:05:08.000 --> 00:05:22.000
+And on App set view engine as Gs.
+
+00:05:22.000 --> 00:05:25.000
+So that's the basics to start with.
+
+00:05:25.000 --> 00:05:39.000
+In each of these things you can see sort of three different phases of the initial starting up right one is to require in the package. One is to use the stuff that comes out of that package to build some objects.
+
+00:05:39.000 --> 00:05:49.000
+And then the last one here is to start setting configuration on each of those things.
+
+00:05:49.000 --> 00:05:52.000
+Another thing that we're going to want to have today.
+
+00:05:52.000 --> 00:06:08.000
+And I'm kind of excited about this actually because it's um it's a bit of a thread that I like to use to tie together many lectures, over the whole of the bootcamp, actually, is the particular kind of widget, or entity that I want to work with today,
+
+00:06:08.000 --> 00:06:20.000
+we're going to have our own data structure that holds the widgets that we're using right so for tiny I think the URLs that you're shortening. Right.
+
+00:06:20.000 --> 00:06:35.000
+In my case, what I want to try out is a database of learning objectives for boot camp, so that we can build a shared tool.
+
+00:06:35.000 --> 00:06:40.000
+As part of the sample code. Throughout the series of lectures.
+
+00:06:40.000 --> 00:06:50.000
+And then by the end of it. We've got a database of bootcamp related questions and answers.
+
+00:06:50.000 --> 00:06:51.000
+Right.
+
+00:06:51.000 --> 00:06:55.000
+And so, for today's database.
+
+00:06:55.000 --> 00:06:58.000
+I'm going to work with
+
+00:06:58.000 --> 00:07:04.000
+precisely that kind of a thing. These are the entities that we're going to work with.
+
+00:07:04.000 --> 00:07:06.000
+And so I'll paste in.
+
+00:07:06.000 --> 00:07:09.000
+Just some sample data to start with.
+
+00:07:09.000 --> 00:07:20.000
+Right, such that every time the server restarts. This is what the objectives database is going to be set to as a value.
+
+00:07:20.000 --> 00:07:37.000
+So you can see it's an array of objects, an array of objects is a really nice data structure, when you need to loop over the things right because arrays are really built for being looped over, as opposed to say an object of objects, where you've got to
+
+00:07:37.000 --> 00:07:42.000
+have keys associated with each of them. Right.
+
+00:07:42.000 --> 00:07:45.000
+named keys, I mean.
+
+00:07:45.000 --> 00:07:50.000
+Anyway, we'll start there, with an array of objects.
+
+00:07:50.000 --> 00:07:58.000
+And now a little bit more about the tooling for our Express app today.
+
+00:07:58.000 --> 00:08:08.000
+I'd like to introduce to you a package called Morgan, have people use Morgan yet, quick show hands.
+
+00:08:08.000 --> 00:08:16.000
+No. Okay, so, Morgan is a developer tool.
+
+00:08:16.000 --> 00:08:23.000
+And what it does is it
+
+00:08:23.000 --> 00:08:25.000
+spits out a console log.
+
+00:08:25.000 --> 00:08:36.000
+With a bit of relevant useful debugging information for each route that gets hit every time your server has a request come into it and it serves back a route.
+
+00:08:36.000 --> 00:08:48.000
+It gives the fact that that route was hit. And a little bit of debugging information like how many milliseconds did it take to run that route, and so on.
+
+00:08:48.000 --> 00:08:54.000
+So we're going to bring in, Morgan, as a package here.
+
+00:08:54.000 --> 00:08:59.000
+And then down in the configuration section.
+
+00:08:59.000 --> 00:09:04.000
+I want to introduce a new kind of concept.
+
+00:09:04.000 --> 00:09:13.000
+Because Morgan is in fact one of these things. This concept is called middleware.
+
+00:09:13.000 --> 00:09:16.000
+Now, for middleware.
+
+00:09:16.000 --> 00:09:24.000
+Here's an example of the way that you can use middleware. We're going to go app dot set.
+
+00:09:24.000 --> 00:09:29.000
+Sorry, not set app.us.
+
+00:09:29.000 --> 00:09:33.000
+This is typical of middleware app.us.
+
+00:09:33.000 --> 00:09:42.000
+And so we're going to say, Morgan. That's actually the function that came out of this require up here.
+
+00:09:42.000 --> 00:09:44.000
+We're going to call it.
+
+00:09:44.000 --> 00:09:49.000
+And we're going to call it with a special word that it would recognize called Dev.
+
+00:09:49.000 --> 00:09:54.000
+Okay, so this is an example of middleware use. so let's just take a quick.
+
+00:09:54.000 --> 00:10:01.000
+Let's just back up a little bit and describe what middleware is and how it does its thing.
+
+00:10:01.000 --> 00:10:10.000
+Remember yesterday in our routes section, we had app dot get, followed by a path.
+
+00:10:10.000 --> 00:10:13.000
+And a call back.
+
+00:10:13.000 --> 00:10:14.000
+Right.
+
+00:10:14.000 --> 00:10:25.000
+So the path, the callback took request and response. And then inside the callback. This is going to be custom code that acts, when that route is being handled.
+
+00:10:25.000 --> 00:10:34.000
+Right. This is what a route looks like it's designed for an individual URL that's hit with a specific HTTP verb.
+
+00:10:34.000 --> 00:10:37.000
+By
+
+00:10:37.000 --> 00:10:46.000
+this callback, the code that's inside this route handler here is executed for one and only one route.
+
+00:10:46.000 --> 00:11:00.000
+If the server sees that this request matches this route, then this callback will be run by contrast that with middleware.
+
+00:11:00.000 --> 00:11:10.000
+In the case of middleware this function inside of app.us.
+
+00:11:10.000 --> 00:11:17.000
+This thing is actually called for every request.
+
+00:11:17.000 --> 00:11:36.000
+And so we're going to see other forms of middleware that we're going to add in here, where there's something that you need to occur to every request, no matter what you're at least going to check run a certain callback, and whatnot.
+
+00:11:36.000 --> 00:11:41.000
+And that thing, this is what this thing is in here.
+
+00:11:41.000 --> 00:11:43.000
+Right.
+
+00:11:43.000 --> 00:11:46.000
+So
+
+00:11:46.000 --> 00:11:57.000
+just understand this, that at this stage, we want Morgan to run on every request and so it ends up as middleware, we'll see more examples of this as we go forward, right.
+
+00:11:57.000 --> 00:12:07.000
+So, the section in the middle where it's like a chain of functions that gets called on every request. Right. Other examples of middleware might be to do with authentication.
+
+00:12:07.000 --> 00:12:17.000
+Right. And so when you're checking the authentication of something you might have some middleware, helping you out with that.
+
+00:12:17.000 --> 00:12:22.000
+That's more advanced something to look at a little bit later.
+
+00:12:22.000 --> 00:12:32.000
+So, right, we've got queuing up our packages for use. We've got a little bit of configuration, we've got configuration of middleware here.
+
+00:12:32.000 --> 00:12:38.000
+We've got a section that shows data. This is the data that's going to be used by the server.
+
+00:12:38.000 --> 00:12:55.000
+And then we get to the business of programming, some routes and this is largely what today is about, right, how to set up specific routes to support, in our case now the bread acronym for interacting with the entities.
+
+00:12:55.000 --> 00:13:03.000
+And then finally, toward the end of the file you want to have your app dot, listen.
+
+00:13:03.000 --> 00:13:11.000
+Right, which takes a port number, which we haven't established yet so let's go ahead and do that.
+
+00:13:11.000 --> 00:13:15.000
+concert caps this time port equals.
+
+00:13:15.000 --> 00:13:17.000
+And oh, I don't know.
+
+00:13:17.000 --> 00:13:20.000
+8085.
+
+00:13:20.000 --> 00:13:23.000
+Say,
+
+00:13:23.000 --> 00:13:47.000
+and that port number is going to be used in the first parameter of the listen call here, port, followed by a call back in the callback we'll just do nice and simple console.
+
+00:13:47.000 --> 00:13:52.000
+work, like so.
+
+00:13:52.000 --> 00:14:07.000
+Okay, so this is, you know, pretty much a standard starting point for any Express app, uh, you know, the beginning form of a Xpress app is going to look a lot like this.
+
+00:14:07.000 --> 00:14:18.000
+The only thing that's really super specific to this case is that we've put in some data that's associated with the exact kind of objectives that we would like to see here.
+
+00:14:18.000 --> 00:14:20.000
+So if I bring up my terminal.
+
+00:14:20.000 --> 00:14:25.000
+And you know nothing up my sleeve. This is the actual code that we just wrote out.
+
+00:14:25.000 --> 00:14:28.000
+Right.
+
+00:14:28.000 --> 00:14:36.000
+If we try to run this as is of course is going to be packaged as missing cannot find module, express, for example.
+
+00:14:36.000 --> 00:14:43.000
+So, let's go through the NPM and it process to bring us package. json file.
+
+00:14:43.000 --> 00:14:51.000
+This package name. Oh, let's say, bread with expressed.
+
+00:14:51.000 --> 00:14:56.000
+Oh, no spaces.
+
+00:14:56.000 --> 00:14:59.000
+Press,
+
+00:14:59.000 --> 00:15:10.000
+or one description, okay here we go with the spaces, express, with bread routes for lighthouse labs.
+
+00:15:10.000 --> 00:15:26.000
+Learning Objectives entry point and found server. js, no testing at this point no get repository, keywords, I know slabs, author, and we'll pick that licenses as Okay, take, taking the default.
+
+00:15:26.000 --> 00:15:28.000
+Right.
+
+00:15:28.000 --> 00:15:35.000
+And so that gives us a package. json file like such with all those values in it.
+
+00:15:35.000 --> 00:15:41.000
+And PM, install Express Morgan.
+
+00:15:41.000 --> 00:15:45.000
+Is that all we had for now.
+
+00:15:45.000 --> 00:15:53.000
+Expressing Morgan OEJSC
+
+00:15:53.000 --> 00:15:59.000
+and save.
+
+00:15:59.000 --> 00:16:06.000
+Great, so that's going to install some code, it's going to bring in the module.
+
+00:16:06.000 --> 00:16:10.000
+Note underscore modules directory, now that that's been done.
+
+00:16:10.000 --> 00:16:15.000
+And now we should be in a position to run the server.
+
+00:16:15.000 --> 00:16:17.000
+notes node.
+
+00:16:17.000 --> 00:16:24.000
+server.js.
+
+00:16:24.000 --> 00:16:27.000
+Like so.
+
+00:16:27.000 --> 00:16:40.000
+Great. Now no routes are yet being coated. So, we're not gonna be able to have a very useful thing. Let's start adding some stuff to make it a more useful server.
+
+00:16:40.000 --> 00:16:43.000
+So.
+
+00:16:43.000 --> 00:16:52.000
+Oh, I'm node mon had people been introduced to node one yet, and what it's for. Yeah.
+
+00:16:52.000 --> 00:16:53.000
+Okay.
+
+00:16:53.000 --> 00:17:11.000
+In fact, I think it's a this is a good a time as any to introduce it node mon is an awesome little program that will run your server and monitor the files that build that server for changes and then restart the server automatically each time you save
+
+00:17:11.000 --> 00:17:22.000
+the server files that matter, right, so let's go ahead and install that node, node mon, all one word,
+
+00:17:22.000 --> 00:17:30.000
+like to have it as an install once its installed like this, it doesn't need to be a dependency in your package. json.
+
+00:17:30.000 --> 00:17:35.000
+Um, It's certainly useful as a development package.
+
+00:17:35.000 --> 00:17:43.000
+And so now with it in place like this. Now, we're able to run it, like so.
+
+00:17:43.000 --> 00:17:49.000
+Here's node modules dot been, and it should be in here.
+
+00:17:49.000 --> 00:17:50.000
+And there it is.
+
+00:17:50.000 --> 00:17:53.000
+So here's the executable.
+
+00:17:53.000 --> 00:17:57.000
+And let's say we want to run server. js, like that.
+
+00:17:57.000 --> 00:18:06.000
+Now, this is going to be the line that I'd like to keep as my thing that I run to execute the code.
+
+00:18:06.000 --> 00:18:14.000
+So there to restart it at any restarted at any time, type RS I could type RS now hit enter, it's going to restart the server.
+
+00:18:14.000 --> 00:18:21.000
+But if I go away and change my server file.
+
+00:18:21.000 --> 00:18:22.000
+Right.
+
+00:18:22.000 --> 00:18:30.000
+For example, I might do rez dot render.
+
+00:18:30.000 --> 00:18:38.000
+On page, something like that. Soon as I do that, it actually goes back and restart the server again.
+
+00:18:38.000 --> 00:18:39.000
+Right.
+
+00:18:39.000 --> 00:18:50.000
+Yeah, go ahead. Real quick, for those of us running the ones we don't need the dash, l, on that no demon d dash, l.
+
+00:18:50.000 --> 00:19:03.000
+As part of the compass thing it's a suggestion to use an L flag when you're in the vagrants, if we're not in vagrant. We don't need to use the URL flag, you know, I don't I'm not sure what the alpha is, is this on node itself.
+
+00:19:03.000 --> 00:19:06.000
+Yeah, that's fine I'll fit all figured out.
+
+00:19:06.000 --> 00:19:19.000
+Okay, yeah, I mean, right, let me follow up a level later that it sounds like there's something specific to everyone's but I'm not sure what that is.
+
+00:19:19.000 --> 00:19:26.000
+Okay, so we've got the server up and running, and now with node mon this way.
+
+00:19:26.000 --> 00:19:36.000
+I can happily just go ahead and code, and it's going to handle the restarting of the server for me as I go. It's a nice development tool.
+
+00:19:36.000 --> 00:19:44.000
+All right. And so now, our job is to start building out these routes in some detail.
+
+00:19:44.000 --> 00:19:53.000
+And already I've said, I've said here that okay I'm going to be working with any GPS template called index and yet I don't have it yet.
+
+00:19:53.000 --> 00:19:57.000
+So let's make sure we have it.
+
+00:19:57.000 --> 00:20:11.000
+I'm a big fan of running on the terminal to do lots of things of course, you can do things from either place, are people cool with the terminal program by the way you can open new tabs in it right to open up any terminals I don't know if people have seen
+
+00:20:11.000 --> 00:20:23.000
+seen this trick yet, I just hit Command T in my terminal program on Windows, I think that that is analogous things for the particular terminal program you're working in here I am in this directory I just did a command tea I can flip back and forth now
+
+00:20:23.000 --> 00:20:35.000
+between my server command line where it's going to be continuously restarting. And here, where I get to do whatever else I want in this particular place in the file system.
+
+00:20:35.000 --> 00:20:38.000
+For example, I can make their views.
+
+00:20:38.000 --> 00:20:46.000
+Right. I can add a file, views index.ej S.
+
+00:20:46.000 --> 00:20:47.000
+Great.
+
+00:20:47.000 --> 00:20:48.000
+Back here.
+
+00:20:48.000 --> 00:20:53.000
+Those new files are going to show up here's my views here's my index ODJS.
+
+00:20:53.000 --> 00:21:08.000
+I think it makes sense to have some HTML boilerplate in there. And we'll have a list of lighthouse labs, learning objectives, say like that.
+
+00:21:08.000 --> 00:21:10.000
+Cool.
+
+00:21:10.000 --> 00:21:17.000
+For now,
+
+00:21:17.000 --> 00:21:20.000
+Just to see that it's in place.
+
+00:21:20.000 --> 00:21:33.000
+And now, all the time that I've been doing this server restarted if it was necessary. Turns out, ETFs templates are loaded from scratch every time you hit the route.
+
+00:21:33.000 --> 00:21:42.000
+So changes TJs templates don't cause server restarts right and node Marla's is smart enough to figure that out.
+
+00:21:42.000 --> 00:21:52.000
+With the server running, and we are running on port, 8085, I believe it was. Yeah.
+
+00:21:52.000 --> 00:21:56.000
+So let's have a look and see if our homepage route is connected.
+
+00:21:56.000 --> 00:22:02.000
+So bring up the browser, local host a five.
+
+00:22:02.000 --> 00:22:05.000
+Sure enough, we have a homepage.
+
+00:22:05.000 --> 00:22:07.000
+All right.
+
+00:22:07.000 --> 00:22:12.000
+And so from here, let's just turn the crank start turning out some routes.
+
+00:22:12.000 --> 00:22:22.000
+What you'll be able to do is focus on how they're different from each other, and how the dynamic content works in each of the routes cases.
+
+00:22:22.000 --> 00:22:24.000
+Okay.
+
+00:22:24.000 --> 00:22:28.000
+By the way, this is obviously very much analogous to tiny app.
+
+00:22:28.000 --> 00:22:30.000
+Yeah.
+
+00:22:30.000 --> 00:22:35.000
+So, back to the editor.
+
+00:22:35.000 --> 00:22:44.000
+Here we have the homepage, we would like this homepage to be a list of all of our learning objectives. Let's make a nice table. Right.
+
+00:22:44.000 --> 00:23:00.000
+And so for that we're going to need to make a variable called typically called template bars of course you can call it whatever you want because you're, it's in the scope of your own function here.
+
+00:23:00.000 --> 00:23:12.000
+And so for template bars. I'm actually happy to pass in the entirety of this array, and then let that get displayed however it will be displayed inside the template.
+
+00:23:12.000 --> 00:23:15.000
+So, there you go.
+
+00:23:15.000 --> 00:23:18.000
+This is nice and easy.
+
+00:23:18.000 --> 00:23:36.000
+Oh, except for one thing, we want to make sure that this template bars contains the name of the variable that it will have on the other side, right, of course template bars is itself an object.
+
+00:23:36.000 --> 00:23:59.000
+And that object has incited properties and values. Right now, I'm using the same name as the, the name of the variable for the property name here. But it's important to keep those two concepts distinct right my template bars object has a property, objectives,
+
+00:23:59.000 --> 00:24:09.000
+whose value is this variable objectives. They're different things, right, objectives, the variable was defined up here.
+
+00:24:09.000 --> 00:24:14.000
+Objectives the property of the template bars object was defined here.
+
+00:24:14.000 --> 00:24:17.000
+Right. And so if you can keep those two things straight.
+
+00:24:17.000 --> 00:24:23.000
+I find this syntax, helps to keep those two things straight.
+
+00:24:23.000 --> 00:24:29.000
+Now, have folks seen that as a es six.
+
+00:24:29.000 --> 00:24:38.000
+The following is actually legit, and equivalent of people seen this.
+
+00:24:38.000 --> 00:24:53.000
+Yeah, okay, that you can eliminate the split between the name and the variable, you can just drop a variable in here. And what it does is it takes the variable name makes a property out of that variable name, and sets the value of that property to be
+
+00:24:53.000 --> 00:24:58.000
+the value of the variable.
+
+00:24:58.000 --> 00:25:10.000
+Either way, you're happy with doing this sort of stuff, you can pick one or the other, right, just be aware that you can do both. For now I'm going to do this the way that's more self documenting and keeps the concept separate, right.
+
+00:25:10.000 --> 00:25:13.000
+So now I have a template bars variable.
+
+00:25:13.000 --> 00:25:21.000
+I'm going to pass this variable into the template thusly. Yeah.
+
+00:25:21.000 --> 00:25:26.000
+So now, when we go over to the, the index study jazz file.
+
+00:25:26.000 --> 00:25:28.000
+And
+
+00:25:28.000 --> 00:25:47.000
+right when I go over to the GS template here called index. Now it's going to have a variable called objectives, whose value is the value of the objectives variable right that is it's going to be an array of objects with Question and Answer pairs available
+
+00:25:47.000 --> 00:25:50.000
+to us over there.
+
+00:25:50.000 --> 00:25:56.000
+Now, are people all over the split screen. Right. I think that
+
+00:25:56.000 --> 00:26:01.000
+as of.
+
+00:26:01.000 --> 00:26:05.000
+Some of the more recent and more involved programming.
+
+00:26:05.000 --> 00:26:12.000
+I'm sure people are finding that it's actually pretty important to be able to view.
+
+00:26:12.000 --> 00:26:23.000
+Both like two files at once, especially when they're in such close communication with each other, these files, right. So for example, this route is going to call this EJS template.
+
+00:26:23.000 --> 00:26:24.000
+Right.
+
+00:26:24.000 --> 00:26:31.000
+And so it makes sense to see. Yeah, this is how it's effectively being invoked it's how it's being called.
+
+00:26:31.000 --> 00:26:51.000
+And this is the file that we need to understand what's going on inside it. In order to understand what line 36 is doing. Right. So I would highly recommend getting your editor into split pain mode, so that you can see both files at once.
+
+00:26:51.000 --> 00:26:53.000
+Okay.
+
+00:26:53.000 --> 00:27:03.000
+So right now, we've changed the way that we are passing this template bars into our index study jazz template.
+
+00:27:03.000 --> 00:27:12.000
+That means that if I add it here inside what I'm calling alligator clips, like so.
+
+00:27:12.000 --> 00:27:17.000
+I should be able to go objectives.
+
+00:27:17.000 --> 00:27:20.000
+Like that.
+
+00:27:20.000 --> 00:27:30.000
+And so by save that. Go back to the app, I can trust that it's been restarted as much as it needed to be. Because node is running reload it.
+
+00:27:30.000 --> 00:27:32.000
+Interesting.
+
+00:27:32.000 --> 00:27:48.000
+So this is now the text representation of the objectives, very variable that the GPS template has access to and I see 12345 object.
+
+00:27:48.000 --> 00:28:06.000
+Five objects, separated by commas right. So this is evidently, how the GPS template is handling out putting a particular variable that happens to be an array of objects right and we saw that and so we are encouraged by this right, like, all right, our
+
+00:28:06.000 --> 00:28:10.000
+data must be in here somewhere. we're going to go after it.
+
+00:28:10.000 --> 00:28:19.000
+Now, are people okay with these little script Blitz things
+
+00:28:19.000 --> 00:28:38.000
+on the JS template side, we have different kinds of of alligator clips This one has an equal sign in it. This one does not right. Anybody recall the distinction between those two types of scripts that in the template.
+
+00:28:38.000 --> 00:28:43.000
+What was the difference and why.
+
+00:28:43.000 --> 00:28:53.000
+Yeah that's got it so when you have the equal sign like this what it's saying is, take the value of the variable that I put here and output it into the template.
+
+00:28:53.000 --> 00:29:14.000
+Right. It's kind of like saying, print, right, but it's so common they gave it a little character. Right, whereas this one it permits you to include JavaScript in your template, without putting it, there's no expectation of direct output straight away.
+
+00:29:14.000 --> 00:29:27.000
+Right. So for example, we could put a for loop split across these two script Blitz, like that.
+
+00:29:27.000 --> 00:29:36.000
+And then I can put an HTML dynamic values right in here on line 16, and it's going to actually loop over that HTML.
+
+00:29:36.000 --> 00:29:42.000
+Right. This is the really cool thing about EJS templates and any other template language from it, for that matter.
+
+00:29:42.000 --> 00:29:55.000
+It allows you to mix. What is mostly an HTML file with a bit of dynamic content right that comes from the variables that were passed into it.
+
+00:29:55.000 --> 00:30:03.000
+So, just like we did yesterday let's dress this up a little bit. How about we make this a table this time.
+
+00:30:03.000 --> 00:30:08.000
+And we'll put our loop inside the table.
+
+00:30:08.000 --> 00:30:14.000
+And we'll have a tea body tag.
+
+00:30:14.000 --> 00:30:19.000
+And these rows are going to go inside the body.
+
+00:30:19.000 --> 00:30:21.000
+Like this.
+
+00:30:21.000 --> 00:30:26.000
+And so now we can have.
+
+00:30:26.000 --> 00:30:27.000
+Rose.
+
+00:30:27.000 --> 00:30:30.000
+Here's a table row.
+
+00:30:30.000 --> 00:30:39.000
+And for each row will have a couple of table data tags. There's one and two.
+
+00:30:39.000 --> 00:30:49.000
+This one is going to contain the question from our Aegis template, sorry from our from our objectives database.
+
+00:30:49.000 --> 00:30:56.000
+Right, and answer. And so we'll have two columns in this table. Questions and Answers.
+
+00:30:56.000 --> 00:31:00.000
+Actually you know what do I want the answer on this.
+
+00:31:00.000 --> 00:31:03.000
+I'm, I'm not so sure.
+
+00:31:03.000 --> 00:31:08.000
+With browse. I think what we're most interested in is just the questions.
+
+00:31:08.000 --> 00:31:18.000
+And then we click on one of those questions to give us a detail with both that's better for browser because with browse you've got a lot of information on that page already.
+
+00:31:18.000 --> 00:31:22.000
+Let's just check it out that way. In fact, we can also include.
+
+00:31:22.000 --> 00:31:31.000
+Um, yeah, let's just go for browse for now. We might expand this table later on, to have more columns.
+
+00:31:31.000 --> 00:31:50.000
+But asks, do, do this objectives, access the key objectives of template bars object or the value itself. So far we only need the value itself, and so I take your hint, we could have a loop here that's not a see style loop because that see style is not
+
+00:31:50.000 --> 00:32:05.000
+necessarily the best. So for example, for objective. Let's see, objective of objectives, like so.
+
+00:32:05.000 --> 00:32:13.000
+And so now my objective here is a way of getting at the values inside that array. Right.
+
+00:32:13.000 --> 00:32:15.000
+Let's try it.
+
+00:32:15.000 --> 00:32:24.000
+Here I'm going to need an alligator clip for designed for output. Right. And so we'll have objectives dot question.
+
+00:32:24.000 --> 00:32:30.000
+Right. each of the objects inside the objectives array has a question, and an answer.
+
+00:32:30.000 --> 00:32:32.000
+property.
+
+00:32:32.000 --> 00:32:38.000
+So now this loop is going inside to this individual object now.
+
+00:32:38.000 --> 00:32:41.000
+And plucking out the question.
+
+00:32:41.000 --> 00:32:53.000
+So now we shouldn't need this anymore because that was just the debugging output of the whole array. And instead, hopefully we'll get a table of questions.
+
+00:32:53.000 --> 00:32:54.000
+Yeah.
+
+00:32:54.000 --> 00:33:00.000
+So that's all saved and remember every time I saved my server file.
+
+00:33:00.000 --> 00:33:07.000
+This was restarting the server, you know at some intermediate state.
+
+00:33:07.000 --> 00:33:20.000
+I had some form of error, but eventually my code cleaned up and then it saved it again and then it rerun the server. Sometimes you'll find you have to kick start the server again, if it gets into an error state that we're not happy with.
+
+00:33:20.000 --> 00:33:24.000
+Let me just reload this page there enough.
+
+00:33:24.000 --> 00:33:28.000
+There's our brows route.
+
+00:33:28.000 --> 00:33:32.000
+Right, it's just showing us. Only the questions.
+
+00:33:32.000 --> 00:33:35.000
+Yeah monkey fuzz is getting a bit stale now isn't it.
+
+00:33:35.000 --> 00:33:40.000
+So we'll go back here.
+
+00:33:40.000 --> 00:33:42.000
+slabs.
+
+00:33:42.000 --> 00:33:47.000
+Learning Objectives.
+
+00:33:47.000 --> 00:33:52.000
+Like so. Save back to the page, reload.
+
+00:33:52.000 --> 00:34:03.000
+Done. Are people noticing that I'm really like into using my keyboard here, every time I reload the page I'm using command are is so much faster than moving the mouse around trying to find this thing, right.
+
+00:34:03.000 --> 00:34:11.000
+And I'd say that's general right if you can memorize a few keyboard shortcut.
+
+00:34:11.000 --> 00:34:15.000
+Do it, because it's going to speed you up.
+
+00:34:15.000 --> 00:34:20.000
+Okay. Yeah, so there's our learning objectives list, there's the browser out.
+
+00:34:20.000 --> 00:34:28.000
+Any questions on what you've seen in the implementation of this browse route, right, here's a quick review.
+
+00:34:28.000 --> 00:34:31.000
+That's what the route looks like.
+
+00:34:31.000 --> 00:34:35.000
+And here's the BTS template that it leverages.
+
+00:34:35.000 --> 00:34:52.000
+It takes the data that we want hands it in as a dynamic value. And on the template side, use disease the alligator clips things to make a loop, and pluck out the individual thing that we want for dynamic data.
+
+00:34:52.000 --> 00:34:55.000
+Any questions.
+
+00:34:55.000 --> 00:34:58.000
+Oh, we wanted to let in here.
+
+00:34:58.000 --> 00:34:59.000
+That's better.
+
+00:34:59.000 --> 00:35:08.000
+Better practice.
+
+00:35:08.000 --> 00:35:17.000
+All right, here no objections, let's proceed on to some of the next routes.
+
+00:35:17.000 --> 00:35:25.000
+Um, okay. So this is interesting
+
+00:35:25.000 --> 00:35:40.000
+to do read what we would like to do is to be able to click on an individual question and then get more detail about that thing. Right.
+
+00:35:40.000 --> 00:35:55.000
+And in fact, Right now, the way that are individual objectives are managed is via the index that they appear at in this particular array.
+
+00:35:55.000 --> 00:36:10.000
+So, here's an opportunity for us to actually expose that value that we're using to manage this, maybe we need to show it to the end user maybe we don't, but for now let's just have it so that are loop shows it.
+
+00:36:10.000 --> 00:36:18.000
+Let's add a column here like so.
+
+00:36:18.000 --> 00:36:30.000
+And instead of let objective of objectives, be the way that we're losing it because we do want to see the index. Now, let's change this to, in, so that now.
+
+00:36:30.000 --> 00:36:40.000
+This is going to be, and let. I wonder if it'll let me do the Rename symbol trick. Yeah, let's call this index and see if it updates it everywhere.
+
+00:36:40.000 --> 00:36:48.000
+No, it's not happy with that ETS templates for doing that rename simple trick so index here.
+
+00:36:48.000 --> 00:37:05.000
+Right indexing objectives, this is going to run 01234 like that. Right. And so with our 01234. Now, we need to go objectives and index, that's how we get the object inside the loop.
+
+00:37:05.000 --> 00:37:08.000
+Yeah.
+
+00:37:08.000 --> 00:37:12.000
+In fact, that's what this one should have been.
+
+00:37:12.000 --> 00:37:14.000
+Whereas here.
+
+00:37:14.000 --> 00:37:18.000
+I'd like to actually see the index value as the first column.
+
+00:37:18.000 --> 00:37:28.000
+So I'll save that like that, go back to my code, reload it. And sure enough, now I've got my index values as a column on the view.
+
+00:37:28.000 --> 00:37:45.000
+Okay, everybody okay with what they just saw in terms of switching the loop from one type of Luke to the other, right I needed this type of loop so that I could actually see the values of the index for each of these objects.
+
+00:37:45.000 --> 00:37:46.000
+Okay.
+
+00:37:46.000 --> 00:37:49.000
+Now with that done that way.
+
+00:37:49.000 --> 00:37:59.000
+Now I've got a number that I can use to refer to an individual learning objectives.
+
+00:37:59.000 --> 00:38:01.000
+Okay.
+
+00:38:01.000 --> 00:38:08.000
+So, When it comes to this page.
+
+00:38:08.000 --> 00:38:22.000
+Now, I would like to be able to click on an individual question, and land on a page that's built as a detail page for that thing.
+
+00:38:22.000 --> 00:38:24.000
+Right.
+
+00:38:24.000 --> 00:38:27.000
+So,
+
+00:38:27.000 --> 00:38:32.000
+Well, what are these needs to be a link.
+
+00:38:32.000 --> 00:38:49.000
+Let's make this one, the link inside my TD. Now, I'm going to go AHRF equal. Right. And I'm going to wrap the entire question text in a link tag.
+
+00:38:49.000 --> 00:38:52.000
+Like that.
+
+00:38:52.000 --> 00:38:58.000
+So I go back here, reload it, and it transformed this thing into links.
+
+00:38:58.000 --> 00:38:59.000
+Great.
+
+00:38:59.000 --> 00:39:07.000
+Now, what's the destination.
+
+00:39:07.000 --> 00:39:13.000
+Um, I would like to send this link to.
+
+00:39:13.000 --> 00:39:22.000
+And for now let's call this read, because that's the particular route that we're going to use the reed route.
+
+00:39:22.000 --> 00:39:27.000
+Read and the index.
+
+00:39:27.000 --> 00:39:30.000
+Like so.
+
+00:39:30.000 --> 00:39:45.000
+Right, I'm going to add an alligator clip inside the double quotes here, save it, that dynamic value inside this loop is going to be included as the link target for this particular link.
+
+00:39:45.000 --> 00:39:47.000
+Like this.
+
+00:39:47.000 --> 00:40:00.000
+So now when I go back here and reload have Can you see in the very lower left hand corner of my page out when I hover over the link, you get a different URL, everybody can see that.
+
+00:40:00.000 --> 00:40:04.000
+Okay. and it was a Texas bit small. Okay, thanks.
+
+00:40:04.000 --> 00:40:14.000
+So yeah, now this link, YYEGS templates, it's going to one of our learning objectives. Now I can click on that and it's going to go to read slash zero.
+
+00:40:14.000 --> 00:40:21.000
+This one is going to go to read slash one, and so on.
+
+00:40:21.000 --> 00:40:24.000
+So,
+
+00:40:24.000 --> 00:40:39.000
+that's pretty decent. At this stage, I would say this column is kinda redundant I mean it's a bit of debugging info in that column right showing us what the value of the indexes.
+
+00:40:39.000 --> 00:40:49.000
+And yes, when I hover over this, the corresponding link corresponds to the index value that I'm seeing, you know whether I keep this in here or not, I could comment that out.
+
+00:40:49.000 --> 00:40:55.000
+Save back here reload. Now those numbers aren't facing the user so and it's such a glaring way.
+
+00:40:55.000 --> 00:41:01.000
+But, you know, six of one half a dozen the other for that particular view.
+
+00:41:01.000 --> 00:41:15.000
+But at this stage, we're well primed now to click on this and end up at a route that is going to show us a detail page for that particular objective.
+
+00:41:15.000 --> 00:41:23.000
+I'm sorry, a little bit confused about the title this Where's title and title is, is the text at the top of a browser tag.
+
+00:41:23.000 --> 00:41:28.000
+Do you want to browser tab called title in our view here.
+
+00:41:28.000 --> 00:41:32.000
+Is this the one we're talking about. I
+
+00:41:32.000 --> 00:41:43.000
+think she's adopting where that was I think she was expecting it to show up on the page at this in a tag dicey as opposed to this one for example which is just an h1 tag so LHL learning objectives.
+
+00:41:43.000 --> 00:41:50.000
+The title tag in the head. Yeah, is going to be.
+
+00:41:50.000 --> 00:41:53.000
+For example, here.
+
+00:41:53.000 --> 00:41:54.000
+Yeah.
+
+00:41:54.000 --> 00:41:58.000
+Okay, if that's it. Great, thank you very much for the help.
+
+00:41:58.000 --> 00:42:07.000
+I'm good right so let's move on to the next route then right done with the Browse let's get on to the reading and individual one.
+
+00:42:07.000 --> 00:42:28.000
+And so, you know, it's going to largely be of this structure. So let's try a copy paste to start with now we have another route, except now we're going to be specifying that the path is going to be read, colon, Id actually let's call this index, even
+
+00:42:28.000 --> 00:42:30.000
+better.
+
+00:42:30.000 --> 00:42:34.000
+So that's a little bit mysterious right now.
+
+00:42:34.000 --> 00:42:39.000
+What it is is it's a dynamic value on the URL.
+
+00:42:39.000 --> 00:42:50.000
+And your call from yesterday how I was saying, with Express apps, what it does is it looks through each of the routes in order, looking for a match.
+
+00:42:50.000 --> 00:42:55.000
+So the question is, What will this route, and its path.
+
+00:42:55.000 --> 00:42:57.000
+match.
+
+00:42:57.000 --> 00:43:13.000
+Well the answer is that it will match slash read slash zero slash read style one slash read to all of those URLs are going to match this route.
+
+00:43:13.000 --> 00:43:22.000
+Furthermore, index is going to become a variable here.
+
+00:43:22.000 --> 00:43:35.000
+That's useful when it comes to populating some dynamic value to pluck something out of the database and pass that in to our template.
+
+00:43:35.000 --> 00:43:40.000
+So, I'm going to show you how to do that
+
+00:43:40.000 --> 00:43:41.000
+right now.
+
+00:43:41.000 --> 00:43:48.000
+And the way this works is this contest index is going to be the name of our variable.
+
+00:43:48.000 --> 00:43:55.000
+And where this comes from, is it actually comes in as part of the request object.
+
+00:43:55.000 --> 00:44:12.000
+We're looking at our request object yesterday. How about there was this massive set of properties inside the request object. Well, the request object, thanks to express is going to be populated with whatever dynamic value belonged on this URL blog on
+
+00:44:12.000 --> 00:44:17.000
+this path. Right. If I hit slash read size five.
+
+00:44:17.000 --> 00:44:23.000
+Then I'm going to be able to pluck the value five out of a certain place.
+
+00:44:23.000 --> 00:44:31.000
+And it's inside the request object request dot per EMS is in fact, where it lives.
+
+00:44:31.000 --> 00:44:35.000
+So, just to get a flavor for this.
+
+00:44:35.000 --> 00:44:46.000
+Let's just, you know, set this as a value placeholder for now. What I would like to show you is console log
+
+00:44:46.000 --> 00:44:52.000
+wreck dot programs, like so.
+
+00:44:52.000 --> 00:44:55.000
+Right. So, what is wrecked operate.
+
+00:44:55.000 --> 00:44:58.000
+Well, let's have a look.
+
+00:44:58.000 --> 00:45:12.000
+And then, I'm not going to have any template bars for now, and I also actually don't have the read BTS template yet, but we should still get our console log.
+
+00:45:12.000 --> 00:45:26.000
+So now with that done by the way every time I kept saving my editor file node mon was happily restarting the server each time, over here. So it's keeping pace with my changes to my code.
+
+00:45:26.000 --> 00:45:32.000
+Go back to here, reload it for good measure, click on any one of these to go to that route.
+
+00:45:32.000 --> 00:45:45.000
+Okay, now I get an error message failed to look up view, read interviews directory right that's precisely because we have not yet built the reading ETS template.
+
+00:45:45.000 --> 00:46:03.000
+That's fine. What I'm really interested in showing you is the stuff that showed up on the console and Sue, I mean good thing I included the label in my console log right here because you know the console log starting to get a bit busy, but there's the
+
+00:46:03.000 --> 00:46:10.000
+line I'm looking for rack dot programs. And here is what the value of rec doc programs is.
+
+00:46:10.000 --> 00:46:12.000
+It's an object.
+
+00:46:12.000 --> 00:46:23.000
+It has a property called index, and its value as to why because over here.
+
+00:46:23.000 --> 00:46:29.000
+See the URL slash read slash something.
+
+00:46:29.000 --> 00:46:31.000
+It's a two.
+
+00:46:31.000 --> 00:46:33.000
+And so the value to.
+
+00:46:33.000 --> 00:46:48.000
+This is what caused this object to have its index property set to to why the index property. Because of this word, right here.
+
+00:46:48.000 --> 00:46:59.000
+For example, I go back to the browser, and I go read a monkey fuzz go for that URL.
+
+00:46:59.000 --> 00:47:01.000
+Look what comes out on the console log.
+
+00:47:01.000 --> 00:47:20.000
+Right, rec programs is now an object with indexes of property and monkey funds is the value that is any value I put here is going to be what rack dot programs dot index becomes.
+
+00:47:20.000 --> 00:47:22.000
+Right.
+
+00:47:22.000 --> 00:47:24.000
+It's a URL parameter.
+
+00:47:24.000 --> 00:47:31.000
+It's a dynamic value that's being fed in by the user via the URL.
+
+00:47:31.000 --> 00:47:32.000
+Okay.
+
+00:47:32.000 --> 00:47:36.000
+So in the case of our read route.
+
+00:47:36.000 --> 00:47:45.000
+I'm going to take that value that's inside rec programs, and use it as my index variable.
+
+00:47:45.000 --> 00:47:55.000
+So instead of zero here we'll go rack dot programs dot index, like so.
+
+00:47:55.000 --> 00:48:05.000
+Okay, so now for our template bars for the dynamic value that we're going to hand into the CGS template.
+
+00:48:05.000 --> 00:48:11.000
+Now I'm going to have not many objectives, but one objective.
+
+00:48:11.000 --> 00:48:13.000
+Which one.
+
+00:48:13.000 --> 00:48:15.000
+That one.
+
+00:48:15.000 --> 00:48:26.000
+Right, objectives, is the data structure that holds all of my learning objective objects. It's an array.
+
+00:48:26.000 --> 00:48:41.000
+And so I can use the square brackets with index on it to pluck an individual object out of that or array of objects. Right. And so for example if index is going to take on the value to, or three, or whatever, right.
+
+00:48:41.000 --> 00:48:50.000
+Then, objectives of two is going to be 01 to this one.
+
+00:48:50.000 --> 00:49:02.000
+And so, This object inside this array is the one that's going to get plucked out
+
+00:49:02.000 --> 00:49:07.000
+and set as the value to that property on template bars.
+
+00:49:07.000 --> 00:49:16.000
+So now we can put template bars back into our call to the EJS template.
+
+00:49:16.000 --> 00:49:26.000
+And so we need to make a new egs template it's going to take in a thing where objective is now a variable that's available to it.
+
+00:49:26.000 --> 00:49:34.000
+So I can make a new file here.
+
+00:49:34.000 --> 00:49:48.000
+Right. In fact, so for those of you who attended the command line breakout session earlier on in the boot camp. This is a hold my beer and watch this moment, I'm not even going to change into that directory I'm going to copy that file and make a new version
+
+00:49:48.000 --> 00:49:56.000
+of it right so copy views index. js, two views, read EJS.
+
+00:49:56.000 --> 00:49:57.000
+There.
+
+00:49:57.000 --> 00:50:05.000
+Now I have a new file called read and it has exactly the same content that indexed it.
+
+00:50:05.000 --> 00:50:17.000
+Sure enough, in one fell swoop this new thing was made I'm going to drag it over to the other pain, so I can see it there instead.
+
+00:50:17.000 --> 00:50:25.000
+And then on this side I only need server, right, here's my read route that I'm building.
+
+00:50:25.000 --> 00:50:31.000
+Here's the reed ETS template that goes with it.
+
+00:50:31.000 --> 00:50:34.000
+What I just do. Yeah, that's right. Okay.
+
+00:50:34.000 --> 00:50:41.000
+Now, the new title for this one should be a learning objective.
+
+00:50:41.000 --> 00:50:45.000
+Detail page.
+
+00:50:45.000 --> 00:50:46.000
+Say, like so. And now, we're not going to need a table of them because there's only the one. Right.
+
+00:50:46.000 --> 00:51:02.000
+like so. And now, we're not going to need a table of them because there's only the one. Right. Let's just make this, and we won't even need a loop, either because we're not going to loop over anything, we only have the one objective coming in now.
+
+00:51:02.000 --> 00:51:06.000
+So will be rid of the table rapping. Right.
+
+00:51:06.000 --> 00:51:10.000
+And instead of tr here.
+
+00:51:10.000 --> 00:51:17.000
+Let's make this a div.
+
+00:51:17.000 --> 00:51:26.000
+And instead of a TD. Hmm.
+
+00:51:26.000 --> 00:51:31.000
+Sorry, get rid of it, get rid of my multiple curses okay so there's a TV.
+
+00:51:31.000 --> 00:51:36.000
+Let's just delete it.
+
+00:51:36.000 --> 00:51:39.000
+And this TV we can be rid of as well.
+
+00:51:39.000 --> 00:51:46.000
+And it doesn't need to be a link anymore, does it because we're just going to show the question and the answer.
+
+00:51:46.000 --> 00:51:58.000
+So, yeah, this is getting quite simpler as we go. And now we don't have a thing inside a loop anymore, right we just have the variable called objective.
+
+00:51:58.000 --> 00:52:03.000
+You can see over here for the template bars for this route.
+
+00:52:03.000 --> 00:52:21.000
+I'm making an object with a property called objective that property becomes the variable on the template side, right, so here it is objective, if I happen to know that it's one of these things, right, each objective is an object that has a question and
+
+00:52:21.000 --> 00:52:21.000
+an answer property.
+
+00:52:21.000 --> 00:52:25.000
+answer property. So there's the question.
+
+00:52:25.000 --> 00:52:29.000
+Let's also include.
+
+00:52:29.000 --> 00:52:32.000
+Now, because we're on the detail page.
+
+00:52:32.000 --> 00:52:34.000
+the answer
+
+00:52:34.000 --> 00:52:52.000
+for styling and separation. I think it's going to make sense to have these things in separate HTML elements. So why don't we try a div with a class equal question on this one.
+
+00:52:52.000 --> 00:52:58.000
+And we'll take the objective.
+
+00:52:58.000 --> 00:53:03.000
+Dynamic info, drop it in there.
+
+00:53:03.000 --> 00:53:13.000
+And then similarly here for our answer will do this, grab that one.
+
+00:53:13.000 --> 00:53:21.000
+Take it. Drop it in over top of that, no answer. And then we have a Dave here.
+
+00:53:21.000 --> 00:53:23.000
+Answer.
+
+00:53:23.000 --> 00:53:25.000
+Like so.
+
+00:53:25.000 --> 00:53:30.000
+Okay, so that's our read ETFs template for this particular route.
+
+00:53:30.000 --> 00:53:31.000
+Right.
+
+00:53:31.000 --> 00:53:34.000
+And let's test it out.
+
+00:53:34.000 --> 00:53:39.000
+Go back to the code, the servers been keeping pace.
+
+00:53:39.000 --> 00:53:42.000
+Everything looks good.
+
+00:53:42.000 --> 00:53:46.000
+Let's give it a go.
+
+00:53:46.000 --> 00:53:53.000
+In the browser now back to the homepage shows us the list of objectives.
+
+00:53:53.000 --> 00:54:05.000
+Click on what does credit stand for, click on the link. It takes us to the learning objective Detail page. What does credit stand for, and it shows the answer as well.
+
+00:54:05.000 --> 00:54:25.000
+Right. And, you know, if we look at like the Chrome Developer Tools to show us the elements, we can see all of that stuff that we built into the template right we've got dibs with classes on them that we can use to style this up, give it some padding
+
+00:54:25.000 --> 00:54:27.000
+make it look nice.
+
+00:54:27.000 --> 00:54:35.000
+We're going to dig into how to do that more precisely in week four.
+
+00:54:35.000 --> 00:54:37.000
+Okay. Um.
+
+00:54:37.000 --> 00:54:44.000
+Any questions about the read route.
+
+00:54:44.000 --> 00:55:01.000
+Anything in this that was setting people off a little bit about how its put together. I think the most complex pieces actually how the dynamic values are handed in from the route to the template, right, and working with the structures, right, this is
+
+00:55:01.000 --> 00:55:16.000
+why we teach objects first in some detail. It's so that you can understand this part, and if you don't understand it fully. At least you know, which questions to ask yourself, your, your fellow classmates in the assistance queue or me right.
+
+00:55:16.000 --> 00:55:21.000
+How did that dynamic data go from there to there.
+
+00:55:21.000 --> 00:55:23.000
+So some comments from Logan.
+
+00:55:23.000 --> 00:55:35.000
+Yeah, by the way, Chris a paragraph tag would work well as well. Yeah. Logan asks h2 for question p for answer. Sure.
+
+00:55:35.000 --> 00:55:38.000
+wrecked out perhaps comes from a library.
+
+00:55:38.000 --> 00:55:41.000
+It's actually managed by Express.
+
+00:55:41.000 --> 00:55:47.000
+Is there a way to get the info natively.
+
+00:55:47.000 --> 00:55:50.000
+without express for example.
+
+00:55:50.000 --> 00:55:56.000
+Um, I would say that that info would be, well let's see I mean it's the path right.
+
+00:55:56.000 --> 00:56:01.000
+So if you were trying to write this without express, you would have to look at the path.
+
+00:56:01.000 --> 00:56:06.000
+Do your own matching of that path.
+
+00:56:06.000 --> 00:56:12.000
+Look at the value of how that matching works maybe with a red X or something.
+
+00:56:12.000 --> 00:56:20.000
+pluck the value out, assign that value to a variable and there now you have your dynamic value.
+
+00:56:20.000 --> 00:56:23.000
+Yeah.
+
+00:56:23.000 --> 00:56:31.000
+Yeah, it is from Express, and you know it's one of the reasons that we use Express because this is a very common thing to have to do.
+
+00:56:31.000 --> 00:56:34.000
+good.
+
+00:56:34.000 --> 00:56:36.000
+All right.
+
+00:56:36.000 --> 00:56:55.000
+Next up, I think, between edit and add, I think, add is actually the easier route to tackle. And so I want to do it first, so that you can understand the basics of how the ad route will work.
+
+00:56:55.000 --> 00:56:59.000
+And then from there, once ad is done.
+
+00:56:59.000 --> 00:57:04.000
+Edit is very similar to add but it's got a little bit more to it.
+
+00:57:04.000 --> 00:57:20.000
+So, we'll do ad first, and then we'll do the Edit route. After that, as it is, we're queued up now for a 10 minute break. So what I'll do is fire up some
+
+00:57:20.000 --> 00:57:22.000
+timer.
+
+00:57:22.000 --> 00:57:36.000
+Coffee says Chris, because we're seeing how this work. Should we go it's like the first person who chimes in gets the pic. Is that how this is going to work right it's not a democracy but it can be a democracy.
+
+00:57:36.000 --> 00:57:39.000
+Coffee.
+
+00:57:39.000 --> 00:57:46.000
+People seen the radish cutting. how do they feel about the radish cutting movie.
+
+00:57:46.000 --> 00:57:55.000
+Oh, have not yet seen the ranch cutting room yes there's a radish cutting little Did you know, maybe we'll do that tomorrow.
+
+00:57:55.000 --> 00:57:59.000
+is there dim sum, asking real questions tj.
+
+00:57:59.000 --> 00:58:03.000
+There is not as far as I know, although Feel free to contribute one.
+
+00:58:03.000 --> 00:58:12.000
+You know what, take a real break. I'll be back in about five minutes if you got some extra questions or just want to, you know, shoot the breeze as they say.
+
+00:58:12.000 --> 00:58:42.000
+And, yeah, see y'all soon take a real break, right, shake up the brain cells. See you soon. We'll get back to those other routes.
+
+01:03:34.000 --> 01:03:43.000
+Alright, we're back if folks have questions.
+
+01:03:43.000 --> 01:03:45.000
+Listen to guitar.
+
+01:03:45.000 --> 01:03:50.000
+Just for fun.
+
+01:03:50.000 --> 01:04:01.000
+In KC player why
+
+01:04:01.000 --> 01:04:05.000
+mega desk. Just no wonder. All right.
+
+01:04:05.000 --> 01:04:30.000
+Oh, don't do that.
+
+01:04:30.000 --> 01:04:35.000
+Maybe we'll make the breaks like a jam session who has
+
+01:04:35.000 --> 01:04:47.000
+things they want to play.
+
+01:04:47.000 --> 01:04:50.000
+Yeah pet meets Yeah.
+
+01:04:50.000 --> 01:05:04.000
+Good idea.
+
+01:05:04.000 --> 01:05:12.000
+Christian. I'm just got a little confused about the rec programs. Yeah.
+
+01:05:12.000 --> 01:05:19.000
+Sorry I didn't want to interrupt oh no you should, what we're here for. Right.
+
+01:05:19.000 --> 01:05:27.000
+So with two and a half minutes to go to extreme coals notes.
+
+01:05:27.000 --> 01:05:30.000
+See this URL right here.
+
+01:05:30.000 --> 01:05:34.000
+Yes. See the colon in it.
+
+01:05:34.000 --> 01:05:40.000
+That's an indication that there's something funky going on with it. Right.
+
+01:05:40.000 --> 01:05:48.000
+That is, when we're looking for a route that matches the URL that's coming in.
+
+01:05:48.000 --> 01:05:56.000
+This colon says, Don't look for the word index, like slash breed slash index, don't look for that word.
+
+01:05:56.000 --> 01:06:03.000
+Instead, whatever value you see here after the second slash
+
+01:06:03.000 --> 01:06:06.000
+make it match.
+
+01:06:06.000 --> 01:06:23.000
+But set a variable called index inside rec programs to be whatever the match was right. This allows you to have dynamic values on your URLs.
+
+01:06:23.000 --> 01:06:30.000
+Go so I was trying to console. log Rams and I wasn't easy at all the results I wanted.
+
+01:06:30.000 --> 01:06:31.000
+Okay.
+
+01:06:31.000 --> 01:06:47.000
+Well, you're going to need to have a colon and the, the name of a variable here for the route that you're trying to make it work. And in order to get to that route you have to make a request from your browser.
+
+01:06:47.000 --> 01:06:51.000
+To make this match the route.
+
+01:06:51.000 --> 01:07:02.000
+Right. And so what does match mean it means well it matches this first part of the path here, right, that has to match exactly, but then after the second slash can be whatever you want.
+
+01:07:02.000 --> 01:07:14.000
+Right. And then you should be getting a matching route like that, and then rec programs should contain that information.
+
+01:07:14.000 --> 01:07:16.000
+I think I got it.
+
+01:07:16.000 --> 01:07:38.000
+Okay, good.
+
+01:07:38.000 --> 01:07:42.000
+Who has a pet that they can introduce us to.
+
+01:07:42.000 --> 01:07:48.000
+Before we restart here.
+
+01:07:48.000 --> 01:07:57.000
+anybody's cat or dog. Oh, there's one that's got a dog in tow. Who's that
+
+01:07:57.000 --> 01:08:00.000
+this is Bernie she's just a pop.
+
+01:08:00.000 --> 01:08:10.000
+Bernie, Bernie like a bird, a birdie birdie. I was gonna vote her.
+
+01:08:10.000 --> 01:08:16.000
+Oh, I see an ikat these got a cat and Chris has got a cat. Wow look at the cats.
+
+01:08:16.000 --> 01:08:20.000
+TJ, there's a lap dog.
+
+01:08:20.000 --> 01:08:24.000
+Awesome.
+
+01:08:24.000 --> 01:08:25.000
+Super cool.
+
+01:08:25.000 --> 01:08:31.000
+What are your pets names
+
+01:08:31.000 --> 01:08:40.000
+Take them in the chat, or maybe change your zoom name to your pet's name.
+
+01:08:40.000 --> 01:08:43.000
+Okay, Let's start so says the coffee.
+
+01:08:43.000 --> 01:08:46.000
+Thank you for the intro so.
+
+01:08:46.000 --> 01:08:51.000
+And also thank you for turning your cameras on it does help.
+
+01:08:51.000 --> 01:08:55.000
+Switch back to
+
+01:08:55.000 --> 01:09:02.000
+gallery mode.
+
+01:09:02.000 --> 01:09:04.000
+All right.
+
+01:09:04.000 --> 01:09:14.000
+And so, oh the cat's name is qoq Christmas cat famous you go.
+
+01:09:14.000 --> 01:09:19.000
+Chris. Okey dokey
+
+01:09:19.000 --> 01:09:24.000
+Bailey for TJ super cute.
+
+01:09:24.000 --> 01:09:29.000
+fluffy. Okay, awesome.
+
+01:09:29.000 --> 01:09:35.000
+I'm good. So where are we going to bring back yes code. Right.
+
+01:09:35.000 --> 01:09:57.000
+Yeah. Okay, we've got a browser out we got to read route, read route is here, so that we can see how dynamic values work on the URLs, right, whatever value is, after the read is going to show up now as rack prams dot index index because of this name here.
+
+01:09:57.000 --> 01:10:04.000
+Cool. And as I mentioned before our next round is going to be the ad route.
+
+01:10:04.000 --> 01:10:09.000
+And so here we go again with a copy paste of our.
+
+01:10:09.000 --> 01:10:20.000
+What a route looks like that in another route but we're now going to change it to add new.
+
+01:10:20.000 --> 01:10:28.000
+Maybe we can get away with even just add for now. Okay. So there we are with ADD we don't have a wreck cramps thing anymore.
+
+01:10:28.000 --> 01:10:39.000
+We're not going to need any template bar. At this stage, and we're going to do restaurant render. Add there.
+
+01:10:39.000 --> 01:10:41.000
+That's it for this route.
+
+01:10:41.000 --> 01:10:44.000
+No Okay let's do a bit more.
+
+01:10:44.000 --> 01:10:51.000
+This is just the part that sets the route up, right. I need to now have any jazz template called ad.
+
+01:10:51.000 --> 01:10:54.000
+So go back to here.
+
+01:10:54.000 --> 01:10:56.000
+Here's my terminal.
+
+01:10:56.000 --> 01:11:09.000
+And now, why don't we copy that to that.
+
+01:11:09.000 --> 01:11:15.000
+So I've just made a new, I'm going to come back to today's question later.
+
+01:11:15.000 --> 01:11:25.000
+So that we can follow up on that inanimate content questions. But for now, I've just made a new egs template right using that copy command on the command line back to the editor.
+
+01:11:25.000 --> 01:11:30.000
+And sure enough,
+
+01:11:30.000 --> 01:11:38.000
+let's see, in views here is add.
+
+01:11:38.000 --> 01:11:40.000
+Okay.
+
+01:11:40.000 --> 01:11:45.000
+And now with the ad view.
+
+01:11:45.000 --> 01:12:06.000
+What I want to do is present a form right where a person can type in a question, and an answer and submit them. And then those values should be submitted into our database right into our data structure that holds the learning objectives.
+
+01:12:06.000 --> 01:12:10.000
+So for the title here we're going to have add new learning objective.
+
+01:12:10.000 --> 01:12:13.000
+And yeah, no table, no loop.
+
+01:12:13.000 --> 01:12:17.000
+No variables of any sort.
+
+01:12:17.000 --> 01:12:23.000
+Like that this is getting simpler rapidly before it gets more complex.
+
+01:12:23.000 --> 01:12:27.000
+And so, what do we want.
+
+01:12:27.000 --> 01:12:31.000
+Well, We want a form.
+
+01:12:31.000 --> 01:12:37.000
+And we want that form to have inputs.
+
+01:12:37.000 --> 01:12:40.000
+So there's one input.
+
+01:12:40.000 --> 01:12:42.000
+There's another input.
+
+01:12:42.000 --> 01:12:45.000
+And then finally, a third input.
+
+01:12:45.000 --> 01:12:52.000
+Each of these is going to have a different type and name and ID.
+
+01:12:52.000 --> 01:12:56.000
+So, let's start to flush this out.
+
+01:12:56.000 --> 01:12:59.000
+If I want to do the multiple cursor trick.
+
+01:12:59.000 --> 01:13:02.000
+So there's for input.
+
+01:13:02.000 --> 01:13:12.000
+Name equal, they're each going to get a name, they're each going to get an ID, and they're each going to get a type.
+
+01:13:12.000 --> 01:13:18.000
+And that's good enough for now.
+
+01:13:18.000 --> 01:13:25.000
+So, the name is going to be question for one
+
+01:13:25.000 --> 01:13:29.000
+answer for another.
+
+01:13:29.000 --> 01:13:35.000
+And that I need a name here.
+
+01:13:35.000 --> 01:13:39.000
+Let's just call it submit for now.
+
+01:13:39.000 --> 01:13:42.000
+And same with the IDs.
+
+01:13:42.000 --> 01:13:51.000
+Now can we multiple can be multiple cursor this I think we can. Let's try this ID, we've got three IDs and three cursor's now.
+
+01:13:51.000 --> 01:14:00.000
+And I want the ID to match the same value there, I think each cursor gets its own paste buffer.
+
+01:14:00.000 --> 01:14:02.000
+Love it.
+
+01:14:02.000 --> 01:14:07.000
+Okay, we're going to make that lowercase Submit.
+
+01:14:07.000 --> 01:14:20.000
+And then finally for type. We've got a text field here, a text field there. and this type is going to be type, submit.
+
+01:14:20.000 --> 01:14:23.000
+Okay.
+
+01:14:23.000 --> 01:14:34.000
+So with that, I should now have a form at this place, right where at slash add.
+
+01:14:34.000 --> 01:14:39.000
+So let's go back and take a look, see if it exists.
+
+01:14:39.000 --> 01:14:42.000
+Slash ad.
+
+01:14:42.000 --> 01:14:47.000
+Sure enough, there's my forum. Add new learning objectives.
+
+01:14:47.000 --> 01:14:53.000
+And so I've added a little bit of HTML that shows you how to do forms. Yeah.
+
+01:14:53.000 --> 01:14:55.000
+There it is.
+
+01:14:55.000 --> 01:14:59.000
+We can dress this up just a little bit more.
+
+01:14:59.000 --> 01:15:05.000
+For each of the following inputs.
+
+01:15:05.000 --> 01:15:10.000
+I can add a label.
+
+01:15:10.000 --> 01:15:17.000
+And so how am I going to do this exactly was multiple cursor's, maybe I'm not.
+
+01:15:17.000 --> 01:15:21.000
+It's actually here. Ah, there we go.
+
+01:15:21.000 --> 01:15:24.000
+Label.
+
+01:15:24.000 --> 01:15:34.000
+Like so. For equals. And we're actually going to grab this
+
+01:15:34.000 --> 01:15:45.000
+ID here like so copy for. It's actually the idea that we're triggering on.
+
+01:15:45.000 --> 01:15:57.000
+And so each one is going to have that text associated with. I really love in the multiple cursor game right now, this is just like fun for me to practice that.
+
+01:15:57.000 --> 01:16:04.000
+Question and Answer labels that go with each of our inputs, like so.
+
+01:16:04.000 --> 01:16:18.000
+Right. You can see there's a pair here is a pair here. Right. And so if I save that, go back to the thing and reload it there. Sure enough, each input tag now has a label.
+
+01:16:18.000 --> 01:16:24.000
+Now, One more super important thing performs.
+
+01:16:24.000 --> 01:16:34.000
+Is that the four needs to know how this information is going to get submitted to the back end.
+
+01:16:34.000 --> 01:16:43.000
+And for that we need to attributes on the form tag, one called method.
+
+01:16:43.000 --> 01:16:48.000
+And the other called action.
+
+01:16:48.000 --> 01:17:07.000
+These are old names for these concepts method you may recognize as being the particular HTTP verb. Sorry. The particular HTTP verb that this request is going to use.
+
+01:17:07.000 --> 01:17:13.000
+And in particular, we would like you to try a POST request here.
+
+01:17:13.000 --> 01:17:17.000
+So I'll save that value.
+
+01:17:17.000 --> 01:17:20.000
+Remember, the HTTP verb.
+
+01:17:20.000 --> 01:17:34.000
+We've got get, we've got post, and then there are some others that we're going to talk about later, but for now. This form is going to submit a POST request to the back end.
+
+01:17:34.000 --> 01:17:44.000
+And in particular, let's send it to the path, slash add, like so.
+
+01:17:44.000 --> 01:17:47.000
+Okay, So here's our form.
+
+01:17:47.000 --> 01:18:01.000
+The form is going to submit a POST request to slash add. It's going to have some information that's in that form. And when we click on the submit button,
+
+01:18:01.000 --> 01:18:05.000
+then that request is going to get me.
+
+01:18:05.000 --> 01:18:16.000
+So if I did all that and I go back here and I hit reload on this thing, nothing super special, right, but I can now looking at the elements and sure enough, here's our form.
+
+01:18:16.000 --> 01:18:29.000
+The form has the POST method and an action of slash add, it's got inputs, with names and IDs for each of the two variables right if I hover over it, you can see here's the question one here is the answer one.
+
+01:18:29.000 --> 01:18:33.000
+And then this last bit here is the submit button.
+
+01:18:33.000 --> 01:18:44.000
+And so question, you know what, what is the name of your pet.
+
+01:18:44.000 --> 01:18:48.000
+And the answer is lucky.
+
+01:18:48.000 --> 01:18:52.000
+And now I can click Submit.
+
+01:18:52.000 --> 01:18:56.000
+And so, let's do it and watch what happens by click Submit.
+
+01:18:56.000 --> 01:19:05.000
+This message I get back from expresses cannot post slash add.
+
+01:19:05.000 --> 01:19:14.000
+And so, yeah, that message is totally useful totally understandable right, we have not yet made a route for this form to submit to.
+
+01:19:14.000 --> 01:19:18.000
+It actually needs a separate route.
+
+01:19:18.000 --> 01:19:22.000
+So we'll go back to our code.
+
+01:19:22.000 --> 01:19:33.000
+Here's our template for adding right that's the form, how did how did the user see it because they went to get requested slash add.
+
+01:19:33.000 --> 01:19:41.000
+But now we're going to make a new route app dot post
+
+01:19:41.000 --> 01:19:44.000
+slash ad.
+
+01:19:44.000 --> 01:19:51.000
+And it's going to take a call back.
+
+01:19:51.000 --> 01:19:53.000
+Great there.
+
+01:19:53.000 --> 01:19:58.000
+Except this callback is going to do something different.
+
+01:19:58.000 --> 01:20:06.000
+Okay, so now we have a route. That's a POST request for slash ad.
+
+01:20:06.000 --> 01:20:10.000
+And when the form data gets submitted.
+
+01:20:10.000 --> 01:20:15.000
+It's going to take in the data from the form.
+
+01:20:15.000 --> 01:20:24.000
+It's kind of similar to what we had up here where there was data being sent into a route except that here the data was coming in on the URL itself.
+
+01:20:24.000 --> 01:20:30.000
+Now we have to look somewhere else to get this form data that comes in.
+
+01:20:30.000 --> 01:20:38.000
+And so the way this works, we're actually going to need some middleware to help us out here.
+
+01:20:38.000 --> 01:20:46.000
+The middleware is called body part, sir.
+
+01:20:46.000 --> 01:20:52.000
+And with the older versions of know that we're using here.
+
+01:20:52.000 --> 01:21:07.000
+I'm going to go ahead and add in or require constant body parcel equals require body dash purser. This is a new package that we need to bring in to help us process form data.
+
+01:21:07.000 --> 01:21:16.000
+And that form that package requires a bit of a middleware to help us out.
+
+01:21:16.000 --> 01:21:38.000
+So that's the middleware that I want to execute on all of our requests coming in, if there happens to be formed data on that request, then it's going to get parsed and included in the body of our request.
+
+01:21:38.000 --> 01:21:46.000
+So, now, if I go down to my route the post request route.
+
+01:21:46.000 --> 01:21:58.000
+I can do the following console dot log, just to see what it looks like now rack dot body.
+
+01:21:58.000 --> 01:22:05.000
+And this is very analogous to what we were doing with wreck doc programs, just a second ago.
+
+01:22:05.000 --> 01:22:20.000
+So we'll do a console on, like so. And we'll leave this like unfinished. And so we'll see the thing sit and spin when we run it right now every time I've been saving this file, go back here it's been reloading my server every time.
+
+01:22:20.000 --> 01:22:21.000
+Right.
+
+01:22:21.000 --> 01:22:25.000
+We can leave this here for now we're going to see a console log on there.
+
+01:22:25.000 --> 01:22:29.000
+So we go back here, go to the homepage.
+
+01:22:29.000 --> 01:22:32.000
+Right, I can click on any one of these detail pages now.
+
+01:22:32.000 --> 01:22:38.000
+But we need a link that separate to the ad form and so here's the ad form.
+
+01:22:38.000 --> 01:22:40.000
+Question.
+
+01:22:40.000 --> 01:22:44.000
+You know, what's for lunch. This is the standard question really isn't it.
+
+01:22:44.000 --> 01:22:47.000
+What's for lunch, answer.
+
+01:22:47.000 --> 01:22:49.000
+Oh, food.
+
+01:22:49.000 --> 01:23:06.000
+Definitely the answer, click Submit. It's going to submit to the post request at slash ad, click it. Now we have the route. But notice it's not finishing right we haven't finished the route properly yet, go back to the console log, let's have a look at
+
+01:23:06.000 --> 01:23:15.000
+what came out here is wreck dot body now, Thanks to that middleware that we put in place.
+
+01:23:15.000 --> 01:23:23.000
+rec dot body is populated with an object.
+
+01:23:23.000 --> 01:23:37.000
+Here is the object here are here is the set of properties and values. Notice what they are. They're the form inputs, including the submit button, actually.
+
+01:23:37.000 --> 01:23:47.000
+And for each of the named inputs, we have values, values that are the things that I typed into the form.
+
+01:23:47.000 --> 01:23:49.000
+Right. What's for lunch.
+
+01:23:49.000 --> 01:23:53.000
+Food code for now.
+
+01:23:53.000 --> 01:24:02.000
+And then the submit button itself. Also, a part of the form, so it got included in the submission that got sent into direct body.
+
+01:24:02.000 --> 01:24:05.000
+Cool.
+
+01:24:05.000 --> 01:24:20.000
+Because now we can take these things out of the body object and push them into our data structure, which holds all of our learning objectives.
+
+01:24:20.000 --> 01:24:22.000
+Right.
+
+01:24:22.000 --> 01:24:31.000
+So Riley asks, is the key of the body, the ID or the name, it's the name.
+
+01:24:31.000 --> 01:24:33.000
+That's a great question.
+
+01:24:33.000 --> 01:24:37.000
+So this question here, and this answer here.
+
+01:24:37.000 --> 01:24:41.000
+They came from
+
+01:24:41.000 --> 01:24:46.000
+this, and this.
+
+01:24:46.000 --> 01:24:51.000
+And by the way, that can sometimes be super tricky to debug.
+
+01:24:51.000 --> 01:24:53.000
+Right.
+
+01:24:53.000 --> 01:24:58.000
+Hot Tip for pro developer debugging.
+
+01:24:58.000 --> 01:25:18.000
+Get your editor into this multiple pain mode, so that you can be very cognizant of the contents of your form HTML. And the way that the route is interacting with the data that comes in and try to, to make them line up in your mind, which pieces belong
+
+01:25:18.000 --> 01:25:24.000
+to which, if when you're debugging by putting console logs on this side you find that there's stuff missing.
+
+01:25:24.000 --> 01:25:29.000
+It's, it may be because the name is not set properly.
+
+01:25:29.000 --> 01:25:30.000
+Right.
+
+01:25:30.000 --> 01:25:38.000
+That's kind of a gotcha in the way that these things are coded up. So yeah, definitely get the two panes open.
+
+01:25:38.000 --> 01:25:45.000
+Alright so now we've got wrapped up body with dot name and dot answer inside it. Let's use those things.
+
+01:25:45.000 --> 01:25:48.000
+What we want to do. Right.
+
+01:25:48.000 --> 01:25:56.000
+Remember the goal here is to add another learning objective to the objectives array of objects.
+
+01:25:56.000 --> 01:26:08.000
+So, let's take that array, right down in here this is the post route now objectives.
+
+01:26:08.000 --> 01:26:10.000
+Hmm.
+
+01:26:10.000 --> 01:26:17.000
+It's going to be the next value in the array, right, we should push a thing on to that.
+
+01:26:17.000 --> 01:26:19.000
+Right.
+
+01:26:19.000 --> 01:26:29.000
+What are we going to push an object that object is going to have a question property,
+
+01:26:29.000 --> 01:26:35.000
+whose value should be wrecked out body question.
+
+01:26:35.000 --> 01:26:45.000
+And it's going to have an answer, property, whose value should be rec dot body dot.
+
+01:26:45.000 --> 01:26:48.000
+Insert,
+
+01:26:48.000 --> 01:26:52.000
+Like so.
+
+01:26:52.000 --> 01:26:57.000
+And that's it, we've just taken in values from the form.
+
+01:26:57.000 --> 01:27:05.000
+And we've taken those values and we've made an object out of them here.
+
+01:27:05.000 --> 01:27:10.000
+And push that object on to our objectives array.
+
+01:27:10.000 --> 01:27:15.000
+Done. right, one line of code.
+
+01:27:15.000 --> 01:27:21.000
+So what's the last thing that we should do as part of this route.
+
+01:27:21.000 --> 01:27:37.000
+Well, we could make an egs template and render it here, you know some sort of celebration for having added new learning objectives to our list, but I've got another thing that you can do.
+
+01:27:37.000 --> 01:27:48.000
+Maybe you didn't know that you can do this but here we go. Oh my beer and watch this rez dot redirect
+
+01:27:48.000 --> 01:27:53.000
+instead of rendering and he just simply, we're just going to say hey browser.
+
+01:27:53.000 --> 01:27:56.000
+Go load this URL now.
+
+01:27:56.000 --> 01:28:02.000
+Now this is done, we're going to ask the browser to load a new page.
+
+01:28:02.000 --> 01:28:07.000
+Right. And in fact, Let's just redirect back to the homepage now.
+
+01:28:07.000 --> 01:28:11.000
+Right, because we've already written
+
+01:28:11.000 --> 01:28:14.000
+the way that the homepage should be handled.
+
+01:28:14.000 --> 01:28:19.000
+We know there's new dynamic data that the homepage would show us.
+
+01:28:19.000 --> 01:28:24.000
+If we've successfully added our new learning objective.
+
+01:28:24.000 --> 01:28:28.000
+So no reason not to just send the user back to that route.
+
+01:28:28.000 --> 01:28:33.000
+Right, that's what restaurant redirect does, it's included in the response.
+
+01:28:33.000 --> 01:28:37.000
+it sends back a response.
+
+01:28:37.000 --> 01:28:42.000
+That tells the browser, please make another request to this path.
+
+01:28:42.000 --> 01:28:47.000
+We'll see how this goes in a minute but let me just save that
+
+01:28:47.000 --> 01:28:49.000
+back to here.
+
+01:28:49.000 --> 01:29:00.000
+Okay, the page is not working, let's just check in on our server servers running okay this needed to reload at some point so I'm just going to click reload on this.
+
+01:29:00.000 --> 01:29:06.000
+Here we have our learning objectives, actually actually ended up going to the homepage, find my me.
+
+01:29:06.000 --> 01:29:11.000
+So here's the homepage, it shows our learning objectives that come when the server restarts.
+
+01:29:11.000 --> 01:29:15.000
+I'm going to go to add. Okay.
+
+01:29:15.000 --> 01:29:18.000
+Here's our form.
+
+01:29:18.000 --> 01:29:26.000
+How fuzzy is the monkey answer very.
+
+01:29:26.000 --> 01:29:29.000
+Submit.
+
+01:29:29.000 --> 01:29:30.000
+Check it out.
+
+01:29:30.000 --> 01:29:39.000
+There's our learning objective right there on the list, right, because it sits in the object, and it matches all the data structure that it needs to match.
+
+01:29:39.000 --> 01:29:47.000
+Now when we go back to the homepage. That's a loop over that same data structure, and it found that extra link.
+
+01:29:47.000 --> 01:29:51.000
+Wicked.
+
+01:29:51.000 --> 01:30:04.000
+Alright, I'm back to TJ question, I find it interesting that to do with the dynamic value coming in on the URL here in the read route.
+
+01:30:04.000 --> 01:30:07.000
+I just think that index is dynamic.
+
+01:30:07.000 --> 01:30:11.000
+But we use dot notation for it.
+
+01:30:11.000 --> 01:30:17.000
+Which I thought dot notation is static wreck dot parameter dot index.
+
+01:30:17.000 --> 01:30:20.000
+Uh huh.
+
+01:30:20.000 --> 01:30:32.000
+Okay, so yeah i mean i guess what you're saying is that you might have preferred to use square brackets notation right now with index as a static.
+
+01:30:32.000 --> 01:30:36.000
+Sorry, as a known string
+
+01:30:36.000 --> 01:30:40.000
+index is the name of the property.
+
+01:30:40.000 --> 01:30:53.000
+Right. How do I know that because that's the name I used after my colon, up here. This colon index. That's a fixed name. Right. I could call that whatever I want.
+
+01:30:53.000 --> 01:30:55.000
+Right.
+
+01:30:55.000 --> 01:30:57.000
+Like, triple line.
+
+01:30:57.000 --> 01:31:01.000
+Right now it's triple I hear, that's still going to work.
+
+01:31:01.000 --> 01:31:14.000
+Right. This variable name is a different thing. And I've passed that variable name into here to get, you know, because this is going to be a number objectives have to for example right.
+
+01:31:14.000 --> 01:31:25.000
+This name is triple I this name here. That's why it's, I could use dot notation, because I knew the name that I was going after ahead of time.
+
+01:31:25.000 --> 01:31:26.000
+Yeah.
+
+01:31:26.000 --> 01:31:35.000
+Hopefully that clarifies things for people. It is nice to talk about the details of these things.
+
+01:31:35.000 --> 01:31:41.000
+Okay, now we are done, the ad route.
+
+01:31:41.000 --> 01:31:49.000
+We have got two more routes to go one is complex, the other one is easier.
+
+01:31:49.000 --> 01:31:58.000
+Um, well, they'll have their own complexities, we're going to dig into both to make sure that you know how to do each.
+
+01:31:58.000 --> 01:32:11.000
+But as I've said, the Edit route is actually very similar to the ad route, you think about how this works right we're going to click on a learning objective, like how fuzzy is the monkey.
+
+01:32:11.000 --> 01:32:15.000
+And it's going to show us.
+
+01:32:15.000 --> 01:32:20.000
+This is interesting, actually. Why did that come up that way.
+
+01:32:20.000 --> 01:32:24.000
+We have to debug this a minute, a bit.
+
+01:32:24.000 --> 01:32:28.000
+But
+
+01:32:28.000 --> 01:32:37.000
+that was also not working, something's broken about our read her Why is that working but not the other 1333 works.
+
+01:32:37.000 --> 01:32:45.000
+Read for works at racked up body or the form values started.
+
+01:32:45.000 --> 01:32:47.000
+What is for lunch.
+
+01:32:47.000 --> 01:32:53.000
+Oh, very interesting.
+
+01:32:53.000 --> 01:32:57.000
+And we're gonna have to see why. Okay, anyway.
+
+01:32:57.000 --> 01:33:03.000
+For now, let's just look at this, right, so here's the detail page for this. Right.
+
+01:33:03.000 --> 01:33:08.000
+That's got the particular values for that particular learning objective.
+
+01:33:08.000 --> 01:33:26.000
+If I go to the ad form. Here's a form. What I would like is for this form to be pre populated with the values that I'm trying to edit, so that I can change them a little bit, And then say submit those changes.
+
+01:33:26.000 --> 01:33:30.000
+Maybe the button needs to read, edit, instead of Submit. Right.
+
+01:33:30.000 --> 01:33:39.000
+And when I click edit it, the change values should go in for those things.
+
+01:33:39.000 --> 01:33:43.000
+So, to make that work.
+
+01:33:43.000 --> 01:33:53.000
+We're going to have a couple of edit routes, right, one that shows the form, and one that handles the post input from that for.
+
+01:33:53.000 --> 01:34:01.000
+That's very typical by the way to have one route to show the form, and then another route to post to handle the post of that form.
+
+01:34:01.000 --> 01:34:08.000
+And so, when working on our edit route, I'm going to go back to these
+
+01:34:08.000 --> 01:34:18.000
+routes here. Copy that like that and paste it here because edit needs to have these, but now I'm going to have instead of slash add.
+
+01:34:18.000 --> 01:34:22.000
+Let's have slash,
+
+01:34:22.000 --> 01:34:25.000
+edit, like so.
+
+01:34:25.000 --> 01:34:28.000
+So now I'm targeting a different path name.
+
+01:34:28.000 --> 01:34:34.000
+And here will have, edit, as well.
+
+01:34:34.000 --> 01:34:46.000
+And you know what we do from here, remains to be seen. Because we're going to have to go after a particular learning objective in the array. So that piece of code is going to need to get updated for sure.
+
+01:34:46.000 --> 01:34:53.000
+But in the meantime, we can start to flesh out what we need. with these other routes.
+
+01:34:53.000 --> 01:35:06.000
+So, yeah, I need to have an edit EGF template now. Right. And it's actually going to look very much like our ad one, because the ad was a form.
+
+01:35:06.000 --> 01:35:07.000
+Right.
+
+01:35:07.000 --> 01:35:09.000
+The Edit one is also going to be a form.
+
+01:35:09.000 --> 01:35:17.000
+So let's do that. Let's copy in.
+
+01:35:17.000 --> 01:35:22.000
+Add now as edit.
+
+01:35:22.000 --> 01:35:24.000
+Like this. Are people.
+
+01:35:24.000 --> 01:35:37.000
+For those of you who didn't attend the command line tips and tricks, control, a to go to the beginning of a line control, e to go to the end and control the deletes from the right in the interior if you want to do that.
+
+01:35:37.000 --> 01:35:57.000
+I highly recommend going back to that breakout video to watch that to speed up your use of the command line. Okay, so copy views, add two views, edit WJS.
+
+01:35:57.000 --> 01:36:04.000
+Edit EJS. And so here we are with edit DJs open in the editor. Right.
+
+01:36:04.000 --> 01:36:14.000
+And so, instead of Add New. We're going to have, edit, learning objectives.
+
+01:36:14.000 --> 01:36:16.000
+And it's going to build out a form.
+
+01:36:16.000 --> 01:36:20.000
+Now,
+
+01:36:20.000 --> 01:36:26.000
+with this editing of a learning objective.
+
+01:36:26.000 --> 01:36:31.000
+We are going to need dynamic data to come into this form.
+
+01:36:31.000 --> 01:36:41.000
+Right. It's going to need to be the particulars of the individual learning objective that we're trying to edit.
+
+01:36:41.000 --> 01:36:46.000
+So let's go back to this route here.
+
+01:36:46.000 --> 01:36:50.000
+Sorry, the one with the form here.
+
+01:36:50.000 --> 01:36:57.000
+And in particular, we want to have access to whichever one we're trying to edit. Right.
+
+01:36:57.000 --> 01:37:01.000
+And so much like the read one here.
+
+01:37:01.000 --> 01:37:16.000
+Let's grab a dynamic value off the URL, which corresponds to the particular index for the particular.
+
+01:37:16.000 --> 01:37:22.000
+I'm learning objective that we're trying to edit.
+
+01:37:22.000 --> 01:37:24.000
+Right.
+
+01:37:24.000 --> 01:37:27.000
+And so there's my value now I have index.
+
+01:37:27.000 --> 01:37:31.000
+And so I need to pass in some template bars.
+
+01:37:31.000 --> 01:37:35.000
+Let's pass in
+
+01:37:35.000 --> 01:37:40.000
+the exact objective that corresponds to that index.
+
+01:37:40.000 --> 01:37:46.000
+Right. It's going to take it out of the objectives array pass it in as an object.
+
+01:37:46.000 --> 01:38:01.000
+And so, that objective is going to show up now. In my edit ej is template, so long as I add the template bars variable to the call on the render here.
+
+01:38:01.000 --> 01:38:05.000
+Right, that's how you pass dynamic data down into the template.
+
+01:38:05.000 --> 01:38:10.000
+Seeing that again is another example of that. And so now on edit it js.
+
+01:38:10.000 --> 01:38:23.000
+I can have access to the individual bits and pieces. In fact, let's just do this for debugging purposes you can try this objective dot. Well you know what, let's do the whole thing.
+
+01:38:23.000 --> 01:38:28.000
+We could go JSON string of phi, this time.
+
+01:38:28.000 --> 01:38:32.000
+The entire objective, like that.
+
+01:38:32.000 --> 01:38:38.000
+And so now, on the form for the Edit.
+
+01:38:38.000 --> 01:38:43.000
+Let's try this, edit, slash two.
+
+01:38:43.000 --> 01:38:47.000
+Yeah, Sure enough, there's my objective.
+
+01:38:47.000 --> 01:39:01.000
+At the index have to write, and it passed in the whole objective down into my edit form egs template.
+
+01:39:01.000 --> 01:39:08.000
+So Darcy asks Can you call him directly. As the objective.
+
+01:39:08.000 --> 01:39:15.000
+So rec programs, if you recall, held
+
+01:39:15.000 --> 01:39:31.000
+the named token from the URL and its value. So I'm only going to get the value, like in this case to write AAA is going to be equal to two.
+
+01:39:31.000 --> 01:39:35.000
+And so Darcy's asking wreck dot render.
+
+01:39:35.000 --> 01:39:48.000
+Edit objective record.
+
+01:39:48.000 --> 01:40:03.000
+I call these convenience variables, where I take a thing like grams triple I say, stick it into a temporary variable, use that temporary variable is part of this syntax right and again template bars itself is even a temporary variable.
+
+01:40:03.000 --> 01:40:13.000
+Right. There's no question that I could refactor this code to be more dense, right.
+
+01:40:13.000 --> 01:40:25.000
+So here I am with that. This is the source of my index value here. Right, so why don't I just use it like that, instead of perfectly legal.
+
+01:40:25.000 --> 01:40:26.000
+Right.
+
+01:40:26.000 --> 01:40:30.000
+and then while we're at it.
+
+01:40:30.000 --> 01:40:43.000
+Here is template bars, as another intermediate variable, right, why don't I just take that value. And instead of establishing a temporary variable, go in here and drop it in directly like that.
+
+01:40:43.000 --> 01:40:45.000
+There.
+
+01:40:45.000 --> 01:40:58.000
+So there you go. This is exactly identical to that right in terms of the code. Can I do this. Absolutely right. It's syntactically correct, it's functionally equivalent.
+
+01:40:58.000 --> 01:40:59.000
+Right.
+
+01:40:59.000 --> 01:41:04.000
+But there is a bit of a disadvantage between here and here.
+
+01:41:04.000 --> 01:41:12.000
+And that is, these intermediate variables, provide you with a bit of self documentation.
+
+01:41:12.000 --> 01:41:24.000
+Right there a bit of an opportunity to give a name to a thing, so that when you're reading it you can debug it a little bit better.
+
+01:41:24.000 --> 01:41:26.000
+Right.
+
+01:41:26.000 --> 01:41:43.000
+And so people tend to on their learning journey for code, start here and then migrate as far toward this style of code, as they're comfortable with, or as their team members are comfortable with.
+
+01:41:43.000 --> 01:41:47.000
+right, usually you want to have maintainable code.
+
+01:41:47.000 --> 01:41:58.000
+And this code I would argue is a lot less maintainable than this one is because up here we've got more opportunities to name the parts.
+
+01:41:58.000 --> 01:41:59.000
+Yeah.
+
+01:41:59.000 --> 01:42:13.000
+Okay, so very good question, and I, you know, you should find your own sweet spot, but then understand that. Yeah, coming back to this code six months later.
+
+01:42:13.000 --> 01:42:21.000
+This one is going to be a lot more straightforward to debug and understand what you were thinking when you were coding it. Yeah.
+
+01:42:21.000 --> 01:42:23.000
+Yeah. Very good.
+
+01:42:23.000 --> 01:42:27.000
+Okay. So there we have our edit form.
+
+01:42:27.000 --> 01:42:43.000
+And so now, this objective is going to get passed in to this template variable. We've seen how objective was available to us over here, right, we can actually just show the whole objective.
+
+01:42:43.000 --> 01:42:52.000
+And so now, inside my inputs. I can actually tweak.
+
+01:42:52.000 --> 01:42:55.000
+Why is that thing stuck there, so I'm a wrong editor. Okay.
+
+01:42:55.000 --> 01:42:59.000
+Inside this input. I can for example.
+
+01:42:59.000 --> 01:43:07.000
+Let me just space this down a little bit so that we can see the individual attributes.
+
+01:43:07.000 --> 01:43:11.000
+Like so.
+
+01:43:11.000 --> 01:43:12.000
+Right.
+
+01:43:12.000 --> 01:43:21.000
+And so I'm going to add another attribute to this input value, like so.
+
+01:43:21.000 --> 01:43:26.000
+And for the value, we're going to have an alligator clip
+
+01:43:26.000 --> 01:43:32.000
+that outputs. Now, right with the equal sign, this time.
+
+01:43:32.000 --> 01:43:39.000
+Objective dot question, like so.
+
+01:43:39.000 --> 01:43:46.000
+And then similarly for this one.
+
+01:43:46.000 --> 01:44:06.000
+We will add another attribute to the answer one that goes like this value objective dot answer. That's the value of the input as it renders the form.
+
+01:44:06.000 --> 01:44:08.000
+Right.
+
+01:44:08.000 --> 01:44:15.000
+Okay, back to hear, reload.
+
+01:44:15.000 --> 01:44:20.000
+Sure enough, It took the question value dropped it into this.
+
+01:44:20.000 --> 01:44:25.000
+And it took the answer value and dropped it into here.
+
+01:44:25.000 --> 01:44:28.000
+Cool. Now I don't even need my debugging.
+
+01:44:28.000 --> 01:44:37.000
+Here, I'll leave it in for now because there's actually one more interesting step that we need.
+
+01:44:37.000 --> 01:44:41.000
+This number two.
+
+01:44:41.000 --> 01:44:44.000
+We're going to need that number two.
+
+01:44:44.000 --> 01:44:54.000
+When we submit this form can actually think of a few ways to do this.
+
+01:44:54.000 --> 01:44:59.000
+Okay, see here's the button, submit right when I click this it's going to submit this form.
+
+01:44:59.000 --> 01:45:04.000
+Where's it going to get sent to well right now it's going to be a post to slash ad.
+
+01:45:04.000 --> 01:45:13.000
+Right, remember I copy pasted this this is like where copy paste can be a huge source of bugs, you don't get back to fixing all the things that need to change.
+
+01:45:13.000 --> 01:45:19.000
+You know, it's going to go to the wrong route all hell's going to break loose, you know, who knows what's going to happen.
+
+01:45:19.000 --> 01:45:24.000
+I what I really would like is for this to be at the slash edit post request.
+
+01:45:24.000 --> 01:45:34.000
+Right, that's going to correspond to this route, which we are about to start writing.
+
+01:45:34.000 --> 01:45:38.000
+And you know what, just to make this even more a little bit different.
+
+01:45:38.000 --> 01:45:46.000
+Let's try changing the values down here.
+
+01:45:46.000 --> 01:45:49.000
+And in fact,
+
+01:45:49.000 --> 01:46:00.000
+we did pick up the word submit but I think this might be default on this form, submit like this. Let's just see this.
+
+01:46:00.000 --> 01:46:05.000
+If we change the name to edit and save that.
+
+01:46:05.000 --> 01:46:09.000
+What happens here. It's still submit on this thing.
+
+01:46:09.000 --> 01:46:28.000
+Is it that Id No Is it the type. No, in fact, what it is, is the value, a submit button also has a value that value is what shows up on the button. Now my button says Edit.
+
+01:46:28.000 --> 01:46:34.000
+Right. So this is one way to do a submit button on a form is like this.
+
+01:46:34.000 --> 01:46:39.000
+You can also use a button tag, as a submit button on of for a like this.
+
+01:46:39.000 --> 01:46:47.000
+Like this. I go back here and reload it there. You can see where the text is coming up now.
+
+01:46:47.000 --> 01:46:48.000
+Right.
+
+01:46:48.000 --> 01:46:58.000
+That's an alternate way of doing an input on a form, but I'm gonna stick with this one for now, I now have a button that says edit on it, which reload.
+
+01:46:58.000 --> 01:47:00.000
+Here's my Edit button.
+
+01:47:00.000 --> 01:47:15.000
+The form needs to submit to this route. Now, right, and so back here. What does it stand for and if I click Edit here.
+
+01:47:15.000 --> 01:47:34.000
+It's going to go to this route. Right. The post HTTP verb at the path of slash, edit, and so it goes to here, we hope, and so let's check out what record body's going to do when I submit this form.
+
+01:47:34.000 --> 01:47:46.000
+Okay, it's submitted it and it redirected to the homepage, we should have gotten a console log at racked up body. Let's check the values that came out here on our console log racked up body.
+
+01:47:46.000 --> 01:47:55.000
+Sure enough, what does it stand for. Right, I had types that in that way. And it came in as part of the form values.
+
+01:47:55.000 --> 01:48:01.000
+Right. It came in in the same place that we had from before wreck dot body.
+
+01:48:01.000 --> 01:48:06.000
+That's where for values come in on his body.
+
+01:48:06.000 --> 01:48:08.000
+Okay.
+
+01:48:08.000 --> 01:48:14.000
+But the problem is that for this post route.
+
+01:48:14.000 --> 01:48:23.000
+We didn't have, which performance objective index. We're trying to change.
+
+01:48:23.000 --> 01:48:31.000
+Right, the number two is nowhere to be seen in this submission.
+
+01:48:31.000 --> 01:48:41.000
+So, there'd be a couple of ways to do this one would be to add a token here.
+
+01:48:41.000 --> 01:48:46.000
+Like this. Let's call it, Jay Jay jay this time just to show that it's different.
+
+01:48:46.000 --> 01:48:58.000
+Right. And so we could pluck the value off of rack dot programs here and do something like that. Right.
+
+01:48:58.000 --> 01:49:06.000
+And so now we have an index. And so why don't we console log it just to see it.
+
+01:49:06.000 --> 01:49:08.000
+Index.
+
+01:49:08.000 --> 01:49:11.000
+Right.
+
+01:49:11.000 --> 01:49:16.000
+Like so unlike so.
+
+01:49:16.000 --> 01:49:38.000
+But notice the path that we're submitting to should now, not just be slash at it but it should also include the index. Here, the form itself needs to know the index that it's going to get sent to ultimately, you know, which is the index that we're using
+
+01:49:38.000 --> 01:49:39.000
+here.
+
+01:49:39.000 --> 01:49:55.000
+And so, that means that in this route that's building the form, we should also pass in the index, as a parameter to the object to the template bars that are going in.
+
+01:49:55.000 --> 01:49:56.000
+Right.
+
+01:49:56.000 --> 01:50:01.000
+And so let's do that. Let's add it to this here.
+
+01:50:01.000 --> 01:50:13.000
+Now I have a second variable, other than objectives. Here's objective being used here's objective being used in the form. Now I have a variable called index which I can also use in this form.
+
+01:50:13.000 --> 01:50:14.000
+Right.
+
+01:50:14.000 --> 01:50:17.000
+In fact, let's use it here.
+
+01:50:17.000 --> 01:50:25.000
+alligator clip output style index value, like that.
+
+01:50:25.000 --> 01:50:37.000
+And so now my form is going to submit to slash edit slash and then the particular index for this form. So, let's go back to the thing, reload.
+
+01:50:37.000 --> 01:50:42.000
+Notice that my new learning objectives are gone because the server had restarted in that time.
+
+01:50:42.000 --> 01:50:58.000
+YEGS templates is read zero, this is the zeros, learning objective. And so if I want to edit I should go to slash edit a slash zero.
+
+01:50:58.000 --> 01:51:04.000
+And sure enough, YEJS templates that's that particular learning objective.
+
+01:51:04.000 --> 01:51:14.000
+The values coming in on here. Let's have a look at our form. And sure enough, the path is now updated to slash edit slash zero.
+
+01:51:14.000 --> 01:51:17.000
+And so when this form is submitted.
+
+01:51:17.000 --> 01:51:23.000
+It's going to submit to this route.
+
+01:51:23.000 --> 01:51:31.000
+At this path and Jays is going to come up
+
+01:51:31.000 --> 01:51:40.000
+as the thing. Right. js is going to be a value we should get the value 04 Js when I submit this so we'll submit it does its thing.
+
+01:51:40.000 --> 01:51:42.000
+Let's look at the console log.
+
+01:51:42.000 --> 01:51:46.000
+And sure enough, index. js came in as zero.
+
+01:51:46.000 --> 01:51:52.000
+Similarly, if I went for edit have to that's what this crowd stand for.
+
+01:51:52.000 --> 01:51:56.000
+We go edit slash two.
+
+01:51:56.000 --> 01:52:08.000
+Here's what does that stand for, I'm just going to submit it as is. goes back to here. And sure enough, edits of Jays now has to in it.
+
+01:52:08.000 --> 01:52:15.000
+Okay. And so we can reliably take this value.
+
+01:52:15.000 --> 01:52:25.000
+And now, instead of pushing our wrecked out body question and answer as a new object onto the array.
+
+01:52:25.000 --> 01:52:47.000
+Instead, we can do something else with it, we can say objective objectives of index dot question, equals wreck dot body question.
+
+01:52:47.000 --> 01:52:49.000
+Like so.
+
+01:52:49.000 --> 01:52:55.000
+Right. we're going to change the one that was already in the object for a new one.
+
+01:52:55.000 --> 01:52:58.000
+The new one that came in on the Edit for.
+
+01:52:58.000 --> 01:53:08.000
+Similarly, we're going to change the answer.
+
+01:53:08.000 --> 01:53:22.000
+In a similar way, and that therefore, is what our code should do in order to edit a learning objective.
+
+01:53:22.000 --> 01:53:27.000
+Now, Let's try this.
+
+01:53:27.000 --> 01:53:31.000
+YEJS templates.
+
+01:53:31.000 --> 01:53:36.000
+Seems perhaps not grammatically complete to me.
+
+01:53:36.000 --> 01:53:44.000
+So let's edit this thing. This is the zero learning objective, edit, zero.
+
+01:53:44.000 --> 01:53:47.000
+YEJS templates. Okay, how about this.
+
+01:53:47.000 --> 01:54:02.000
+Why should we use EJS templates. We use EJS templates blah blah blah, submit the Edit goes through the back end route at slot at the post request of slash edit slash zero.
+
+01:54:02.000 --> 01:54:10.000
+And now it updated that individual learning objectives to include my edit on the question.
+
+01:54:10.000 --> 01:54:13.000
+Why should I use EJS templates.
+
+01:54:13.000 --> 01:54:14.000
+What.
+
+01:54:14.000 --> 01:54:22.000
+How about for what does crud stand for. Whoops. We want to change this to an edit.
+
+01:54:22.000 --> 01:54:27.000
+What does Chris and for. Well, it's an acronym, why don't we make it look like an acronym by putting periods into the name.
+
+01:54:27.000 --> 01:54:31.000
+Yeah, edit, and now my question is periods in it.
+
+01:54:31.000 --> 01:54:37.000
+So I'm able to edit my question. I'm similarly able to edit the answers that should be tested, of course.
+
+01:54:37.000 --> 01:54:40.000
+And there you go.
+
+01:54:40.000 --> 01:54:46.000
+Okay. I'm
+
+01:54:46.000 --> 01:54:53.000
+Darcy asks Can we use some conditional logic to reuse the ad route.
+
+01:54:53.000 --> 01:54:59.000
+In fact, I can imagine using the Edit route.
+
+01:54:59.000 --> 01:55:06.000
+To add a new learning objective and just not pass it any values.
+
+01:55:06.000 --> 01:55:17.000
+Right, because it's new, there are no values to pass to it. And then you could pass a Boolean that says, am I making a new one or not, and then have it render the form, one way or the other.
+
+01:55:17.000 --> 01:55:18.000
+Right.
+
+01:55:18.000 --> 01:55:20.000
+It's more complex code.
+
+01:55:20.000 --> 01:55:38.000
+The advantages that you would then only have one EJS template to maintain, you know, with regard to all the fields that need to be there with you know how they're going to render all that stuff.
+
+01:55:38.000 --> 01:55:48.000
+There's a slight advantage to having only the one to maintain. But then, each one is going to be slightly more, that one that you do have is going to have to do to use cases.
+
+01:55:48.000 --> 01:55:52.000
+So, pros and cons, I would say there.
+
+01:55:52.000 --> 01:55:54.000
+Glad to ask shouldn't use the put method.
+
+01:55:54.000 --> 01:56:00.000
+Interesting point, we're going to talk about the REST API conventions when we come to that.
+
+01:56:00.000 --> 01:56:09.000
+Logan asks, Can we attached directly to a form element for the index. Yes.
+
+01:56:09.000 --> 01:56:18.000
+I had mentioned that there's multiple ways to send information from the form, back to the back end.
+
+01:56:18.000 --> 01:56:32.000
+Hold my beer and watch this. Here's my Edit page I have access to the index. There's another way that you may prefer to send that index value back to the post route.
+
+01:56:32.000 --> 01:56:39.000
+And so for that you could do this input
+
+01:56:39.000 --> 01:56:43.000
+a name, let's call it index actually.
+
+01:56:43.000 --> 01:56:45.000
+Why not ID.
+
+01:56:45.000 --> 01:56:52.000
+Similarly, index type equals hidden.
+
+01:56:52.000 --> 01:57:05.000
+This is a hidden form input and the value of that hidden form input is going to be the index.
+
+01:57:05.000 --> 01:57:11.000
+So we'll put their that they're that way. This is the ending of my input tag, like so.
+
+01:57:11.000 --> 01:57:25.000
+And now, when we render an input so say what, what are you are, where are URL parameters store, right, here's the link. If we edit that thing.
+
+01:57:25.000 --> 01:57:31.000
+Here's the Edit page for where our URL parameters stored, they are stored in grams.
+
+01:57:31.000 --> 01:57:33.000
+Look at my form now.
+
+01:57:33.000 --> 01:57:52.000
+Yes, the action is edit, Sasha size three. Right. But notice now, I've got a
+
+01:57:52.000 --> 01:58:08.000
+question, and an input for the question. I've got an answer. And I've got the input for the answer, but I also have this input, which does not show up like this one shows up over there.
+
+01:58:08.000 --> 01:58:03.000
+This one shows up over there.
+
+01:58:03.000 --> 01:58:04.000
+This one doesn't.
+
+01:58:04.000 --> 01:58:10.000
+It's hidden, it's type equal hidden, but it has a value of three.
+
+01:58:10.000 --> 01:58:15.000
+And so I can actually click on Edit here.
+
+01:58:15.000 --> 01:58:19.000
+And let's look at what came out in the console logs.
+
+01:58:19.000 --> 01:58:30.000
+Now I've got rack dot body also has a copy of that information right yes it came out as index jjj, but it's also in the form.
+
+01:58:30.000 --> 01:58:40.000
+So you could go either way, actually, to bring that in.
+
+01:58:40.000 --> 01:58:49.000
+Yeah. Um,
+
+01:58:49.000 --> 01:58:59.000
+Yeah. Darcy makes a good point. In fact, we are going to see for security reasons why you need to check the validity of these arguments that get handed in on URL parameters.
+
+01:58:59.000 --> 01:59:14.000
+We'll talk about that deeply in weeks five for long term data storage, we definitely need to be using sequel, because now every time the server restarts, for whatever reason, like if I restarted my typing Rs.
+
+01:59:14.000 --> 01:59:15.000
+Right.
+
+01:59:15.000 --> 01:59:18.000
+All of my new changes are now gone.
+
+01:59:18.000 --> 01:59:21.000
+Yeah.
+
+01:59:21.000 --> 01:59:29.000
+But that's why we do week five actually, is to learn sequel, so that we can make these changes, permanent.
+
+01:59:29.000 --> 01:59:30.000
+Yep.
+
+01:59:30.000 --> 01:59:38.000
+Adrian wouldn't have been possible to step on click Actions, instead of links for each objective.
+
+01:59:38.000 --> 01:59:46.000
+That is the essence of a single page app, which we're going to learn a lot about in week four.
+
+01:59:46.000 --> 01:59:48.000
+So great questions all around.
+
+01:59:48.000 --> 01:59:56.000
+For sure. Now we have one more
+
+01:59:56.000 --> 01:59:58.000
+route to do.
+
+01:59:58.000 --> 02:00:03.000
+And so, I mean I could leave it as an exercise.
+
+02:00:03.000 --> 02:00:07.000
+It's actually pretty straightforward.
+
+02:00:07.000 --> 02:00:19.000
+But instead of doing it. There's one more thing that I want to talk about that. Does that is in the notes and it is a thing that we want to introduce.
+
+02:00:19.000 --> 02:00:24.000
+And that is the notion of a REST API.
+
+02:00:24.000 --> 02:00:28.000
+Now, as it stands.
+
+02:00:28.000 --> 02:00:37.000
+We've been writing routes, and just picking names for those routes that seem appropriate.
+
+02:00:37.000 --> 02:00:39.000
+Right.
+
+02:00:39.000 --> 02:00:54.000
+The name, the paths for our routes, have been slash edit, slash, add slash read. So I browse, actually the homepage didn't have such browse on it but I could have called it slash browse right.
+
+02:00:54.000 --> 02:00:59.000
+These were very much names that were inspired by the bread acronym.
+
+02:00:59.000 --> 02:01:06.000
+Notice that nowhere in these paths did I include the word objective.
+
+02:01:06.000 --> 02:01:09.000
+Right.
+
+02:01:09.000 --> 02:01:11.000
+That's a bit of.
+
+02:01:11.000 --> 02:01:16.000
+That was a learning step right yes we can change the past to whatever we want.
+
+02:01:16.000 --> 02:01:24.000
+But there's a really important convention that I would like you to all be introduced to.
+
+02:01:24.000 --> 02:01:31.000
+At this stage, And that convention is called a REST API.
+
+02:01:31.000 --> 02:01:41.000
+So right now we are building an API, of sorts.
+
+02:01:41.000 --> 02:01:43.000
+What is an API.
+
+02:01:43.000 --> 02:01:47.000
+Application Programming Interface.
+
+02:01:47.000 --> 02:01:53.000
+that's, you know, one version of that acronym.
+
+02:01:53.000 --> 02:02:00.000
+What a REST API is, is it's a convention for the naming of these routes.
+
+02:02:00.000 --> 02:02:08.000
+And what's nice about using a convention is that if I tell you, Oh, I'm writing a REST API for widgets.
+
+02:02:08.000 --> 02:02:10.000
+Right.
+
+02:02:10.000 --> 02:02:14.000
+Just in that one simple sentence.
+
+02:02:14.000 --> 02:02:25.000
+You would know. Oh, then I expect to see this route and this route and this route and this route. These are the verbs that would go with each one, etc.
+
+02:02:25.000 --> 02:02:37.000
+and rest API's do handle all of the routes for the bread or the crowd acronyms, as you would want to do with any given entity.
+
+02:02:37.000 --> 02:02:45.000
+Like in our case a learning objective, in your case it's like tiny URLs. Right.
+
+02:02:45.000 --> 02:02:50.000
+And so let's have a look at that. Let's have a look at that convention in a little bit of detail.
+
+02:02:50.000 --> 02:03:01.000
+Right, let's say for example that I wanted to build out this app, as we did today, but to follow the REST API convention.
+
+02:03:01.000 --> 02:03:18.000
+So, in such a case, it means I'm going to use the word objectives for the path, so that it matches the kind of widget that I'm dealing with right, in my case objectives for you guys URL.
+
+02:03:18.000 --> 02:03:20.000
+right.
+
+02:03:20.000 --> 02:03:34.000
+And so, if your API is going to match the rest API convention, have a look at some of these routes. We've got to get route to slash objectives that corresponds to getting all the objectives.
+
+02:03:34.000 --> 02:03:35.000
+Right, it's plural.
+
+02:03:35.000 --> 02:03:41.000
+The, the widget is described in its plurality here objectives plural.
+
+02:03:41.000 --> 02:03:55.000
+And so you'll see objectives is used as the word all over the place. Here's one, slash, so it's a get request to slash objective slash colon ID.
+
+02:03:55.000 --> 02:03:57.000
+Like so.
+
+02:03:57.000 --> 02:03:59.000
+That's a dead giveaway.
+
+02:03:59.000 --> 02:04:04.000
+Get a specific objective.
+
+02:04:04.000 --> 02:04:10.000
+Right. It's like the read route of the bread acronym. Give me one widget.
+
+02:04:10.000 --> 02:04:12.000
+Right.
+
+02:04:12.000 --> 02:04:19.000
+Here's one, a POST request to slash objectives slash ID.
+
+02:04:19.000 --> 02:04:27.000
+Right. That looks very much like an update to an individual objective.
+
+02:04:27.000 --> 02:04:29.000
+Right.
+
+02:04:29.000 --> 02:04:36.000
+And so it goes, the REST API is precisely this, it's a way to make up
+
+02:04:36.000 --> 02:04:48.000
+the routes. And so you get a list of routes that you need to code to.
+
+02:04:48.000 --> 02:04:55.000
+Right. And so at the outset, we kind of had a list of objectives, sorry a list of routes that we wanted to make.
+
+02:04:55.000 --> 02:05:07.000
+If you're working with a REST API. Then you have precisely this, right, so here is like the REST API set of stuff.
+
+02:05:07.000 --> 02:05:15.000
+the routes that we would have for that REST API would be something like this.
+
+02:05:15.000 --> 02:05:20.000
+We're going to have a verb and a path.
+
+02:05:20.000 --> 02:05:32.000
+And so if our widgets are going to be let's use actual widgets Okay, the word widget here, then we need to be using the word widgets on our path because it's plural.
+
+02:05:32.000 --> 02:05:47.000
+And so each of these paths is going to be widgets, something with a slash in front and say, and the verb. Get widgets, is to get the list of all the widgets.
+
+02:05:47.000 --> 02:05:57.000
+Get with slash widgets and an ID number, like so.
+
+02:05:57.000 --> 02:06:03.000
+That's to get an individual widget.
+
+02:06:03.000 --> 02:06:08.000
+If we had a POST request to slash widgets.
+
+02:06:08.000 --> 02:06:15.000
+That's going to be about creating a new one.
+
+02:06:15.000 --> 02:06:22.000
+And so the action is here, get a list.
+
+02:06:22.000 --> 02:06:25.000
+That's like, browse
+
+02:06:25.000 --> 02:06:31.000
+here. Get a single
+
+02:06:31.000 --> 02:06:32.000
+digit.
+
+02:06:32.000 --> 02:06:35.000
+This is like, Read.
+
+02:06:35.000 --> 02:06:44.000
+Right, posting to slash widgets, is create a new widget.
+
+02:06:44.000 --> 02:06:48.000
+Right. That's like, add,
+
+02:06:48.000 --> 02:06:50.000
+get the idea.
+
+02:06:50.000 --> 02:06:58.000
+As I move through my list of routes that I'm planning out. I'm going to have a list like this.
+
+02:06:58.000 --> 02:07:11.000
+Now, got a little bit more to talk about with verbs and paths and whatnot but I think we're doing pretty well here and let people go because we're taking up all your time.
+
+02:07:11.000 --> 02:07:13.000
+Right.
+
+02:07:13.000 --> 02:07:17.000
+Let's say your web app has to deal with more than one widget type.
+
+02:07:17.000 --> 02:07:28.000
+You might have users and map points and products for sale, and you're going to combine them all into one API.
+
+02:07:28.000 --> 02:07:36.000
+One nice thing about using a REST API is that you can take this thing.
+
+02:07:36.000 --> 02:07:48.000
+By the way, delete is going to show up down here as well as well as update right there's more paths here to the REST API in total, but for my plan lists of routes, right, there's the one for widgets.
+
+02:07:48.000 --> 02:07:54.000
+Here's another one. Except now, I'm going to go.
+
+02:07:54.000 --> 02:08:02.000
+Just like this.
+
+02:08:02.000 --> 02:08:05.000
+Actually, hold on, be like that.
+
+02:08:05.000 --> 02:08:07.000
+There we go.
+
+02:08:07.000 --> 02:08:10.000
+Okay, so instead of widgets.
+
+02:08:10.000 --> 02:08:14.000
+users.
+
+02:08:14.000 --> 02:08:15.000
+Done.
+
+02:08:15.000 --> 02:08:26.000
+Now I have a plan for my routes for my users right, get a list of users get a single user that might be a profile page.
+
+02:08:26.000 --> 02:08:32.000
+Right, create a new user, it's going to be a POST request to slash users.
+
+02:08:32.000 --> 02:08:38.000
+And so all I needed to tell you, was that I'm following the REST API convention for my route names.
+
+02:08:38.000 --> 02:08:40.000
+And you're all good.
+
+02:08:40.000 --> 02:08:43.000
+Yeah.
+
+02:08:43.000 --> 02:08:46.000
+Okay, that's a good place to stop.
+
+02:08:46.000 --> 02:08:55.000
+I'm.
+
+02:08:55.000 --> 02:09:04.000
+I'm happy to forward on the lecture video to folks, quickly, what I'll do is I'll send you the preview that sits on zoom to slack straightaway.
+
+02:09:04.000 --> 02:09:12.000
+And other than that, I'm, leave it at that. So, as usual, click like and subscribe hold my beer and watch this.
+
+02:09:12.000 --> 02:09:35.000
+Have a good day compensating contact me and slack for whatever is required in terms of discussions around the lecture content.
+
