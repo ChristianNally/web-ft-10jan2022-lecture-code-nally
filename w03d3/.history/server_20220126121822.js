@@ -10,8 +10,7 @@ app.set('view engine','ejs');
 // DATA
 //
 const users = {
-  '1': {id: '1', email: 'nally@example.com', password: 'qwerty'},
-  '2': {id: '2', email: 'apple@example.com', password: 'apple'}
+  '1': {id: '1', email: 'nally@example.com', password: 'qwerty'}
 };
 
 // middleware
@@ -57,10 +56,6 @@ function verifyUser(email, password){
   return false;
 }
 
-function loggerInner(value){
-  res.cookie('user',value); // could be crazy complex
-}
-
 app.post('/login', (req,res) => {
   const candidateEmail = req.body.email;
   const candidatePassword = req.body.password;
@@ -69,9 +64,7 @@ app.post('/login', (req,res) => {
 
   if (userObj) {
     console.log('login valid');
-
-    loggerInner(userObj.id);
-
+    res.cookie('user',userObj.id);
     res.redirect('/profile');
   } else {
     console.log('login INVALID!');
@@ -94,9 +87,6 @@ app.post('/register', (req,res) => {
   console.log('register valid');
   const newId = generateRandomString(4);
   users[newId] = {id: newId, email: newEmail, password: newPassword};
-
-  loggerInner(newId);
-
   console.log('users',users);
   res.redirect('/login');
 });
@@ -106,11 +96,11 @@ app.post('/register', (req,res) => {
 //
 app.get('/profile', (req,res) => {
   console.log('req.cookies',req.cookies);
-  const userID = req.cookies.user;
+  const cookieUser = req.cookies.user;
 
-  if (users[userID]){
+  if (users[cookieUser]){
     const templateVars = {
-      secret: users[userID].password
+      secret: 'this is super secret information. CWN loves to eat cookies for breakfast!'
     };
     res.render('profile',templateVars);
     res.end();

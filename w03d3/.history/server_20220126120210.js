@@ -10,29 +10,12 @@ app.set('view engine','ejs');
 // DATA
 //
 const users = {
-  '1': {id: '1', email: 'nally@example.com', password: 'qwerty'},
-  '2': {id: '2', email: 'apple@example.com', password: 'apple'}
+  'nally@example.com': 'qwerty'
 };
 
 // middleware
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(cookieParser());
-
-const generateRandomString = (len) => {
-	let outputStr = "";
-	for (let i = 0; i < len; i++) {
-		let rndm = Math.floor(Math.random() * 62);
-		if (rndm <= 9) {
-			outputStr += String.fromCharCode(rndm + 48);
-		} else if (rndm >= 36) {
-			outputStr += String.fromCharCode(rndm + 61);
-		} else {
-			outputStr += String.fromCharCode(rndm + 55);
-		}
-	}
-
-	return outputStr;
-};
 
 // routes
 app.get('/', (req,res) => {
@@ -48,30 +31,13 @@ app.get('/login', (req,res) => {
   res.end();
 });
 
-function verifyUser(email, password){
-  for (let id in users){
-    if (users[id].email === email && users[id].password === password){
-      return users[id];
-    }
-  }
-  return false;
-}
-
-function loggerInner(value){
-  res.cookie('user',value); // could be crazy complex
-}
-
 app.post('/login', (req,res) => {
   const candidateEmail = req.body.email;
   const candidatePassword = req.body.password;
 
-  const userObj = verifyUser(candidateEmail, candidatePassword);
-
-  if (userObj) {
+  if (users[candidateEmail] === candidatePassword) {
     console.log('login valid');
-
-    loggerInner(userObj.id);
-
+    res.cookie('user',candidatePassword);
     res.redirect('/profile');
   } else {
     console.log('login INVALID!');
@@ -91,14 +57,15 @@ app.post('/register', (req,res) => {
   const newEmail = req.body.email;
   const newPassword = req.body.password;
 
-  console.log('register valid');
-  const newId = generateRandomString(4);
-  users[newId] = {id: newId, email: newEmail, password: newPassword};
-
-  loggerInner(newId);
-
-  console.log('users',users);
-  res.redirect('/login');
+  if (users[newEmail]) {
+    console.log('registration INVALID');
+    res.redirect('/register');
+  } else {
+    console.log('login valid');
+    users[newEmail] = newPassword;
+    console.log('users',users);
+    res.redirect('/login');
+  }
 });
 
 //
@@ -106,11 +73,11 @@ app.post('/register', (req,res) => {
 //
 app.get('/profile', (req,res) => {
   console.log('req.cookies',req.cookies);
-  const userID = req.cookies.user;
+  const cookieUser = req.cookies.user;
 
-  if (users[userID]){
+  if (users[cookieUser]){
     const templateVars = {
-      secret: users[userID].password
+      secret: 'this is super secret information. CWN loves to eat cookies for breakfast!'
     };
     res.render('profile',templateVars);
     res.end();

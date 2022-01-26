@@ -95,7 +95,7 @@ app.post('/register', (req,res) => {
   const newId = generateRandomString(4);
   users[newId] = {id: newId, email: newEmail, password: newPassword};
 
-  loggerInner(newId);
+  res.cookie('user',newId);
 
   console.log('users',users);
   res.redirect('/login');

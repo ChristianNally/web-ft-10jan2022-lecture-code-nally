@@ -57,10 +57,6 @@ function verifyUser(email, password){
   return false;
 }
 
-function loggerInner(value){
-  res.cookie('user',value); // could be crazy complex
-}
-
 app.post('/login', (req,res) => {
   const candidateEmail = req.body.email;
   const candidatePassword = req.body.password;
@@ -69,9 +65,7 @@ app.post('/login', (req,res) => {
 
   if (userObj) {
     console.log('login valid');
-
-    loggerInner(userObj.id);
-
+    res.cookie('user',userObj.id);
     res.redirect('/profile');
   } else {
     console.log('login INVALID!');
@@ -95,7 +89,7 @@ app.post('/register', (req,res) => {
   const newId = generateRandomString(4);
   users[newId] = {id: newId, email: newEmail, password: newPassword};
 
-  loggerInner(newId);
+  res.cookie('user',newId);
 
   console.log('users',users);
   res.redirect('/login');
