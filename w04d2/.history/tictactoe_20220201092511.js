@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  const player = $('#player').html();
+
   function victory($clickedElement){
     const $row = $clickedElement.parent();
     const player = $('#player').html();

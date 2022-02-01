@@ -11,7 +11,7 @@ $(document).ready(function(){
       }
     });
 
-    return rowWin;
+    return true;
   };
 
   $('td').click(function(){
