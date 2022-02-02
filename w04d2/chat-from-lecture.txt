@@ -1,0 +1,86 @@
+00:18:37	Ali Hashemi:	Shall we have <script> instead of <link> ?
+00:27:15	Adam Schulte:	our lesson yesterday showed js added with <script> at the end of the html for loading purposes? is this recommended only for secific circumstances?
+00:29:12	Adam Schulte:	ok awesome tan you
+00:35:03	Donatas Tubutis:	you can see this info (navigator interface) about the client using your website?
+00:35:29	Sarah White (she/her):	Snoop says no
+00:36:48	Donatas Tubutis:	its good
+00:36:48	William Liu:	basically the browser is its own client and we can run it to check the variables on the client?
+00:41:07	William Liu:	sad doggo
+00:41:44	EZECHIEL ITIMBIEN:	You need more light
+00:46:23	John Ngai:	So far so good
+00:46:24	William Liu:	is jquery sort of like an declaring html object with methods?
+00:47:18	William Liu:	alright
+00:49:00	William Liu:	this may be tiny ahead
+00:49:02	Carter Hemington:	dana!
+00:49:17	William Liu:	should we not use jquery with react?
+00:49:41	William Liu:	I heard its bad practice
+00:49:52	William Liu:	i see
+01:01:01	Fransiskus Aldo:	If the file failed to run will the js code still run?
+01:01:13	Joshua Loduca:	I did some reading for the <script> tag in html
+And it mention an attribute called "defer"
+Defer seems to do the same thing as $(document).ready.
+Is there something im missing?
+01:01:20	Andrew McNeill:	Html can’t really fail to run
+01:01:21	Fransiskus Aldo:	The page
+01:01:29	Andrew McNeill:	Just won’t render right
+01:01:42	Ifrah Noor:	$ is not defined
+01:02:29	Fransiskus Aldo:	I mean there is error in html?
+01:02:44	EZECHIEL ITIMBIEN:	If or if document produise error
+01:03:56	Fransiskus Aldo:	Got it
+01:04:13	EZECHIEL ITIMBIEN:	Document work only if ready, but if it is not ready by error, what happened?
+01:04:36	EZECHIEL ITIMBIEN:	$(document).ready
+01:05:23	Andrew McNeill:	I think because it’s a markup language, it will always end up as ready when it’s done, but it might just not show anything meaningful
+01:05:56	Andrew McNeill:	In the same way that if you have typos in a word document, it still “works” it just doesn’t look right
+01:06:35	Andrew McNeill:	I could be wrong though. Maybe he will answer this after
+01:09:03	Gerard Compion:	Because we’re working with object methods, is it better practice to not use arrow notation for callbacks?
+01:09:38	Donatas Tubutis:	i think this is special jquery syntax, pre esš
+01:09:39	Mahad Nur:	There’s a difference using function() and an arrow function on the click event right?
+01:09:44	Donatas Tubutis:	esš
+01:09:47	Donatas Tubutis:	es6 lol
+01:10:09	Andrew McNeill:	It wasn’t a question, just response to another’s question
+01:10:56	Adam Schulte:	the lesson today emphasized not using anonomous functions as callbacks in event listeners so that you can 'grab' them latter to clear them. Does JQuery event handlers not need that?
+01:11:40	Gerard Compion:	Ok thanks
+01:17:42	Rita Vaghasia:	have you clicked once or twice?
+01:18:26	Adam Schulte:	wow
+01:18:44	Rita Vaghasia:	Got it Thank you!
+01:25:52	Rita Vaghasia:	X
+01:26:07	Adam Schulte:	so i guess jquery replaces ejs in our repertoire?
+01:32:55	Donatas Tubutis:	ejs is serverside
+01:35:19	Gerard Compion:	I think its url()
+01:35:26	Rita Vaghasia:	background-image:
+01:35:30	Joshua Loduca:	background-image: url(''url");
+01:37:09	Matthew Bednarski:	hacks
+01:41:43	JOE VALOOKARAN:	can you write an if statement so that if it has a class it doesn’t add a class to it?
+02:01:19	Donatas Tubutis:	What’s the difference between the node and the element? Are elements attributes of the nodes?
+02:02:56	William Liu:	can we declare a variable outside the jquery functions and use it to track the state of the current player/(rows/columns)?
+02:03:11	Carli Raul-Omar:	Does jQuery follow the same specificity rules as css?
+02:04:04	Donatas Tubutis:	Ok
+02:04:57	William Liu:	i meant like
+02:05:26	William Liu:	add a const var player =""; at line 1
+02:05:28	Donatas Tubutis:	Are there DOM nodes that are not elements?
+02:05:38	William Liu:	and have onclick to assign the player
+02:05:39	William Liu:	nono
+02:05:46	William Liu:	like move line1 to line 2
+02:10:17	William Liu:	var isPopupOpen = false;$('.toggleLink').click(function() {    if(!isPopupOpen){        $(this).find('.popup').show();        isPopupOpen = true;    }});
+02:10:19	William Liu:	opps
+02:10:23	William Liu:	sorry disregard
+02:10:26	William Liu:	pls
+02:12:43	Gerard Compion:	Technically its only 5 lines
+02:17:28	Rita Vaghasia:	could you try for form submission?
+02:18:18	David H:	Imo jQuery was a lot more useful back when Microsoft refused to use the same functions as other browsers.  Though IE/Edge still tend to lag behind in feature adoption even today.
+02:18:23	Rita Vaghasia:	Thank you!
+02:19:12	Mikiyoshi Kokura:	How to count the number of how many people click it?  For example facebook like button, one user can one count of like, and user can cancel like.  Does we use cookie of that count or Database count the number?  And how to find general user without member login system.
+Or this tweeter project check like button only click or not?
+02:20:10	Kaoru Nagayama:	Thank you!
+02:20:14	Manseerat Kaur:	Thank you!
+02:20:15	Armin Glavovic:	thanks
+02:20:18	Carter Hemington:	thanks!
+02:20:19	Andrew Stanley:	Thanks!
+02:20:20	Gerard Compion:	Thanks christian!
+02:20:22	Jimmy:	thanks!
+02:20:22	Clifford Tse:	Thanks
+02:20:25	Andrew McNeill:	Thank you
+02:20:26	Seamus McGill:	Thank you!
+02:20:26	William Liu:	thanks
+02:20:28	Rita Vaghasia:	Thank you!
+02:20:31	Fransiskus Aldo:	thanks

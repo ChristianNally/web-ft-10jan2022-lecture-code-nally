@@ -1,0 +1,2852 @@
+WEBVTT
+
+00:02:09.000 --> 00:02:12.000
+So,
+
+00:02:12.000 --> 00:02:21.000
+let us have a bit of exposure to all of this stuff.
+
+00:02:21.000 --> 00:02:24.000
+And
+
+00:02:24.000 --> 00:02:38.000
+I'm going to just start by setting up the tools that we're going to use. And then once those tools are set up it'll give us a bit of context for how we're going to dive into all of this stuff.
+
+00:02:38.000 --> 00:02:54.000
+So, for example, we're going to have a bit of each of the three things that end up on the browser that can allow us to deliver content to the user.
+
+00:02:54.000 --> 00:03:04.000
+In, an arbitrary and as complex way as we want to right, We've got three tools at hand. one is HTML.
+
+00:03:04.000 --> 00:03:16.000
+HTML is the semantic markup of your content right it's a markup language, you send information to the browser, you tell the browser oh this bit is a paragraph.
+
+00:03:16.000 --> 00:03:22.000
+This is a table this is the body this etc etc right, We've got that tool.
+
+00:03:22.000 --> 00:03:30.000
+We also have CSS, where we're going to be styling some of the elements of that HTML.
+
+00:03:30.000 --> 00:03:38.000
+And then we also have JavaScript, and I've made some starter files for each of these three things.
+
+00:03:38.000 --> 00:03:50.000
+So, for Tic Tac Toe leaderboard that's three squares by three squares right knots and crosses X's and O's that's what we're going to do.
+
+00:03:50.000 --> 00:03:57.000
+And so to that end, let's go ahead and make a table tag.
+
+00:03:57.000 --> 00:04:01.000
+And in this table, we're going to make some rows.
+
+00:04:01.000 --> 00:04:12.000
+And in each of those rows, we're going to have three cells, 123, so there's one row.
+
+00:04:12.000 --> 00:04:17.000
+And then here's another row and here's another row.
+
+00:04:17.000 --> 00:04:19.000
+Great.
+
+00:04:19.000 --> 00:04:25.000
+So now I have a table, three rows and three columns.
+
+00:04:25.000 --> 00:04:31.000
+And that's it. So far, for my HTML.
+
+00:04:31.000 --> 00:04:36.000
+What do we want maybe we want to put an h1 tag.
+
+00:04:36.000 --> 00:04:42.000
+Welcome to
+
+00:04:42.000 --> 00:04:47.000
+like that just so that we know that it's here.
+
+00:04:47.000 --> 00:04:52.000
+And at this stage.
+
+00:04:52.000 --> 00:04:55.000
+If I do.
+
+00:04:55.000 --> 00:05:04.000
+This is wrong directory. Here we go, lips.
+
+00:05:04.000 --> 00:05:05.000
+Right.
+
+00:05:05.000 --> 00:05:10.000
+Open Tic Tac Toe dot html.
+
+00:05:10.000 --> 00:05:18.000
+There were
+
+00:05:18.000 --> 00:05:28.000
+quite a bit smaller.
+
+00:05:28.000 --> 00:05:32.000
+Like this.
+
+00:05:32.000 --> 00:05:42.000
+Okay, I can't see the table yet, because there's nothing in it. There's no styling in it that would make it apparent.
+
+00:05:42.000 --> 00:05:48.000
+So, let's go back to our code.
+
+00:05:48.000 --> 00:05:56.000
+One thing we can do straight away is add a bit of styling to this.
+
+00:05:56.000 --> 00:06:13.000
+And so, Let's just see here how to link. css into the head of any HTML page.
+
+00:06:13.000 --> 00:06:20.000
+So this three ways to bring styling into a page. Perhaps you've seen this already in the boot camp.
+
+00:06:20.000 --> 00:06:26.000
+I'm in line is where you put styles directly onto HTML tag.
+
+00:06:26.000 --> 00:06:31.000
+This is to be warned against boo.
+
+00:06:31.000 --> 00:06:46.000
+Internal CSS is one way where you can include the style straightaway and HTML, by putting a style tag. Not too bad.
+
+00:06:46.000 --> 00:06:51.000
+But if you want to have it in a separate file, then you're going to want to have something like this.
+
+00:06:51.000 --> 00:06:55.000
+In the head tag, like so.
+
+00:06:55.000 --> 00:07:04.000
+And so, we'll do that and then I'm going to go bring Snoopy in and see if we can keep him from bothering more class.
+
+00:07:04.000 --> 00:07:13.000
+Tech co dot CSS like so. Just a moment.
+
+00:07:13.000 --> 00:07:19.000
+That reload. still nothing showing.
+
+00:07:19.000 --> 00:07:20.000
+All right.
+
+00:07:20.000 --> 00:07:45.000
+Just a second.
+
+00:07:45.000 --> 00:07:49.000
+Sorry for the interruption.
+
+00:07:49.000 --> 00:07:54.000
+I'm
+
+00:07:54.000 --> 00:08:04.000
+Shall we have script instead of link. I'm not this time, so here we go with the link, bringing in the Tic Tac Toe CSS file. Right.
+
+00:08:04.000 --> 00:08:08.000
+And so now I can do the following.
+
+00:08:08.000 --> 00:08:15.000
+I would like my TD elements to have width and height.
+
+00:08:15.000 --> 00:08:20.000
+So, I don't know, let's make them 80 pixels, like so.
+
+00:08:20.000 --> 00:08:28.000
+And he gh t 80 pixels also, like so.
+
+00:08:28.000 --> 00:08:37.000
+And you know what, let's also give them a border.
+
+00:08:37.000 --> 00:08:42.000
+Whoops. Ford or
+
+00:08:42.000 --> 00:08:51.000
+one PEX solid black.
+
+00:08:51.000 --> 00:08:56.000
+Like that.
+
+00:08:56.000 --> 00:08:57.000
+Cool.
+
+00:08:57.000 --> 00:09:00.000
+starting to look like a tic tac toe board already.
+
+00:09:00.000 --> 00:09:04.000
+In fact, let me
+
+00:09:04.000 --> 00:09:09.000
+one pixel was a bit chintzy there we go a
+
+00:09:09.000 --> 00:09:11.000
+little bit more visible now.
+
+00:09:11.000 --> 00:09:14.000
+And the 80 pixels by 80 pixels.
+
+00:09:14.000 --> 00:09:19.000
+Maybe that's a bit small even, let's go for 100 and said,
+
+00:09:19.000 --> 00:09:25.000
+Dave, reload.
+
+00:09:25.000 --> 00:09:30.000
+Pretty straightforward.
+
+00:09:30.000 --> 00:09:35.000
+So,
+
+00:09:35.000 --> 00:09:39.000
+HTML,
+
+00:09:39.000 --> 00:09:43.000
+css.
+
+00:09:43.000 --> 00:09:47.000
+And then finally, JavaScript.
+
+00:09:47.000 --> 00:10:07.000
+And so we're going to put some JavaScript code, custom computer programming code with variables and functions, and all the actions that we come to know and love from JavaScript, and put it into this page such that the browser is going to be able to use
+
+00:10:07.000 --> 00:10:09.000
+it and execute it.
+
+00:10:09.000 --> 00:10:14.000
+So, similarly to the way that we included.
+
+00:10:14.000 --> 00:10:20.000
+css into our page. This way, but pulling a file in.
+
+00:10:20.000 --> 00:10:27.000
+We're also going to do the same thing with JavaScript.
+
+00:10:27.000 --> 00:10:36.000
+In particular, we're going to be using a particular JavaScript library called jQuery.
+
+00:10:36.000 --> 00:10:47.000
+So, how to include jQuery into your HTML from a CDN.
+
+00:10:47.000 --> 00:10:56.000
+So we'll, we'll do this and we'll have a little bit of a conversation about what's going on with it.
+
+00:10:56.000 --> 00:11:01.000
+So,
+
+00:11:01.000 --> 00:11:13.000
+similarly to CSS where we had three options of bringing CSS in right where we could,
+
+00:11:13.000 --> 00:11:33.000
+you could do in line bits of CSS. You can also do that with JavaScript, you can have internal CSS where you make a script tag or sorry, a style tag in the head where you can include styles directly in the document in the head tag, like this, you can do
+
+00:11:33.000 --> 00:11:36.000
+that as well, with JavaScript.
+
+00:11:36.000 --> 00:11:51.000
+And then finally, via a thing that looks a lot like this, you can bring in a JavaScript script file into your HTML. This way as well. We're going to do that.
+
+00:11:51.000 --> 00:11:58.000
+Just the way that we did a link tag, we're going to do something similar with our jQuery.
+
+00:11:58.000 --> 00:12:03.000
+I'm.
+
+00:12:03.000 --> 00:12:25.000
+So, again, jQuery is a particular library of JavaScript that we're going to bring in. So similar to the ways that we have been using things like require in node, where you bring stuff in from MPM.
+
+00:12:25.000 --> 00:12:46.000
+This trick is one that we're going to use to bring in a JavaScript library that we're going to be able to use within our scripts within the browser and bringing it in via a CDN CDN stands for content delivery network.
+
+00:12:46.000 --> 00:12:54.000
+What it means is that this particular URL is going to be seen as the source of the script.
+
+00:12:54.000 --> 00:12:58.000
+And if your CDN.
+
+00:12:58.000 --> 00:13:14.000
+Link is one that your browser has already seen, then it will have cash to this thing, which speeds up the whole process, because your browser only needs to download this URL, once, and then keep a copy of that.
+
+00:13:14.000 --> 00:13:26.000
+And so if many pages all use the same CDN as the source for jQuery, for example, then you, then it will be able to skip this step.
+
+00:13:26.000 --> 00:13:31.000
+and it will make the loading and things faster.
+
+00:13:31.000 --> 00:13:41.000
+So we're going to go ahead and do that, I'm going to copy that line. Bring it over into our code, say here.
+
+00:13:41.000 --> 00:13:52.000
+And that line is going to make it so that jQuery now lives within our code, and we will be able to leverage it.
+
+00:13:52.000 --> 00:14:00.000
+Similarly, I'm going to also source, another bit of JavaScript.
+
+00:14:00.000 --> 00:14:04.000
+Also here in the head tag of the document.
+
+00:14:04.000 --> 00:14:09.000
+And it's going to be Tic Tac toe.js.
+
+00:14:09.000 --> 00:14:18.000
+That is our custom code file that I've made over here.
+
+00:14:18.000 --> 00:14:26.000
+And I'm including jQuery, first, because I need jQuery defined in order to be able to use it here.
+
+00:14:26.000 --> 00:14:34.000
+Then I'm including that one Tic Tac toe.js, which is this file.
+
+00:14:34.000 --> 00:14:39.000
+And so that will also get included into our HTML.
+
+00:14:39.000 --> 00:14:49.000
+So, yeah, I save this. Go back to the code.
+
+00:14:49.000 --> 00:14:54.000
+Back to the page that loaded it in hit reload on this.
+
+00:14:54.000 --> 00:14:56.000
+I see Welcome to tic tac toe.
+
+00:14:56.000 --> 00:15:01.000
+Let's have a quick look at view page source.
+
+00:15:01.000 --> 00:15:08.000
+Right. This is a tool that allows us to debug what's going on as I load in this page here.
+
+00:15:08.000 --> 00:15:25.000
+I can see all of the stuff that came in as a result of that, I can see this is the source HTML, right. I can see yes indeed I'm connecting to particular CSS file I can even click on this and open it up as its own tab, set because the browser has access
+
+00:15:25.000 --> 00:15:45.000
+to this thing. Right. And sure enough, there's the CSS file that I loaded in doing this trick of looking at your source view page source is a good way to check what your page is actually loading it like are you getting it right.
+
+00:15:45.000 --> 00:15:53.000
+I can actually show you the jQuery link from that CDN link.
+
+00:15:53.000 --> 00:16:09.000
+And sure enough, here's a bunch of j JavaScript source code that is itself, the very definition of all of jQuery right it's been modified and packed into a smaller file as we can get.
+
+00:16:09.000 --> 00:16:27.000
+Don't worry, we're not going to need to debug this, right, it's all been automatically made small, but it's nice to see that it's actually working this page right that is loading in and this library will be available to us.
+
+00:16:27.000 --> 00:16:37.000
+And then finally, on the page source, we can see this connection to Tic Tac Toe by right click on that and open it up in the browser, as its own tab.
+
+00:16:37.000 --> 00:16:43.000
+Then it's a blank file, because we haven't typed anything into that yet.
+
+00:16:43.000 --> 00:16:46.000
+Okay.
+
+00:16:46.000 --> 00:17:00.000
+Adam asked, one question. Yeah, go ahead, have a lesson yesterday. Sure GS added with script tag. At the end of the HTML for learning purposes, is this recommend only for specific circumstance.
+
+00:17:00.000 --> 00:17:15.000
+Yeah, great question. Adam and thanks, Ricky for for drawing my attention to it. Um, z. So, that thing that trick about putting a script tag.
+
+00:17:15.000 --> 00:17:19.000
+Down here, near the body.
+
+00:17:19.000 --> 00:17:27.000
+The reason that that's done, is because the script tag is going to get executed.
+
+00:17:27.000 --> 00:17:31.000
+Just as soon as it loads in.
+
+00:17:31.000 --> 00:17:35.000
+And if you put it near the top of the page.
+
+00:17:35.000 --> 00:17:45.000
+Then, you may find that it's going to start running right away, even before the rest of the pages loaded in.
+
+00:17:45.000 --> 00:17:53.000
+And if your JavaScript needs to refer to those parts that it's going to run too soon.
+
+00:17:53.000 --> 00:18:10.000
+So, moving the script tag toward the end of the body tag, for example, is a standard trick to make sure that it loads later in the process. We're actually going to address this in a slightly different way with jQuery.
+
+00:18:10.000 --> 00:18:14.000
+By using an event listener.
+
+00:18:14.000 --> 00:18:21.000
+It's going to listen for an event that occurs when we know that the page is entirely loaded.
+
+00:18:21.000 --> 00:18:31.000
+So yeah, we're actually going to see a slightly different approach to that today. Yeah, thanks for the question that's a good segue into, into jQuery and how it works, actually.
+
+00:18:31.000 --> 00:18:38.000
+Okay, before we get to that, though I do want to show one more very important tool.
+
+00:18:38.000 --> 00:18:41.000
+I've shown you so far.
+
+00:18:41.000 --> 00:18:47.000
+view page source right to look at the initial HTML that's loaded in.
+
+00:18:47.000 --> 00:18:59.000
+I'd like to also show you the Chrome Developer Tools, this is going to be another piece of the puzzle that's going to be super useful and interesting today.
+
+00:18:59.000 --> 00:19:07.000
+Chrome Developer Tools shows us the source elements, it shows us the styles.
+
+00:19:07.000 --> 00:19:12.000
+It also shows us
+
+00:19:12.000 --> 00:19:19.000
+a console, which we're going to be able to use
+
+00:19:19.000 --> 00:19:24.000
+to interact with jQuery on the browser.
+
+00:19:24.000 --> 00:19:36.000
+So, in your use of JavaScript so far, right in the boot camp, you've been using JavaScript out here.
+
+00:19:36.000 --> 00:19:50.000
+Right. If I make a small file test.js. Right, I can do cost, x equal five and then I can go console. log.
+
+00:19:50.000 --> 00:19:57.000
+Monkey fuzz comma x.
+
+00:19:57.000 --> 00:20:17.000
+So, and then I can run node on test on js, and it will run and I get my output. Right. That's JavaScript on the back end. Using a console, this terminal is in fact the console that I'm allowed to interact with five type know directly I get
+
+00:20:17.000 --> 00:20:23.000
+command line where I can interact with JavaScript directly.
+
+00:20:23.000 --> 00:20:29.000
+We have a similar sort of thing going on, as all of this.
+
+00:20:29.000 --> 00:20:31.000
+But it's in the browser.
+
+00:20:31.000 --> 00:20:32.000
+Over here.
+
+00:20:32.000 --> 00:20:39.000
+Here it is on the console, the console is going to allow us to interact with JavaScript here as well.
+
+00:20:39.000 --> 00:20:46.000
+I can go cost, x x equal 55 hit Enter.
+
+00:20:46.000 --> 00:20:51.000
+And so now I have a variable called xx
+
+00:20:51.000 --> 00:20:57.000
+do things with it, console.
+
+00:20:57.000 --> 00:21:03.000
+Monkey photos, comma, xx hit Enter.
+
+00:21:03.000 --> 00:21:05.000
+And I get the same thing back.
+
+00:21:05.000 --> 00:21:09.000
+typing right straight into the console like this.
+
+00:21:09.000 --> 00:21:25.000
+Right. So, this console is effectively. An analogy to what we were using as our terminal from before. And it's right here in the console,
+
+00:21:25.000 --> 00:21:33.000
+JavaScript, of course, came from the browser in the first place.
+
+00:21:33.000 --> 00:21:37.000
+This is where JavaScript was born, was in the browser.
+
+00:21:37.000 --> 00:21:45.000
+It was a language that was built for this exact context.
+
+00:21:45.000 --> 00:21:55.000
+And so, that context in which the JavaScript is running is super important to keep straight in your mind.
+
+00:21:55.000 --> 00:22:01.000
+Right, am I running JavaScript in the browser or am I running it on the back end.
+
+00:22:01.000 --> 00:22:07.000
+For example, as a difference between those two contexts.
+
+00:22:07.000 --> 00:22:20.000
+We actually have some predefined objects available to us in the front end context that we don't have available to us in the back end.
+
+00:22:20.000 --> 00:22:26.000
+For instance, we've got an object called navigator.
+
+00:22:26.000 --> 00:22:33.000
+And so what I'm going to do is console log it straight away, because I can. Right.
+
+00:22:33.000 --> 00:22:38.000
+Navigate or, like so.
+
+00:22:38.000 --> 00:22:40.000
+So let's go to log navigator.
+
+00:22:40.000 --> 00:22:44.000
+I get to see it as an object, straight away.
+
+00:22:44.000 --> 00:22:54.000
+And now look at all this stuff that comes defined for free in the front end context.
+
+00:22:54.000 --> 00:23:05.000
+Bluetooth stuff, the clipboard about what stuff has been copied and pasted geolocation information right available here on the front end.
+
+00:23:05.000 --> 00:23:16.000
+A way to interact with the keyboard media devices that happened to be connected to this remember this object is going to be defined, whether I'm on a laptop or a desktop or in a phone.
+
+00:23:16.000 --> 00:23:20.000
+Maybe I'm running chrome on an iPhone or Android.
+
+00:23:20.000 --> 00:23:29.000
+And this so here's the USB connections if I have USB devices connected to the browser machine. Right.
+
+00:23:29.000 --> 00:23:41.000
+All of this stuff becomes available to you, the language that is defined. You know you can detect in JavaScript, what the preferred languages of the person who's browsing your system.
+
+00:23:41.000 --> 00:23:42.000
+Right.
+
+00:23:42.000 --> 00:23:47.000
+All of this stuff is predefined and available to you.
+
+00:23:47.000 --> 00:23:51.000
+Not so on the back end, like that.
+
+00:23:51.000 --> 00:23:59.000
+There's another object that's defined for you in the back end context, sorry in the front end context.
+
+00:23:59.000 --> 00:24:02.000
+It's called documents.
+
+00:24:02.000 --> 00:24:06.000
+Let's have a look at it.
+
+00:24:06.000 --> 00:24:17.000
+document is the HTML, that you're using for your
+
+00:24:17.000 --> 00:24:22.000
+that this particular JavaScript is attached to.
+
+00:24:22.000 --> 00:24:34.000
+Yeah, someone asked question you can see this info navigator interface about decline using your website.
+
+00:24:34.000 --> 00:24:38.000
+I'm a little confused by the question.
+
+00:24:38.000 --> 00:24:40.000
+The puppy dog.
+
+00:24:40.000 --> 00:24:46.000
+But what we're trying to get with it harder.
+
+00:24:46.000 --> 00:24:50.000
+Yes, there's definitely has no no no.
+
+00:24:50.000 --> 00:25:10.000
+I'm gonna let him out and and see how he's in the outdoors. Just give me a second here.
+
+00:25:10.000 --> 00:25:17.000
+Alright. Um, What I'm doing is I'm using the console.
+
+00:25:17.000 --> 00:25:24.000
+To show you which things are defined this console is available inside your Chrome Developer Tools.
+
+00:25:24.000 --> 00:25:26.000
+Yeah.
+
+00:25:26.000 --> 00:25:41.000
+So, that's what I used. You know you, by the way, this console I can even do the up arrow trick to bring back my previous things right. It's, it feels a lot like a command line interface.
+
+00:25:41.000 --> 00:25:46.000
+And so by doing that I can see the elements that have been defined here.
+
+00:25:46.000 --> 00:25:47.000
+Yeah, I hope that that helps.
+
+00:25:47.000 --> 00:25:58.000
+If not, do not test then feel free to ask the question, again, as required going down the line.
+
+00:25:58.000 --> 00:26:02.000
+Okay, very good.
+
+00:26:02.000 --> 00:26:16.000
+The browser is its own client, the browser is the client. Certainly, and we can run it to check the variables that are available on the client. Yes, that's, I would say that that's a reasonable characterization William.
+
+00:26:16.000 --> 00:26:20.000
+Good.
+
+00:26:20.000 --> 00:26:30.000
+Very good. In fact, because that sort of brings us up to speed with the environment that we're running JavaScript in.
+
+00:26:30.000 --> 00:26:45.000
+So rookie who's a good beginning of a new section right and so if you can record the time on the timer. This will be where we get into jQuery itself. And so this will be the section on jQuery, and so whatever the stopwatch says that's where we are in
+
+00:26:45.000 --> 00:26:49.000
+the video, I want to stop.
+
+00:26:49.000 --> 00:26:53.000
+No, no, don't stop it just write down where we are in the time right now.
+
+00:26:53.000 --> 00:26:58.000
+Perfect. So let's talk about jQuery shall we.
+
+00:26:58.000 --> 00:27:15.000
+I have a file that I've brought in to our HTML page. Here we are with Tic Tac toe.js right now just to show the JavaScript is working here. Why don't I try an alert.
+
+00:27:15.000 --> 00:27:29.000
+So alert is kind of like console log but it's for the Windows environment of the front end, you'll see if I go, I am alive, like so, and hit save.
+
+00:27:29.000 --> 00:27:44.000
+That's a little bit of vanilla JavaScript no jQuery required yet, it's just a line of JavaScript, and it's kind of like console log in that it's going to launch a pop up at us that contains this text, and it's going to do so as soon as this JavaScript
+
+00:27:44.000 --> 00:27:46.000
+runs.
+
+00:27:46.000 --> 00:27:53.000
+So here I have here, this is where it's going to run going to run straight away as soon as I load the page.
+
+00:27:53.000 --> 00:28:03.000
+So let's try that. I go back to the browser I'm going to hit reload. And sure enough, I get this little pop up message that says, hey, I'm alive.
+
+00:28:03.000 --> 00:28:06.000
+Notice that it's come up already.
+
+00:28:06.000 --> 00:28:19.000
+Even before it's rendered on the table, and any of that stuff. So this sort of shows when this file is going to be running very early on in the evolution of the page.
+
+00:28:19.000 --> 00:28:24.000
+It's a pop up that will grab the attention of the user.
+
+00:28:24.000 --> 00:28:30.000
+And not proceed until we click OK. It actually blocks and holds at this point.
+
+00:28:30.000 --> 00:28:41.000
+So I'm going to click OK and then it's going to proceed and do the rest of the actions that it needs to do. Click OK, and then comes the render like that.
+
+00:28:41.000 --> 00:29:01.000
+So, in a way, we've just used this alert call to confirm that our file is being connected, that it is running at the appropriate time, and so on. I can include any kind of JavaScript, I want here.
+
+00:29:01.000 --> 00:29:05.000
+And then I can do console log.
+
+00:29:05.000 --> 00:29:07.000
+Like this.
+
+00:29:07.000 --> 00:29:12.000
+Hello world.
+
+00:29:12.000 --> 00:29:18.000
+Save it. Go back to here, rerun it I reload.
+
+00:29:18.000 --> 00:29:21.000
+And then notice on the console.
+
+00:29:21.000 --> 00:29:24.000
+I get this.
+
+00:29:24.000 --> 00:29:28.000
+I get the thing that I had console locked.
+
+00:29:28.000 --> 00:29:38.000
+And it shows up here, this time because it's the front end, because I'm running JavaScript within the browser context.
+
+00:29:38.000 --> 00:29:46.000
+I actually see my console log stuff. Show up here inside the Chrome Developer Tools now.
+
+00:29:46.000 --> 00:29:48.000
+Yeah.
+
+00:29:48.000 --> 00:29:55.000
+Okay. So all of this has been vanilla JavaScript.
+
+00:29:55.000 --> 00:30:02.000
+And I think that just at this moment we're we're about to dive into jQuery.
+
+00:30:02.000 --> 00:30:04.000
+Using this library.
+
+00:30:04.000 --> 00:30:17.000
+I think we're going to have to take an early 10 minute break so that I can go get Snoopy taken care of and he's not barking and filling out the neighborhood with his choice noise.
+
+00:30:17.000 --> 00:30:28.000
+So let's take that early 10 minute break and make sure that he's well taken care of. And then we'll come back and learn a little bit more jQuery. So in the meantime.
+
+00:30:28.000 --> 00:30:30.000
+Let me see.
+
+00:30:30.000 --> 00:30:39.000
+I feel like I mean, for me it's still eight o'clock in the morning. Let's run some coffee through this
+
+00:30:39.000 --> 00:30:43.000
+and
+
+00:30:43.000 --> 00:31:13.000
+see you all in about 10 minutes take a real break, come back with fresh neurons, and we'll dive in together.
+
+00:34:43.000 --> 00:35:13.000
+So I'm back for folks who happen to have questions before we get started in about five minutes.
+
+00:35:21.000 --> 00:35:43.000
+any confusion about what you've seen so far.
+
+00:35:43.000 --> 00:35:51.000
+William asks, Is jQuery sort of like, declaring HTML object with methods.
+
+00:35:51.000 --> 00:35:55.000
+Hmm.
+
+00:35:55.000 --> 00:35:57.000
+It's part of it.
+
+00:35:57.000 --> 00:36:08.000
+You can use jQuery, to make a new piece of HTML and insert it into the document, and with method calls.
+
+00:36:08.000 --> 00:36:11.000
+and we will do that today actually.
+
+00:36:11.000 --> 00:36:20.000
+That's one of the things that you can do with jQuery. In fact, you can do that with normal JavaScript in the browser as well.
+
+00:36:20.000 --> 00:36:31.000
+It's just that jQuery is a library that makes that syntactically a little easier.
+
+00:36:31.000 --> 00:37:01.000
+Cool. Good question.
+
+00:37:28.000 --> 00:37:58.000
+stogie show and tell they.
+
+00:38:06.000 --> 00:38:18.000
+Carter What's the name of your dog.
+
+00:38:18.000 --> 00:38:21.000
+Dana, Dana.
+
+00:38:21.000 --> 00:38:25.000
+Cool.
+
+00:38:25.000 --> 00:38:32.000
+Movies being well taken care of know, so he's definitely a coven dog
+
+00:38:32.000 --> 00:38:36.000
+been very used to having human beings around.
+
+00:38:36.000 --> 00:38:42.000
+William asks, should we not use jQuery with react.
+
+00:38:42.000 --> 00:38:46.000
+Um, well,
+
+00:38:46.000 --> 00:39:01.000
+I would say for the majority of what jQuery is for, they're all there are alternatives that are built into react or are better.
+
+00:39:01.000 --> 00:39:09.000
+They are slightly, they have slightly different purposes jQuery is is quite a bit older than than react.
+
+00:39:09.000 --> 00:39:24.000
+And its original purpose was to make the way that JavaScript would run in the browser cross browser compatible.
+
+00:39:24.000 --> 00:39:38.000
+That by itself is not as necessary as it once was because there were differences in the ways that different browsers were going to run things. And so by having the jQuery API.
+
+00:39:38.000 --> 00:39:46.000
+You could be certain that your code was the right code that would run on all browsers.
+
+00:39:46.000 --> 00:39:55.000
+Beyond that jQuery has a lot of tools, it's kind of the Swiss Army Knife of of JavaScript libraries.
+
+00:39:55.000 --> 00:40:08.000
+But I'll show you a resource a little later on, that shows you how you would write any given bit of jQuery in just vanilla JavaScript, without any library at all.
+
+00:40:08.000 --> 00:40:19.000
+And often, you can get away with no library, right just pure JavaScript, and just do the code that way.
+
+00:40:19.000 --> 00:40:33.000
+within it, cause problems jQuery or whenever GS with react. Because react uses a virtual DOM and then you will be doing things behind his back.
+
+00:40:33.000 --> 00:40:50.000
+Right. And then like it did. Like in the process of reconciliation between the virtual DOM and the real DOM, it wouldn't have the, like, the fact this is this is beyond the scope, but I think it may cause problems because of the virtual DOM and react
+
+00:40:50.000 --> 00:40:56.000
+know that's certainly true, but let's be clear.
+
+00:40:56.000 --> 00:41:04.000
+React is a JavaScript library in and of itself as you are using it you are typing in JavaScript to use it.
+
+00:41:04.000 --> 00:41:19.000
+So vanilla as far as vanilla JavaScript goes, what I mean by vanilla JavaScript is I mean JavaScript with no library, getting in the way you can just start typing JavaScript, and it's going to start running right, you definitely do that when you're using
+
+00:41:19.000 --> 00:41:21.000
+react.
+
+00:41:21.000 --> 00:41:28.000
+Your react code you'll see will be composed of a bunch of JavaScript function calls.
+
+00:41:28.000 --> 00:41:38.000
+Now, what the problem you're describing can happen and you need to use JavaScript carefully. When you do react, because of it.
+
+00:41:38.000 --> 00:41:44.000
+But you'll definitely be using vanilla JavaScript, as part of your experience of react.
+
+00:41:44.000 --> 00:41:51.000
+But we should definitely do First things first, and get it so that we can understand JavaScript in the browser.
+
+00:41:51.000 --> 00:42:01.000
+Now, right before we start bringing in the details of react.
+
+00:42:01.000 --> 00:42:03.000
+Okay.
+
+00:42:03.000 --> 00:42:05.000
+coffee's done.
+
+00:42:05.000 --> 00:42:12.000
+Thank you for turning your cameras back on, they do help the flow of the lecture. Thank you. Thank you.
+
+00:42:12.000 --> 00:42:17.000
+And so here we are, we have JavaScript running in the browser.
+
+00:42:17.000 --> 00:42:23.000
+We're able to insert code that's going to run.
+
+00:42:23.000 --> 00:42:28.000
+As part of this pages lifecycle.
+
+00:42:28.000 --> 00:42:34.000
+And next, What we're going to tackle is
+
+00:42:34.000 --> 00:42:43.000
+adding some JavaScript to this file. Let's comment out the vanilla JavaScript that I've had in here so far.
+
+00:42:43.000 --> 00:42:49.000
+And instead, we're going to leverage a little bit of jQuery.
+
+00:42:49.000 --> 00:42:58.000
+And what we're going to do is leverage some jQuery, that listens for a particular event.
+
+00:42:58.000 --> 00:43:03.000
+You'll recall all the work we've done so far with a synchronous coding.
+
+00:43:03.000 --> 00:43:11.000
+Right. And the main thread, setting up a synchronous stuff that's happening on an event loop.
+
+00:43:11.000 --> 00:43:18.000
+This is the moment where you get to find out why we were doing all of that. Right.
+
+00:43:18.000 --> 00:43:23.000
+Because the browser is actually a very a single environment.
+
+00:43:23.000 --> 00:43:42.000
+You could have user inputs, you could have API calls that are taking a long time, and the whole time, you want your JavaScript to stay on its feet right that's why we're in the world of a synchronous callbacks.
+
+00:43:42.000 --> 00:43:46.000
+Here's how jQuery works.
+
+00:43:46.000 --> 00:43:51.000
+This is a function call
+
+00:43:51.000 --> 00:44:03.000
+the dollar sign is an alias for the jQuery function, there is the jQuery as a library is kind of interesting. There's one main function that you're calling.
+
+00:44:03.000 --> 00:44:07.000
+Most of the time, that very same function.
+
+00:44:07.000 --> 00:44:09.000
+You can call it this way.
+
+00:44:09.000 --> 00:44:11.000
+Like this.
+
+00:44:11.000 --> 00:44:23.000
+Or you'll often see it done like that. And when you see dollar sign and then open parentheses as a function call. It's kind of a dead giveaway that you're probably using jQuery.
+
+00:44:23.000 --> 00:44:29.000
+There are some other libraries that do this trick as well prototype and things like that.
+
+00:44:29.000 --> 00:44:39.000
+But whenever I see this I'm like, Oh, that's probably jQuery that I'm working with dollar sign is the name of the function that I'm calling.
+
+00:44:39.000 --> 00:44:48.000
+And so, I'm about to show you a bunch of different ways that you can use this function call.
+
+00:44:48.000 --> 00:44:58.000
+We'll talk about the kinds of things that this thing returns, we'll talk about the kinds of things that you can do with the return value.
+
+00:44:58.000 --> 00:45:00.000
+Here's an example.
+
+00:45:00.000 --> 00:45:22.000
+document. and remember that object that we said was defined as part of the front end context, right. This is the Document Object Model, it is our reference into the HTML, that has been created so far, if I pass that into the jQuery function call.
+
+00:45:22.000 --> 00:45:29.000
+Then it's basically saying, okay, for the entirety of the document.
+
+00:45:29.000 --> 00:45:33.000
+I want you to do the following stuff.
+
+00:45:33.000 --> 00:45:40.000
+And so the way that it works when you're calling the jQuery function, it's going to return to you.
+
+00:45:40.000 --> 00:45:49.000
+And object that then has a whole bunch of methods defined on it.
+
+00:45:49.000 --> 00:46:06.000
+So for example, I can go right straight away into something like this, or this, and so on and so on, and so a lot of learning about how jQuery works is learning about what functions you can put here.
+
+00:46:06.000 --> 00:46:15.000
+Right, which things are defined on the return value that comes from this function call here.
+
+00:46:15.000 --> 00:46:20.000
+So, this function called ready.
+
+00:46:20.000 --> 00:46:25.000
+That's going to set up an event handler.
+
+00:46:25.000 --> 00:46:30.000
+This function is going to take a call back.
+
+00:46:30.000 --> 00:46:40.000
+So let me add a call back that is let me add a function definition to be passed into this.
+
+00:46:40.000 --> 00:46:45.000
+Ready function. The ready function is going to establish an event listener.
+
+00:46:45.000 --> 00:46:55.000
+For when all of the HTML is ready, that is when all of the HTML has loaded in.
+
+00:46:55.000 --> 00:47:01.000
+And so when the document is done loading in. This is the function call.
+
+00:47:01.000 --> 00:47:07.000
+That will, it's the callback that will get executed at that time.
+
+00:47:07.000 --> 00:47:14.000
+So for example, I can drop my cursor in between these curly braces. Hit enter. at that point.
+
+00:47:14.000 --> 00:47:23.000
+And now, any line of JavaScript that I type in here is going to get executed inside that callback.
+
+00:47:23.000 --> 00:47:39.000
+For example, What if I took my vanilla JavaScript that I had from before, and drop it in here like this.
+
+00:47:39.000 --> 00:47:49.000
+Right. So now I've wrapped, all of that code that I had from before, but now it's inside an event handler.
+
+00:47:49.000 --> 00:47:55.000
+So we'll save that will go back to the browser. I'm going to reload this page.
+
+00:47:55.000 --> 00:47:58.000
+As I reload it.
+
+00:47:58.000 --> 00:48:03.000
+One thing to notice straight away, the rendering is already finished.
+
+00:48:03.000 --> 00:48:07.000
+It's actually already showed us all the stuff.
+
+00:48:07.000 --> 00:48:11.000
+And then it ran the I'm alive alert.
+
+00:48:11.000 --> 00:48:13.000
+Right.
+
+00:48:13.000 --> 00:48:19.000
+In fact, let me do that again. I'm going to grab this as a URL here
+
+00:48:19.000 --> 00:48:32.000
+like so close the tab reopen, a new tab, paste that URL into the browser and hit enter.
+
+00:48:32.000 --> 00:48:35.000
+It rendered first this time.
+
+00:48:35.000 --> 00:48:41.000
+And then it through the alert at me.
+
+00:48:41.000 --> 00:48:49.000
+Okay, what's going on there is precisely this.
+
+00:48:49.000 --> 00:49:07.000
+Our Tic Tac toe.js file, the one that we've got this ready event listener, in that thing is loading in at this time, and it is running right away. We were talking about this at the outset of the class of it right.
+
+00:49:07.000 --> 00:49:11.000
+That JavaScript does run right away.
+
+00:49:11.000 --> 00:49:14.000
+But what it does when it runs.
+
+00:49:14.000 --> 00:49:20.000
+Is it says, Oh, I see jQuery defined.
+
+00:49:20.000 --> 00:49:27.000
+I see that you're calling the jQuery function, and I see that you're setting up an event handler.
+
+00:49:27.000 --> 00:49:32.000
+That event handler is saying, here's a callback.
+
+00:49:32.000 --> 00:49:35.000
+and I'd like you to run that call back.
+
+00:49:35.000 --> 00:49:39.000
+When the document is ready.
+
+00:49:39.000 --> 00:49:48.000
+And so this isn't an alternative way of solving that problem of yeah your jobs just going to run right away even before the pages loaded in.
+
+00:49:48.000 --> 00:49:52.000
+But we're going to delay executing the code.
+
+00:49:52.000 --> 00:50:03.000
+Until we're certain that the document is ready to be used in that way. Right. And so when you see code like this.
+
+00:50:03.000 --> 00:50:04.000
+This part of it like that.
+
+00:50:04.000 --> 00:50:07.000
+That's jQuery in action.
+
+00:50:07.000 --> 00:50:13.000
+and you're going to be able to run jQuery stuff.
+
+00:50:13.000 --> 00:50:15.000
+Within this file.
+
+00:50:15.000 --> 00:50:17.000
+Right.
+
+00:50:17.000 --> 00:50:26.000
+languishing, if, if I fail to run will the JS code still run.
+
+00:50:26.000 --> 00:50:29.000
+If the file fails to run.
+
+00:50:29.000 --> 00:50:41.000
+Yeah believe that Jesus could still run. No, well I mean, isn't that the same thing, like so for example if I save this let's put our alert back like this.
+
+00:50:41.000 --> 00:50:58.000
+And we'll say, turn it off. Right. And so the question is, if this fails to run well why would it fail to run. I guess is the real question for example, what if in here I made a typo in my file name.
+
+00:50:58.000 --> 00:51:07.000
+Right. And so it's actually not going to find the file that we want it to find it will certainly won't run in that case.
+
+00:51:07.000 --> 00:51:15.000
+And so if I go back here. Then, and I reload this thing. Now, it won't run because it's not loading in the right file.
+
+00:51:15.000 --> 00:51:19.000
+Right. That's one context where it's not going to run.
+
+00:51:19.000 --> 00:51:27.000
+Another example would be, yeah like dollar is not defined dollar would not be defined.
+
+00:51:27.000 --> 00:51:37.000
+If I got this URL here, right my CDN URLs mistaken. Maybe I get this one right like that.
+
+00:51:37.000 --> 00:51:45.000
+So with dollar sign not defined. Right now I'm going to reload my page again. Again it's rendering know, nothing's happening.
+
+00:51:45.000 --> 00:51:49.000
+Let's look at the console though.
+
+00:51:49.000 --> 00:51:55.000
+I'm going to have an error. In fact, it's already showing me see the two with the red X here.
+
+00:51:55.000 --> 00:51:57.000
+So on the console I'm seeing.
+
+00:51:57.000 --> 00:52:04.000
+I'm seeing an error failed to load resource, and then ultimately dollar is not defined. Right.
+
+00:52:04.000 --> 00:52:16.000
+And so, the dev tools are going to be good ways for you to make sure that the thing is not running. If I see an error message like this,
+
+00:52:16.000 --> 00:52:24.000
+a failed to load resource right it's because my URL is not correct.
+
+00:52:24.000 --> 00:52:32.000
+So, yeah, I hope that that answers the question
+
+00:52:32.000 --> 00:52:37.000
+errors in HTML are actually there.
+
+00:52:37.000 --> 00:52:44.000
+It's quite forgiving. Right. If the web broke every time there was some broken HTML.
+
+00:52:44.000 --> 00:52:48.000
+Half the web would be broken. Because there's bugs all over HTML.
+
+00:52:48.000 --> 00:52:58.000
+The parsing and rendering of HTML is actually super tolerance of errors, you sort of saw that happen here right where it render the page is best it could.
+
+00:52:58.000 --> 00:53:11.000
+And it showed some error messages in the console, right, it's going to try it's best to present something to the user. And then hide the errors down within the, the console.
+
+00:53:11.000 --> 00:53:24.000
+So, next question. I did some reading for the script tag in HTML and it mentioned and attribute called effort effort seen through the same thing as hash document already.
+
+00:53:24.000 --> 00:53:29.000
+Is there something something missing.
+
+00:53:29.000 --> 00:53:34.000
+Um,
+
+00:53:34.000 --> 00:53:42.000
+so, it may be that differ does something similar to document dot ready.
+
+00:53:42.000 --> 00:53:48.000
+But it doesn't mean that we should just use it, because if you're using this jQuery stuff.
+
+00:53:48.000 --> 00:53:56.000
+You get a whole bunch of other tips, tricks, tools, function calls that are available to us.
+
+00:53:56.000 --> 00:54:12.000
+Where. That means we've got lots of tools and things that we can do available to us diff or maybe an alternative way of doing precisely this, but then that's it, then you're stuck with vanilla JavaScript at the end of the day.
+
+00:54:12.000 --> 00:54:14.000
+Yeah.
+
+00:54:14.000 --> 00:54:23.000
+In fact, let's continue and get to some of that stuff. If I go back here.
+
+00:54:23.000 --> 00:54:29.000
+And I'm looking at my document ready JavaScript.
+
+00:54:29.000 --> 00:54:49.000
+Now, inside this callback. I get to write whatever sorts of JavaScript or jQuery I want to write line after line of it, and I can be certain that it's only going to run within the context of this call back when JavaScript is ready to go.
+
+00:54:49.000 --> 00:54:56.000
+So let's do that. Actually, let's run some more JavaScript.
+
+00:54:56.000 --> 00:55:06.000
+And in particular, because I've got jQuery available to me, you'll see me doing this a lot today.
+
+00:55:06.000 --> 00:55:09.000
+I'm going to call the jQuery function again.
+
+00:55:09.000 --> 00:55:14.000
+And I'm going to use the jQuery function in a new way
+
+00:55:14.000 --> 00:55:24.000
+back here I passed in the entire HTML document in the form of the document object that comes predefined with JavaScript.
+
+00:55:24.000 --> 00:55:36.000
+Another thing that you can hand in to the jQuery function call is a CSS selector
+
+00:55:36.000 --> 00:55:44.000
+to select for individual DOM elements, or even a group of DOM elements.
+
+00:55:44.000 --> 00:55:54.000
+So for example, if I go TD. That's actually a tag
+
+00:55:54.000 --> 00:56:18.000
+that CSS selector is going to select nine elements out of our HTML page, remember we had three rows of three TV elements in our document by typing this using the jQuery function call.
+
+00:56:18.000 --> 00:56:31.000
+That is going to select those DOM elements as a collection, there'll be nine things that this thing has been selected.
+
+00:56:31.000 --> 00:56:44.000
+The way that jQuery is setup is that you can then run functions on that entire collection.
+
+00:56:44.000 --> 00:56:53.000
+It's an automatic for loop that goes over each one of the elements that have been selected.
+
+00:56:53.000 --> 00:57:00.000
+So for example, we can set up a click handler.
+
+00:57:00.000 --> 00:57:07.000
+In much the very same way that we set up an event handler for when the document is ready.
+
+00:57:07.000 --> 00:57:15.000
+Now I'm going to set up an event handler on the things that I've selected for here that has all the TD elements.
+
+00:57:15.000 --> 00:57:21.000
+And we're going to set up a click handler by passing a call back to this function.
+
+00:57:21.000 --> 00:57:24.000
+This click function.
+
+00:57:24.000 --> 00:57:31.000
+And so let's go ahead and do that function, like so.
+
+00:57:31.000 --> 00:57:40.000
+Here's the anonymous function that I'm passing in as a callback this callback will get executed. Whenever a TD is clicked.
+
+00:57:40.000 --> 00:57:50.000
+So, for example, I could put an alert on here that says, I have been clicked.
+
+00:57:50.000 --> 00:57:51.000
+Like so.
+
+00:57:51.000 --> 00:57:56.000
+Save back to the thing, reload it.
+
+00:57:56.000 --> 00:58:02.000
+Now, when I click on a TD element, it pops up that alert.
+
+00:58:02.000 --> 00:58:03.000
+Right.
+
+00:58:03.000 --> 00:58:07.000
+That's going to stay until I say okay, I can click another TV.
+
+00:58:07.000 --> 00:58:11.000
+Again, it's launches the alert.
+
+00:58:11.000 --> 00:58:25.000
+And so you can see how jQuery is is holding together here right, we're calling the jQuery function and passing in a callback, that says that callback will be executed when the document is ready.
+
+00:58:25.000 --> 00:58:29.000
+Inside that callback I'm saying, oh, let's call the jQuery function again.
+
+00:58:29.000 --> 00:58:47.000
+Let's select the TD elements and set up a new click event listener pass in a callback.
+
+00:58:47.000 --> 00:58:58.000
+Yeah, and do ask questions. I think regardless a markup language, it will always end up as ready when it's done but it might just not show anything meaningful.
+
+00:58:58.000 --> 00:59:08.000
+So, yeah, in the same way that if you have typos in Word document in still work. It just, it just doesn't look right.
+
+00:59:08.000 --> 00:59:21.000
+similar timing to just reread that so that it makes sure I understand. So I think it's a markup language yes markup languages are very fault tolerant right they're going to constantly do their very best to render things.
+
+00:59:21.000 --> 00:59:35.000
+It will always end up is ready when it's done. That's true, but it might not show anything meaningful. So the purpose of JavaScript, of course, is arbitrary code that will run.
+
+00:59:35.000 --> 00:59:43.000
+Right. If we connect it up properly. Right. html the Java HTML is to display information.
+
+00:59:43.000 --> 00:59:51.000
+Right. And so, if you can keep that separate in your mind, HTML for displaying info.
+
+00:59:51.000 --> 00:59:57.000
+css is for styling that info
+
+00:59:57.000 --> 01:00:13.000
+JavaScript is for running arbitrary code, right, if you've got those three things separate than you, then you, then you've got it right for how it's all been broken down.
+
+01:00:13.000 --> 01:00:23.000
+Good us question because we are working with object method. Is it better practice to not use out of notation for callback.
+
+01:00:23.000 --> 01:00:35.000
+Actually, I'm with jQuery in particular, we may see this later on, it's actually about the way that this variable is scoped.
+
+01:00:35.000 --> 01:00:48.000
+And so when we're using jQuery it's often the case that we want to use this variable. And so using this style of function definition is better practice.
+
+01:00:48.000 --> 01:00:54.000
+That's the particular reason for that.
+
+01:00:54.000 --> 01:01:05.000
+I see people making comments about the arrow function, the arrow function defines this a little bit differently.
+
+01:01:05.000 --> 01:01:06.000
+Yeah.
+
+01:01:06.000 --> 01:01:11.000
+And then I see a question from Adam, I'll read it out.
+
+01:01:11.000 --> 01:01:19.000
+The lesson the lesson today, not to use anonymous functions as callbacks and event listener so that you can grab them later.
+
+01:01:19.000 --> 01:01:24.000
+That's just the best best practice in general.
+
+01:01:24.000 --> 01:01:32.000
+I have no need to grab these later to execute them from other places. So doing it this way is fine.
+
+01:01:32.000 --> 01:01:39.000
+Right. There's no problem with doing something like this, though, just to be clear about it.
+
+01:01:39.000 --> 01:01:42.000
+I could have gone
+
+01:01:42.000 --> 01:01:45.000
+function.
+
+01:01:45.000 --> 01:01:53.000
+Handle click like that. And then pass that in that way if I wanted to.
+
+01:01:53.000 --> 01:01:57.000
+It's the same.
+
+01:01:57.000 --> 01:02:00.000
+But I'll leave that for now.
+
+01:02:00.000 --> 01:02:07.000
+Okay, thank you for all the questions, there's lots of good context in here I hope that people are learning lots of bits and pieces in context as we go.
+
+01:02:07.000 --> 01:02:11.000
+I'm going to press on, so keep it up.
+
+01:02:11.000 --> 01:02:25.000
+Right. And so we've got some jQuery we've got some JavaScript, that's running in the context of a web page, we have changed the way this web page.
+
+01:02:25.000 --> 01:02:29.000
+Acts. Right.
+
+01:02:29.000 --> 01:02:38.000
+JavaScript allows us to utterly mess with how the user interface is going to work in arbitrary code. Right.
+
+01:02:38.000 --> 01:02:46.000
+And it was just with very few lines, we've actually grabbed a hook into how the all that holds together.
+
+01:02:46.000 --> 01:02:53.000
+And so now we're going to get onto the business of making our game.
+
+01:02:53.000 --> 01:03:04.000
+Right. Yeah, using JavaScript, as the way that we're going to make that game that game work the way that to make it's going to hold together.
+
+01:03:04.000 --> 01:03:11.000
+Okay, so let's use some more jQuery.
+
+01:03:11.000 --> 01:03:15.000
+When I click on a TD.
+
+01:03:15.000 --> 01:03:22.000
+That's our attempt to make a move right to add an X or no to that square.
+
+01:03:22.000 --> 01:03:33.000
+So, when the click occurs here I have a callback that's going to get executed when the clickers
+
+01:03:33.000 --> 01:03:35.000
+inside here.
+
+01:03:35.000 --> 01:03:41.000
+Let's call the jQuery function again. Let's pass it a thing.
+
+01:03:41.000 --> 01:03:49.000
+In fact, this is where that definition of the this variable comes in handy and is important.
+
+01:03:49.000 --> 01:03:59.000
+I can use dollar sign this to refer to the particular TD that was clicked.
+
+01:03:59.000 --> 01:04:14.000
+And so, notice that, that's the thing that's getting passed into the jQuery function, right, first one I was calling the jQuery function I passed in the whole document here when I passed in on line three.
+
+01:04:14.000 --> 01:04:23.000
+When I executed the jQuery function, I pass in a CSS selector that allowed me to select for all of the TD elements.
+
+01:04:23.000 --> 01:04:37.000
+Here I'm calling the jQuery function again and I'm passing in a variable this time I'm saying, I would like you to deal only with the TV that was clicked on.
+
+01:04:37.000 --> 01:04:51.000
+And so now you're getting a bit of a feel for how the jQuery function is called right you pass in a value into the parameter that the jQuery function call is going to take.
+
+01:04:51.000 --> 01:05:03.000
+And that's the context in which the function call that follows right after the.is going to act on the stuff that you've selected for.
+
+01:05:03.000 --> 01:05:07.000
+That's usually how you're using the jQuery function.
+
+01:05:07.000 --> 01:05:26.000
+So, for example, if we select for the particular TD element that was clicked, like this, then we can do all sorts of things. For example, add class.
+
+01:05:26.000 --> 01:05:35.000
+And I might choose to add the x class to this element.
+
+01:05:35.000 --> 01:05:41.000
+Every time I click it, it's going to add the next class on to that Donald.
+
+01:05:41.000 --> 01:05:43.000
+So, let's do it.
+
+01:05:43.000 --> 01:05:51.000
+I'm going to go to the elements tab, so that we can actually see
+
+01:05:51.000 --> 01:05:55.000
+this happen in real time. Here is the table.
+
+01:05:55.000 --> 01:05:59.000
+Here's the row here the TV's right.
+
+01:05:59.000 --> 01:06:04.000
+If I click this middle TD. Watch what happens over here.
+
+01:06:04.000 --> 01:06:10.000
+Oops, looks I've been clicked. This is the old code, I need to reload the page.
+
+01:06:10.000 --> 01:06:12.000
+Here's the table.
+
+01:06:12.000 --> 01:06:17.000
+Paper body. Here's the first row. I'm going to click on this one here.
+
+01:06:17.000 --> 01:06:25.000
+And sure enough, as I clicked on that middle TD of the first row.
+
+01:06:25.000 --> 01:06:29.000
+Indeed did add the class, X to that.
+
+01:06:29.000 --> 01:06:47.000
+Fiona. I can do it with this one. There, that can do it with the third one as well, but all right, the clicks that I'm doing are registering in the DOM, because I'm adding a class to that DOM element.
+
+01:06:47.000 --> 01:06:48.000
+Awesome.
+
+01:06:48.000 --> 01:06:57.000
+Because now we can go back to our CSS file here.
+
+01:06:57.000 --> 01:07:04.000
+And we can say, all right, if an element has the dot x class on it.
+
+01:07:04.000 --> 01:07:10.000
+Let's change the background color.
+
+01:07:10.000 --> 01:07:13.000
+To start with, say
+
+01:07:13.000 --> 01:07:16.000
+it so let's make it blue.
+
+01:07:16.000 --> 01:07:20.000
+If it's got the next class on Save like that.
+
+01:07:20.000 --> 01:07:26.000
+Saved like that. Back to our page, reload it.
+
+01:07:26.000 --> 01:07:34.000
+Now, whenever I click a TD, it turns blue.
+
+01:07:34.000 --> 01:07:37.000
+Cool.
+
+01:07:37.000 --> 01:07:40.000
+I've changed the way the browser works.
+
+01:07:40.000 --> 01:07:45.000
+Right now I can click on table elements and they turn color.
+
+01:07:45.000 --> 01:07:56.000
+Right. It's custom JavaScript code that's running inside the browser, that's changing the way that the browser does its thing.
+
+01:07:56.000 --> 01:08:01.000
+Just for context.
+
+01:08:01.000 --> 01:08:08.000
+We could use this technique to completely mess with the way that the browser works.
+
+01:08:08.000 --> 01:08:25.000
+Right. In theory, I could write code that if I clicked on a link in a webpage that instead of going to wherever that link was supposed to go like normal.
+
+01:08:25.000 --> 01:08:43.000
+I could intercept that change the default behavior of that click and then make a little animation where the, the link text like scrolls away spinning off into infinity and disappears right we the most useless webpage ever, because all the links would
+
+01:08:43.000 --> 01:08:58.000
+suddenly, not do what you want it to. It would be like you're on mushrooms or something like what the heck happened to my browser. Right. I would be changing the way that the browser works completely.
+
+01:08:58.000 --> 01:09:00.000
+Right.
+
+01:09:00.000 --> 01:09:06.000
+And I can do that because I have this hook into JavaScript that's running on the front end.
+
+01:09:06.000 --> 01:09:18.000
+Right. This should feel like a huge opening of opportunity for you to create your own web experiences.
+
+01:09:18.000 --> 01:09:24.000
+Right. That's the power of JavaScript on the front end.
+
+01:09:24.000 --> 01:09:28.000
+Okay, now back to our game.
+
+01:09:28.000 --> 01:09:44.000
+We need a way to keep track of whose turn it is right. Is it good is it excess turn or is it owes turn, and depending on whose turn it is we're going to add a different class, as we click.
+
+01:09:44.000 --> 01:09:46.000
+Right.
+
+01:09:46.000 --> 01:09:53.000
+So let's go back to our original HTML.
+
+01:09:53.000 --> 01:10:06.000
+And let's say that we've got a paragraph of text that says it's exes turn.
+
+01:10:06.000 --> 01:10:07.000
+Okay.
+
+01:10:07.000 --> 01:10:18.000
+I'm putting this directly into the HTML page, go back here and reload it, it's telling us, it's access to.
+
+01:10:18.000 --> 01:10:32.000
+In fact, instead of a paragraph tag let's make it an h2, so it's a little bit bolder bigger easier to see. Right. You can see that what I'm doing here is my code right I'm, it gets to be the way that I want it to be there, it's x sister.
+
+01:10:32.000 --> 01:10:34.000
+five.
+
+01:10:34.000 --> 01:10:39.000
+What I'm really interested in is the x though.
+
+01:10:39.000 --> 01:10:45.000
+So in the spirit of HTML, I'm going to wrap that x in a tag.
+
+01:10:45.000 --> 01:10:51.000
+Let's make it a span tag span tags are in line.
+
+01:10:51.000 --> 01:11:03.000
+So if I do that, it's actually just going to be a way to refer to this particular piece of the output.
+
+01:11:03.000 --> 01:11:08.000
+Let's call it an ID of player.
+
+01:11:08.000 --> 01:11:29.000
+Right. So I've added some markup, that targets that particular letter of whose turn it is right that tag. If I reload this page, it still looks like it's x is turn right, because the span tag is just part of of what this thing is writing out for example
+
+01:11:29.000 --> 01:11:31.000
+if I open up this age to.
+
+01:11:31.000 --> 01:11:42.000
+It shows us its axis, turn right there's a bit of text before the span tag. Here's the span tag itself it's got a capital X on the inside.
+
+01:11:42.000 --> 01:11:54.000
+And then a little bit more text afterwards. Right, that's all inside of an H to this span holds, whose turn it is.
+
+01:11:54.000 --> 01:11:56.000
+Okay.
+
+01:11:56.000 --> 01:12:09.000
+So that means that back here in the JavaScript, where I'm trying to figure out what class to add on to the TD.
+
+01:12:09.000 --> 01:12:14.000
+I can actually grab that straight out of the document now.
+
+01:12:14.000 --> 01:12:31.000
+For example, I can say context player equals, and I'm going to call the jQuery function. I'm going to select for the particular element that has, whose turn it is inside.
+
+01:12:31.000 --> 01:12:40.000
+And I'm going to say, give me the content of that tag.
+
+01:12:40.000 --> 01:12:49.000
+So I was just speaking that out in English into the zoom call here, and I was typing the syntax that goes with it.
+
+01:12:49.000 --> 01:12:53.000
+So let's break this syntax down a bit right.
+
+01:12:53.000 --> 01:13:00.000
+This is a line of JavaScript. Right, so you get to use all your JavaScript tools that you've learned Up to now, right.
+
+01:13:00.000 --> 01:13:09.000
+Concept player, we're establishing a variable, and then we're going to put a value into it. We're not going to be able to change that value.
+
+01:13:09.000 --> 01:13:26.000
+We're going to set that equal to whatever comes back from. This is a function call right that's a function call to the jQuery function. The immensely amazing magic jQuery function that I can pass in parameters into to refer to specific elements of the
+
+01:13:26.000 --> 01:13:34.000
+DOM, to refer to specific elements of the document. Right. Dom sensor document object model.
+
+01:13:34.000 --> 01:13:44.000
+And so, I've passed in a CSS selector much the same way that I did on line three where I was selecting for all the TD elements.
+
+01:13:44.000 --> 01:13:54.000
+Now I'm selecting for that span tag I just add added, which holds, whose turn it is.
+
+01:13:54.000 --> 01:14:11.000
+OK, so I'm calling the jQuery function on that particular DOM element, the span tag that holds who started his, and then I'm saying, Okay, with that particular DOM element,
+
+01:14:11.000 --> 01:14:18.000
+the jQuery function returns a DOM object
+
+01:14:18.000 --> 01:14:25.000
+dot html, this is now a new function call. It's being called on that particular DOM element.
+
+01:14:25.000 --> 01:14:28.000
+And this function call is.
+
+01:14:28.000 --> 01:14:32.000
+Give me the contents of that tag.
+
+01:14:32.000 --> 01:14:38.000
+And so that's the return value of dot html now.
+
+01:14:38.000 --> 01:14:42.000
+And so, what is this.
+
+01:14:42.000 --> 01:14:43.000
+Right.
+
+01:14:43.000 --> 01:14:46.000
+It's a string.
+
+01:14:46.000 --> 01:14:50.000
+It's a string of whatever was inside this particular DOM element.
+
+01:14:50.000 --> 01:15:00.000
+It's a getter if you will, gets that string puts it inside the player variable.
+
+01:15:00.000 --> 01:15:07.000
+And so now, in my ad class, I can just take that string and add that class.
+
+01:15:07.000 --> 01:15:11.000
+There it is.
+
+01:15:11.000 --> 01:15:22.000
+So save, go back here, reload, its axis turn right. Let's open up the table and see this happen in real time.
+
+01:15:22.000 --> 01:15:25.000
+Here's that first row.
+
+01:15:25.000 --> 01:15:27.000
+Here's the first TD if I click on it.
+
+01:15:27.000 --> 01:15:34.000
+Sure enough, it added x.
+
+01:15:34.000 --> 01:15:42.000
+Awesome.
+
+01:15:42.000 --> 01:15:55.000
+And so, I'll get to Adams question about EDS in a second because there's a real nice punch line coming up in this here, where.
+
+01:15:55.000 --> 01:16:00.000
+After we've added the class no to this element.
+
+01:16:00.000 --> 01:16:09.000
+We want to toggle the class, we want to switch away from it being Xs turn to being owes turned.
+
+01:16:09.000 --> 01:16:21.000
+And so, if player equals, at x, then
+
+01:16:21.000 --> 01:16:46.000
+we would like to call the jQuery function, pass in a particular CSS selector to target a piece of the dawn, and then set the value inside that element to be the capital letter Oh, right, are people getting the hang of it here right you call this magical
+
+01:16:46.000 --> 01:16:59.000
+jQuery function you specifically targeted piece of the DOM. And then you can call some function that's going to do your bidding with that dog. Right. And in this case, and we actually using the same function I had before.
+
+01:16:59.000 --> 01:17:02.000
+But here I did not have a parameter on it.
+
+01:17:02.000 --> 01:17:05.000
+When you run it this way, it's a getter.
+
+01:17:05.000 --> 01:17:21.000
+This one is get the value of that DOM element, if I pass in a value to that same function here. This is set the value of that element.
+
+01:17:21.000 --> 01:17:26.000
+Instead of what I should be saying here actually is content.
+
+01:17:26.000 --> 01:17:33.000
+Get the contents of that don't element, set the contents of that donor.
+
+01:17:33.000 --> 01:17:48.000
+And so what this is saying is that if the player is x right now, we've just added the class to the TV. Now I want you to say okay, x is turn is done.
+
+01:17:48.000 --> 01:17:50.000
+It's now.
+
+01:17:50.000 --> 01:17:55.000
+We're setting the content of that Donald.
+
+01:17:55.000 --> 01:18:01.000
+So let's check it out. Reload its axis turn right.
+
+01:18:01.000 --> 01:18:09.000
+Let's watch this happening real time to bring up the table body let's look at the middle row this time.
+
+01:18:09.000 --> 01:18:24.000
+And the middle, as its traditional one clicks on the middle of the Tic Tac Toe board first right click this thing, it's going to add a class to this, and then watch what happens here, because I'm setting that Donald, to have new content now.
+
+01:18:24.000 --> 01:18:39.000
+Click x got added to this class on that element. And now it's saying it's almost her suddenly.
+
+01:18:39.000 --> 01:18:42.000
+Okay, how about the first row.
+
+01:18:42.000 --> 01:18:48.000
+The first TD of this middle row here. If I click on this now.
+
+01:18:48.000 --> 01:18:56.000
+It added the class. Oh, to that element, because it was always turn.
+
+01:18:56.000 --> 01:18:58.000
+Cool.
+
+01:18:58.000 --> 01:19:04.000
+Now I didn't toggle this back to access turn yet because we didn't write that part of the code yet, right.
+
+01:19:04.000 --> 01:19:07.000
+Let's go back to it.
+
+01:19:07.000 --> 01:19:16.000
+Right. So, if the player was x, right after the ad classes happened. If the player was actually switched to Oh, otherwise.
+
+01:19:16.000 --> 01:19:21.000
+Let's switch it back to x. Right.
+
+01:19:21.000 --> 01:19:37.000
+Whoops.
+
+01:19:37.000 --> 01:19:50.000
+Put this comment here it'll apply to both.
+
+01:19:50.000 --> 01:19:54.000
+Yeah.
+
+01:19:54.000 --> 01:20:00.000
+Either way.
+
+01:20:00.000 --> 01:20:05.000
+Ok, back to the code. Reload like this.
+
+01:20:05.000 --> 01:20:07.000
+Looking at the table.
+
+01:20:07.000 --> 01:20:11.000
+Here's the body. Here's the first row this time.
+
+01:20:11.000 --> 01:20:15.000
+There's x now it's his turn
+
+01:20:15.000 --> 01:20:22.000
+Click on the middle cell, it's adding Oh, and it's flipping whose turn it is back to x now.
+
+01:20:22.000 --> 01:20:28.000
+So I click the first one, x.
+
+01:20:28.000 --> 01:20:34.000
+Right.
+
+01:20:34.000 --> 01:20:49.000
+I managed to get xnO to play on the center thing every every time I click it goes back and forth between x and O. But then it's only showing us X's squares, we've got a bit more cleaning up to do here, right, but we've got quite a bit of how this all
+
+01:20:49.000 --> 01:20:59.000
+holds together in place already. Okay, let me get back to Adams question. So I guess jQuery replaces EJS in our repertoire.
+
+01:20:59.000 --> 01:21:02.000
+I'm
+
+01:21:02.000 --> 01:21:22.000
+not precisely what I would say is this JavaScript on the front end can do everything right, you can change the way, clicking on a link does something, you can change the way form submissions happen.
+
+01:21:22.000 --> 01:21:34.000
+You can change the styles by adding classes, you can manipulate the DOM utterly you can delete bits of the DOM, you can do anything with JavaScript on the front of it.
+
+01:21:34.000 --> 01:21:45.000
+ej S is how you get dynamic content to show up in this.
+
+01:21:45.000 --> 01:21:55.000
+Right. EJS allows JavaScript to run in service of putting dynamic values into your HTML.
+
+01:21:55.000 --> 01:21:58.000
+only.
+
+01:21:58.000 --> 01:22:04.000
+That's all the DJ is is good for
+
+01:22:04.000 --> 01:22:12.000
+JavaScript on the front end can do that and so much more.
+
+01:22:12.000 --> 01:22:15.000
+That's right, yes is definitely server side.
+
+01:22:15.000 --> 01:22:27.000
+Yeah. And so, you know, I'm kind of like, I'm hoping I'm like blowing your minds a little bit here right you know the fact that you can do anything with JavaScript on the front end.
+
+01:22:27.000 --> 01:22:36.000
+I mean, heck, if you've got one of those little USB fans plugged into your computer.
+
+01:22:36.000 --> 01:22:39.000
+You can use JavaScript to turn the fan on and off.
+
+01:22:39.000 --> 01:22:52.000
+Right, like that that's that's how much is available to you in JavaScript on the front end.
+
+01:22:52.000 --> 01:23:07.000
+Okay, yeah, let's proceed. Let's, let's tidy this up a little bit more we want to actually play Tic Tac Toe right, we want to keep people from playing all the squares and adding all the types to each type.
+
+01:23:07.000 --> 01:23:16.000
+If we go back to our CSS. Right now we've got blue squares.
+
+01:23:16.000 --> 01:23:24.000
+We could use something a little different actually let me just look in here.
+
+01:23:24.000 --> 01:23:30.000
+I have
+
+01:23:30.000 --> 01:23:39.000
+Stoler some pictures, because that's what you do right you still pictures off the web
+
+01:23:39.000 --> 01:23:44.000
+of two files of an xnO.
+
+01:23:44.000 --> 01:23:49.000
+So here they are, tic tac, x and Tic Tac Toe dot jpg.
+
+01:23:49.000 --> 01:23:57.000
+What I can do is within my CSS instead of when the x class gets entered changing the background color.
+
+01:23:57.000 --> 01:24:06.000
+Let's change the background to be an image
+
+01:24:06.000 --> 01:24:10.000
+source
+
+01:24:10.000 --> 01:24:17.000
+for x, tic tac x dot.
+
+01:24:17.000 --> 01:24:20.000
+jpg.
+
+01:24:20.000 --> 01:24:22.000
+This right.
+
+01:24:22.000 --> 01:24:29.000
+I don't think it's right.
+
+01:24:29.000 --> 01:24:35.000
+How to set the background image on
+
+01:24:35.000 --> 01:24:44.000
+the CSS style
+
+01:24:44.000 --> 01:24:47.000
+background image URL URL. Thank you, everybody.
+
+01:24:47.000 --> 01:24:52.000
+There it is.
+
+01:24:52.000 --> 01:24:57.000
+So it'll be like that.
+
+01:24:57.000 --> 01:24:59.000
+like that.
+
+01:24:59.000 --> 01:25:02.000
+Background Image
+
+01:25:02.000 --> 01:25:10.000
+Tic Tac x dot jpg, or even the editors happier with this way of doing things.
+
+01:25:10.000 --> 01:25:12.000
+So there's x.
+
+01:25:12.000 --> 01:25:14.000
+There is.
+
+01:25:14.000 --> 01:25:18.000
+Oh.
+
+01:25:18.000 --> 01:25:21.000
+Oh, I see.
+
+01:25:21.000 --> 01:25:36.000
+Okay, so with that simple change now I can go back to the game reloaded, and the accent Oh classes are being added to the thing. I click on there.
+
+01:25:36.000 --> 01:25:38.000
+Oh, it's repeating.
+
+01:25:38.000 --> 01:25:40.000
+Here's accent Oh, right.
+
+01:25:40.000 --> 01:25:56.000
+With the cells being a little bit larger than the image I'm getting a bit of an overflow from it.
+
+01:25:56.000 --> 01:26:14.000
+Reload XOXOXOOO. Oh. Oh.
+
+01:26:14.000 --> 01:26:21.000
+Alright, so we're getting there. Right. I mean it's starting to feel like a real Tic Tac Toe game. Right.
+
+01:26:21.000 --> 01:26:29.000
+And, uh, yeah we got a bit of fitness some stuff to handle here So, but we're getting there. Right.
+
+01:26:29.000 --> 01:26:38.000
+And we've done this in what 13 lines of CSS.
+
+01:26:38.000 --> 01:26:49.000
+I'm going to count these as separate lines. Not very many lines of HTML. You know, you could get that down to a dozen pretty easily.
+
+01:26:49.000 --> 01:26:54.000
+And what 12 lines of JavaScript thanks to the jQuery library.
+
+01:26:54.000 --> 01:26:57.000
+This is pretty compact.
+
+01:26:57.000 --> 01:27:14.000
+And you've learned a lot about how jQuery holds together by making this thing, because there's a pattern I'm sure you can see in here right, you call the jQuery function
+
+01:27:14.000 --> 01:27:27.000
+with a parameter, that's talking about which piece of the DOM that you're trying to mess with modify.
+
+01:27:27.000 --> 01:27:35.000
+And then you can call functions on that thing, right, I can set up a, an event handler.
+
+01:27:35.000 --> 01:27:43.000
+I can query for what the value of that DOM element is.
+
+01:27:43.000 --> 01:27:48.000
+I can set the contents of that DOM element.
+
+01:27:48.000 --> 01:27:57.000
+And in here. You've actually got the hints of of almost everything that you will do with jQuery with JavaScript on the front end.
+
+01:27:57.000 --> 01:28:00.000
+Dominic manipulation.
+
+01:28:00.000 --> 01:28:12.000
+Dom reversal is a little bit of that in here, these are all things that you'll be learning what you can do with your JavaScript.
+
+01:28:12.000 --> 01:28:23.000
+And you know, from this point. Let's just keep polishing this Tic Tac Toe game.
+
+01:28:23.000 --> 01:28:43.000
+Um, let's see I think the next thing I'd like to do is to make it so that a user can't actually click again and have that letter be stored, right, like if I click this it's access turn if Oh clicks on that thing.
+
+01:28:43.000 --> 01:28:48.000
+Then it it steals the square. Right, that's no good.
+
+01:28:48.000 --> 01:28:56.000
+Also, this element has both x and y on it.
+
+01:28:56.000 --> 01:29:16.000
+And somehow is choosing to make the background image the oh and not the x, right turns out that's because in our CSS. The O wins because it's second in the list of styles, right if I flip this around then x could steal all of those things.
+
+01:29:16.000 --> 01:29:23.000
+But we can make this better. If we go back to here in the JavaScript.
+
+01:29:23.000 --> 01:29:27.000
+Right. Here's the click handler
+
+01:29:27.000 --> 01:29:34.000
+that runs this this call back right here,
+
+01:29:34.000 --> 01:29:47.000
+huh. Yeah, like that, right by cut it out you can see that's the call to the click function, and passing in a single callback, like so.
+
+01:29:47.000 --> 01:29:49.000
+This call back is what runs. When I click on that element.
+
+01:29:49.000 --> 01:29:58.000
+When I click on that element. What I can do is let's see in jQuery.
+
+01:29:58.000 --> 01:30:07.000
+How to remove a click event handler
+
+01:30:07.000 --> 01:30:11.000
+and bind or off.
+
+01:30:11.000 --> 01:30:20.000
+So,
+
+01:30:20.000 --> 01:30:23.000
+I say, off,
+
+01:30:23.000 --> 01:30:40.000
+off is a function call that I can call with jQuery and office going to take
+
+01:30:40.000 --> 01:30:42.000
+for any given selector.
+
+01:30:42.000 --> 01:30:47.000
+I can take all of the events off, or I could just take the click handler off.
+
+01:30:47.000 --> 01:30:51.000
+I like this one it's pretty targeted.
+
+01:30:51.000 --> 01:30:55.000
+So, we'll go back to our code.
+
+01:30:55.000 --> 01:31:00.000
+And we're working with the this object.
+
+01:31:00.000 --> 01:31:06.000
+So I can do that.
+
+01:31:06.000 --> 01:31:08.000
+Anytime in here.
+
+01:31:08.000 --> 01:31:10.000
+Like that.
+
+01:31:10.000 --> 01:31:14.000
+Whoops.
+
+01:31:14.000 --> 01:31:18.000
+This off. Click.
+
+01:31:18.000 --> 01:31:31.000
+And so once a cell has been clicked once I can remove the event handler from that particular cell with that line right there.
+
+01:31:31.000 --> 01:31:37.000
+removes the click.
+
+01:31:37.000 --> 01:31:43.000
+And so now when I go back to the game board reloaded. Okay, x claims that square.
+
+01:31:43.000 --> 01:31:49.000
+If Oh claims it. It's not letting me click here anymore.
+
+01:31:49.000 --> 01:31:53.000
+Right, it's still owes turning it. There's no click handler on this.
+
+01:31:53.000 --> 01:31:58.000
+Sell anymore, but there is on this one still click.
+
+01:31:58.000 --> 01:32:00.000
+Oh claims that thing.
+
+01:32:00.000 --> 01:32:04.000
+It's still access turn I'm clicking a lot here, X is not going.
+
+01:32:04.000 --> 01:32:08.000
+Right. But there X can go there. Now it's always turn.
+
+01:32:08.000 --> 01:32:12.000
+And it's a race. Whoops, x picked the wrong one.
+
+01:32:12.000 --> 01:32:16.000
+Oh, wins.
+
+01:32:16.000 --> 01:32:28.000
+Cool. All right, I did see a question. Can you write an if statement, so that if it has a class, it doesn't add a class to it. Yeah, we could do that.
+
+01:32:28.000 --> 01:32:44.000
+Yeah, that's entirely reasonable. Right. I turns out this thing that I just did also protects us from that same circumstance, because once the one single class is added, it's not going to allow me to click it again because there's no more clicking on
+
+01:32:44.000 --> 01:32:53.000
+it, so it achieves the same thing in the end, but that's absolutely you can do what Joe suggested here.
+
+01:32:53.000 --> 01:33:04.000
+It would be code, you'd have to query to see if, if it has the class or not. By the way, the code for that is has class. Right, so you've got that, and you go, as class.
+
+01:33:04.000 --> 01:33:12.000
+And so your, it returns a Boolean does it have this class or doesn't it
+
+01:33:12.000 --> 01:33:19.000
+on that point, by the way, because I'm now I'm starting to throw jQuery functions that you're like there's lots of them.
+
+01:33:19.000 --> 01:33:26.000
+Now is a good time to go look at the jQuery documentation.
+
+01:33:26.000 --> 01:33:32.000
+Because this will blow your mind.
+
+01:33:32.000 --> 01:33:43.000
+When you call that magical jQuery function, and it's going to return to you a particular DOM element or a set of DOM elements and automatically loop over them.
+
+01:33:43.000 --> 01:33:45.000
+Right.
+
+01:33:45.000 --> 01:33:54.000
+There are so many things that you can do with the dawn.
+
+01:33:54.000 --> 01:33:59.000
+For example,
+
+01:33:59.000 --> 01:34:18.000
+and I'm just clicking into the stuff that's down here on the left hand side. Look at all these collections of functions, right, you've got functions about basic effects fading sliding document load whether it's loaded not we already saw that one form
+
+01:34:18.000 --> 01:34:33.000
+events is a form submitting keyboard events is the person typing on the keyboard anything right mouse events is the is the mouse scrolling around somewhere, grab those events.
+
+01:34:33.000 --> 01:34:44.000
+You can manipulate class attributes. You can copy elements, you can insert and remove DOM elements.
+
+01:34:44.000 --> 01:34:48.000
+You can do some stuff with data storage.
+
+01:34:48.000 --> 01:35:01.000
+Lots and lots and lots of things that you can do with jQuery functions to all the DOM elements and whatever. Basic so all I did was click the basics
+
+01:35:01.000 --> 01:35:18.000
+for effects, right. You can hide it, you can show it, the sets the display none parameter for CSS style. That's what's happening under the hood, you can toggle it turn it on and off
+
+01:35:18.000 --> 01:35:26.000
+with CSS styles. Here's add class that bit that I just showed you right how to add a class to a DOM element.
+
+01:35:26.000 --> 01:35:43.000
+You can use this CSS in general to set any style has class you can find out what the height of a thing is with presumably position elements, right, all these things.
+
+01:35:43.000 --> 01:35:51.000
+And what's, what's super cool actually, is that you can actually animate this stuff.
+
+01:35:51.000 --> 01:35:58.000
+By setting a style, and saying, Oh, I want you to take 500 milliseconds for this change to occur.
+
+01:35:58.000 --> 01:36:03.000
+And your paid your page will slowly transform from one version to the other.
+
+01:36:03.000 --> 01:36:13.000
+Super cool trick that you can do with jQuery in fact that's the sweet spot I would say, with jQuery is in the animation of CSS styles, even to this day.
+
+01:36:13.000 --> 01:36:20.000
+That's one of the nicer tools, left to jQuery, that does well.
+
+01:36:20.000 --> 01:36:29.000
+Now there's lots of alternatives for for how we're how you could be doing all the above but there you go.
+
+01:36:29.000 --> 01:36:36.000
+Okay, so that's lots of context. Right
+
+01:36:36.000 --> 01:36:56.000
+now. The only thing that's really left at this point to our Tic Tac Toe game back here, which, where is it back here. The only thing that's really left to do to this game is to
+
+01:36:56.000 --> 01:37:00.000
+to detect a win, right, because if there's a winner.
+
+01:37:00.000 --> 01:37:09.000
+There, we want to prevent the game from going on we want there to be some message that says yes there's a winner. Right.
+
+01:37:09.000 --> 01:37:20.000
+And so, at this point, It would be nice to change our code, so that we could do when detection.
+
+01:37:20.000 --> 01:37:22.000
+Right.
+
+01:37:22.000 --> 01:37:34.000
+And that when detection is something that we would want to do in about here right so we add the class.
+
+01:37:34.000 --> 01:37:38.000
+We could turn the click handler off either way.
+
+01:37:38.000 --> 01:37:47.000
+But even right now. We should be able to figure out whether there's a winner for this game.
+
+01:37:47.000 --> 01:37:51.000
+And so we might do something like,
+
+01:37:51.000 --> 01:37:59.000
+if victory.
+
+01:37:59.000 --> 01:38:04.000
+else, like so.
+
+01:38:04.000 --> 01:38:18.000
+And so the code that we wrote down here was the stuff that we were going to do if victory had not yet been established right.
+
+01:38:18.000 --> 01:38:25.000
+But if the victory does occur here.
+
+01:38:25.000 --> 01:38:36.000
+Then, what would we do in that case, we would take, we would remove the click handlers.
+
+01:38:36.000 --> 01:38:41.000
+From all of the TVs, actually.
+
+01:38:41.000 --> 01:38:46.000
+Right. There's all the TVs, and we're going to turn off the click handlers for all of them.
+
+01:38:46.000 --> 01:38:58.000
+We would probably also change the messaging,
+
+01:38:58.000 --> 01:39:10.000
+where we would do something like for our age to tag we could set the HTML, to be
+
+01:39:10.000 --> 01:39:13.000
+winner.
+
+01:39:13.000 --> 01:39:15.000
+Play again.
+
+01:39:15.000 --> 01:39:30.000
+And so the play again text is going to be something like, and a link to reloading the page.
+
+01:39:30.000 --> 01:39:33.000
+Like that.
+
+01:39:33.000 --> 01:39:44.000
+Okay, so let's make a thing to test to test for victory will have a function called victory.
+
+01:39:44.000 --> 01:39:57.000
+And that function. You know what, let's make him. Let's make a victory happen even on the first click will say that there's a victory just to test what this thing is doing.
+
+01:39:57.000 --> 01:40:00.000
+So I'll save that like that. If victory.
+
+01:40:00.000 --> 01:40:19.000
+And it's going to come back as true, then removes all the click handlers and changes Rh to to now say winner play again.
+
+01:40:19.000 --> 01:40:24.000
+x one because the victory function said yeah, you're the winner.
+
+01:40:24.000 --> 01:40:28.000
+Play again now when I click on this link.
+
+01:40:28.000 --> 01:40:35.000
+It reloads the page for us, which is just what we want to happen.
+
+01:40:35.000 --> 01:40:47.000
+When the victory happens now all my CDs have had their event handler removed, I can't click on anything anymore, right, but at least I can click play, and if I want to.
+
+01:40:47.000 --> 01:40:48.000
+Okay.
+
+01:40:48.000 --> 01:40:57.000
+And so now, it just it's left to us to write this function here that test to see whether or not there's actually a victory or not.
+
+01:40:57.000 --> 01:40:59.000
+Yeah.
+
+01:40:59.000 --> 01:41:11.000
+This piece of the code is actually going to be quite a bit more complex. So, we're not going to have time to get to the end of it, but I would like to show at least how to get this started.
+
+01:41:11.000 --> 01:41:17.000
+So that you can see a little bit more about jQuery and how it works and how it holds together.
+
+01:41:17.000 --> 01:41:20.000
+We won't belabor this too too much though.
+
+01:41:20.000 --> 01:41:30.000
+I did include some of the solution in today sample code which will be in the get repository that you all have and so you can do get Poland bringing all that code and have a look at it.
+
+01:41:30.000 --> 01:41:39.000
+Um, but let's think for a moment about how we want to do when detection in this game.
+
+01:41:39.000 --> 01:41:44.000
+If I click here.
+
+01:41:44.000 --> 01:41:53.000
+We now have new information about this row, and about this column, and about both of the diagonals to.
+
+01:41:53.000 --> 01:41:56.000
+If I were to click here.
+
+01:41:56.000 --> 01:42:05.000
+Then I would have to check. Okay. Does this row represent a victory or does this column representative victory.
+
+01:42:05.000 --> 01:42:16.000
+Basically, by handing in the particular TD element that I've clicked on into the victory function.
+
+01:42:16.000 --> 01:42:23.000
+It can limit the number of things that I need to check to see if I have a victory.
+
+01:42:23.000 --> 01:42:33.000
+If I click here, then I should check this row and this column and this diagonal, I suppose, as well, to see if that there was a victory there.
+
+01:42:33.000 --> 01:42:35.000
+Okay.
+
+01:42:35.000 --> 01:42:41.000
+Let's start with rose because, you know, that'll be the easiest.
+
+01:42:41.000 --> 01:42:47.000
+When I click a TD element, say here.
+
+01:42:47.000 --> 01:42:53.000
+I should check the row that it's in to see if that is now a victory.
+
+01:42:53.000 --> 01:42:54.000
+Okay.
+
+01:42:54.000 --> 01:43:06.000
+So what I'm going to do is when I call the victory function. I'm going to pass in this, which is the particular.
+
+01:43:06.000 --> 01:43:10.000
+That's the particular
+
+01:43:10.000 --> 01:43:20.000
+DOM element that was called in fact I'm going to pass in this with the jQuery function wrapped around it so that I get a jQuery object at the other end.
+
+01:43:20.000 --> 01:43:29.000
+This parameter. I'm going to call it a clicked
+
+01:43:29.000 --> 01:43:31.000
+elements.
+
+01:43:31.000 --> 01:43:32.000
+That's a pretty good name.
+
+01:43:32.000 --> 01:43:48.000
+Notice my variable name as $1 sign in the front, that's a bit of a best practice at convention that says that my variable is holding a DOM elements.
+
+01:43:48.000 --> 01:43:58.000
+So I can go something like this
+
+01:43:58.000 --> 01:44:10.000
+row, equals dollar clicked element dot parent.
+
+01:44:10.000 --> 01:44:16.000
+So, this variable that came into the function called victory.
+
+01:44:16.000 --> 01:44:25.000
+That's a jQuery DOM element. That's the kind of thing that this function call here returned to us.
+
+01:44:25.000 --> 01:44:33.000
+Right, It's the thing that I can put dots on and run jQuery function.
+
+01:44:33.000 --> 01:44:41.000
+And so by grabbing the parent of that element, now I have the row.
+
+01:44:41.000 --> 01:44:44.000
+And so
+
+01:44:44.000 --> 01:44:54.000
+I can continue on with this process to check
+
+01:44:54.000 --> 01:45:07.000
+whether or not that row has all the same exits or or or whatever.
+
+01:45:07.000 --> 01:45:10.000
+And so,
+
+01:45:10.000 --> 01:45:17.000
+let's do a bit of logic like this.
+
+01:45:17.000 --> 01:45:22.000
+First off, I'm going to start off with a Boolean row.
+
+01:45:22.000 --> 01:45:26.000
+When equals true.
+
+01:45:26.000 --> 01:45:32.000
+I'm going to start with the assumption that, that there is a row victory.
+
+01:45:32.000 --> 01:45:46.000
+And as soon as I see any evidence that there is not a row victory. Then I'll change row into false, and that'll be what I return something related to that falseness.
+
+01:45:46.000 --> 01:45:55.000
+And so, if I
+
+01:45:55.000 --> 01:45:59.000
+want to access each of the children of the row.
+
+01:45:59.000 --> 01:46:09.000
+Then I can do something like this row dot children dot.
+
+01:46:09.000 --> 01:46:12.000
+Each.
+
+01:46:12.000 --> 01:46:23.000
+So row is the role that is the parent of the clicked element that row has children.
+
+01:46:23.000 --> 01:46:28.000
+Right, that's going to be each of the TVs in that row
+
+01:46:28.000 --> 01:46:37.000
+jQuery has a function called each that I can attach to any group of elements.
+
+01:46:37.000 --> 01:46:38.000
+Okay.
+
+01:46:38.000 --> 01:46:46.000
+What are we going to do with each of those things. Well, we can pass it a callback. This is a lot like for each that you've seen elsewhere.
+
+01:46:46.000 --> 01:46:50.000
+So we'll have function
+
+01:46:50.000 --> 01:46:54.000
+like this.
+
+01:46:54.000 --> 01:46:58.000
+And so,
+
+01:46:58.000 --> 01:47:01.000
+yeah.
+
+01:47:01.000 --> 01:47:08.000
+And we're going to be targeting the particular element.
+
+01:47:08.000 --> 01:47:15.000
+In fact, we're going to be going after this.
+
+01:47:15.000 --> 01:47:27.000
+But this has now been redefined to be each child right because we're inside that each function, this callback has a new definition for this.
+
+01:47:27.000 --> 01:47:33.000
+It's the particular element that I'm looping over now.
+
+01:47:33.000 --> 01:47:49.000
+So, if this has class.
+
+01:47:49.000 --> 01:48:06.000
+We want to check to see whether or not, all of the elements have the class that matches the current player, because we haven't yet.
+
+01:48:06.000 --> 01:48:12.000
+Like in calling victory. We haven't yet flips the player to be the other player.
+
+01:48:12.000 --> 01:48:32.000
+I can actually grab, who the current player is by using this code snippet. The way we did before. In fact, let's copy the whole line just to make it plain what we're doing, like so.
+
+01:48:32.000 --> 01:48:35.000
+And here.
+
+01:48:35.000 --> 01:48:40.000
+So now I have, okay, who's the current player.
+
+01:48:40.000 --> 01:48:44.000
+Play, pull it right out of the document.
+
+01:48:44.000 --> 01:48:50.000
+If this has class player,
+
+01:48:50.000 --> 01:48:53.000
+Like so.
+
+01:48:53.000 --> 01:49:02.000
+Then I can make some conclusions about whether or not this row counts as a victory or not.
+
+01:49:02.000 --> 01:49:07.000
+In fact, I've got my logic backwards.
+
+01:49:07.000 --> 01:49:10.000
+Imagine that it's x who's clicking.
+
+01:49:10.000 --> 01:49:12.000
+Right. And so, x.
+
+01:49:12.000 --> 01:49:21.000
+The clicked element will have the next class, but I'm going to go for the parent of all the elements in that row.
+
+01:49:21.000 --> 01:49:34.000
+Right. Sorry, I'm going to go for the parents of the click element that's a row that row has three TVs in it. And I'm about to loop over all three of those TVs,
+
+01:49:34.000 --> 01:49:38.000
+what I can. What I can test for is this.
+
+01:49:38.000 --> 01:49:47.000
+If any one of those TVs does not have the same class.
+
+01:49:47.000 --> 01:49:51.000
+That is the player name that the current player.
+
+01:49:51.000 --> 01:49:56.000
+This then row when
+
+01:49:56.000 --> 01:50:01.000
+is false.
+
+01:50:01.000 --> 01:50:16.000
+Right. So if x has just played into this row, and any of the other TVs in that road does not have that class, then it's not a row in.
+
+01:50:16.000 --> 01:50:24.000
+And so, at this point, to have my victory function only testing for row wins.
+
+01:50:24.000 --> 01:50:27.000
+I can just actually return.
+
+01:50:27.000 --> 01:50:33.000
+row when like stone.
+
+01:50:33.000 --> 01:50:54.000
+And so, right now, the test for victory is only going to test for rose. Right. We start out with the assumption that the row when is true, and it looks for evidence that neighboring tedious, don't have the same class that this one has soon as it sees
+
+01:50:54.000 --> 01:51:08.000
+there's an element that does not have the same class as the current player. Then it says no, This is not a row when. And then we just returned whether or not row in is true or not, for victory.
+
+01:51:08.000 --> 01:51:14.000
+So that's like the simplest possible part of the victory detection and Tic Tac Toe here.
+
+01:51:14.000 --> 01:51:18.000
+And so we'll go back to this reload this thing.
+
+01:51:18.000 --> 01:51:26.000
+And let's, let's go for a row win, right, so here's x its own turn. Here's the excess term, here's those turn.
+
+01:51:26.000 --> 01:51:30.000
+Now here comes the row when, click here.
+
+01:51:30.000 --> 01:51:32.000
+We have a winner.
+
+01:51:32.000 --> 01:51:36.000
+Get found this win for that row.
+
+01:51:36.000 --> 01:51:42.000
+Now I can't play. Now I have to click play again if I wanted to reset which it does.
+
+01:51:42.000 --> 01:51:59.000
+Right. And now we could try for a column and it's not going to show the victory here's XOXOXO still no victory, its axis turn still and so's turn right, it couldn't detect the wind because there's no column when detector, which is a different, different
+
+01:51:59.000 --> 01:52:02.000
+piece of code that we'd have to add to that.
+
+01:52:02.000 --> 01:52:10.000
+Okay, we are getting close to the end of class though so we'll leave the rest of it as an exercise. If you're really into it.
+
+01:52:10.000 --> 01:52:16.000
+Joe asks, Can you write an if statement so that if it has it has already covered that much earlier, right.
+
+01:52:16.000 --> 01:52:21.000
+Do not miss asks, What's the difference between the node and the element.
+
+01:52:21.000 --> 01:52:26.000
+Oh, I'm maybe I'm using the word interchangeably.
+
+01:52:26.000 --> 01:52:32.000
+When I'm talking about the document object model.
+
+01:52:32.000 --> 01:52:35.000
+Let's look at some DOM elements.
+
+01:52:35.000 --> 01:52:38.000
+Here's a DOM element, the table.
+
+01:52:38.000 --> 01:52:41.000
+Inside the table I have rows that's another DOM element.
+
+01:52:41.000 --> 01:52:54.000
+Right. There's a hierarchy of DOM elements that's what markup languages give you is you can have HTML markup, which turns the document into a hierarchy.
+
+01:52:54.000 --> 01:53:02.000
+And inside that hierarchy, any given DOM elements. I think of it as a node in a graph.
+
+01:53:02.000 --> 01:53:12.000
+Right, it's, it's part of a hierarchy of elements and so sometimes I'll say the word node. When I mean, the DOM element.
+
+01:53:12.000 --> 01:53:15.000
+Yeah.
+
+01:53:15.000 --> 01:53:27.000
+I'm William asks, Can we declare a variable outside the jQuery functions and use it to track the state of the current player.
+
+01:53:27.000 --> 01:53:42.000
+Well, the, the important thing to be aware of there is that any given variable that you're establishing like if I did something like this
+
+01:53:42.000 --> 01:53:45.000
+concert player equals that thing.
+
+01:53:45.000 --> 01:53:52.000
+It is not going to update its value to keep track of the value changes in the dog.
+
+01:53:52.000 --> 01:53:58.000
+Right, it's not a reference, it's actually a new variable here.
+
+01:53:58.000 --> 01:54:04.000
+And so it's only going to update, if it reruns this line.
+
+01:54:04.000 --> 01:54:09.000
+Right. That's why
+
+01:54:09.000 --> 01:54:12.000
+I used
+
+01:54:12.000 --> 01:54:29.000
+this such that when the click happens, we pull that in, and I did it again here, as the victory function is called, it brings the value out of the DOM, at that moment.
+
+01:54:29.000 --> 01:54:41.000
+And so it's that variable is going to be up to date for its value was there more to your question William.
+
+01:54:41.000 --> 01:54:54.000
+Right. If you do that, like, chatline to just after line one right if I add that line like that.
+
+01:54:54.000 --> 01:55:02.000
+Tell you what, William, just drop out and unmute, and we can clarify it.
+
+01:55:02.000 --> 01:55:03.000
+Hello.
+
+01:55:03.000 --> 01:55:06.000
+Yeah,
+
+01:55:06.000 --> 01:55:27.000
+yeah, yeah like this. So I have like a player as a string maybe, and have it as a variable. Yeah, and the trickery. When the person, click the TD assign a the player string to the to that variable on line one.
+
+01:55:27.000 --> 01:55:31.000
+And then, let me interrupt you because.
+
+01:55:31.000 --> 01:55:33.000
+Okay, this function.
+
+01:55:33.000 --> 01:55:36.000
+This whole file.
+
+01:55:36.000 --> 01:55:43.000
+Yeah, is going to run. Let's think about when this runs, this is kind of important because it's about asynchronous code right.
+
+01:55:43.000 --> 01:55:45.000
+Oh, yeah, I get enough.
+
+01:55:45.000 --> 01:55:54.000
+Actually, when does this function going to run, it's going to run right when the page loads.
+
+01:55:54.000 --> 01:55:57.000
+All these event handlers are happening on the event.
+
+01:55:57.000 --> 01:56:05.000
+Well after the fact. Right. This thing only runs when the when the event.
+
+01:56:05.000 --> 01:56:12.000
+Sorry when the document is ready, it will run this x, this callback, which sets up a bunch of event handlers.
+
+01:56:12.000 --> 01:56:19.000
+When a thing is clicked, then it's one of these callbacks that's run. Right.
+
+01:56:19.000 --> 01:56:23.000
+This value player is not going to be the same value.
+
+01:56:23.000 --> 01:56:30.000
+And that's why, for each of these callbacks. You have to refresh the value that you're dealing with.
+
+01:56:30.000 --> 01:56:32.000
+Yeah.
+
+01:56:32.000 --> 01:56:36.000
+Thank you for the question.
+
+01:56:36.000 --> 01:56:46.000
+Good. Um, yeah, just a couple more minutes to go here. Yes Gandhi. Ask me another question. Yes, Yes.
+
+01:56:46.000 --> 01:56:55.000
+Yeah. Does God follow the same specific rule at CSS,
+
+01:56:55.000 --> 01:56:57.000
+where I can say is this.
+
+01:56:57.000 --> 01:57:06.000
+This jQuery function can take quite a few parameters passed into it.
+
+01:57:06.000 --> 01:57:11.000
+You can even pass callbacks directly into here and that's kind of the same thing as a dot ready function.
+
+01:57:11.000 --> 01:57:27.000
+There's quite a lot of magic, let's call it going on when you call the jQuery function. One of the first things it does is it figures out what does this mean.
+
+01:57:27.000 --> 01:57:37.000
+And if you pass in a CSS selector jQuery will do the right thing.
+
+01:57:37.000 --> 01:57:50.000
+If you pass in a string that represents new HTML, like you're actually passing it some HTML in, it's going to create a new DOM element.
+
+01:57:50.000 --> 01:57:56.000
+That doesn't yet exist in the document that you then have to insert.
+
+01:57:56.000 --> 01:58:06.000
+There's a bunch of cool things that you can do with this jQuery function. but if your question is,
+
+01:58:06.000 --> 01:58:14.000
+when it comes to this, if I pass in a CSS selector.
+
+01:58:14.000 --> 01:58:15.000
+Right.
+
+01:58:15.000 --> 01:58:23.000
+Then it will definitely select all of the elements that match that selector it well.
+
+01:58:23.000 --> 01:58:30.000
+Right, I'm seeing Carly's question does jQuery follow the same specificity rules as CSS.
+
+01:58:30.000 --> 01:58:37.000
+Well, when you call the jQuery function in this way.
+
+01:58:37.000 --> 01:58:46.000
+There could be a ton of other CSS styles that are more specific than the one you're using, it's still going to select for the ones that you've passed in this time.
+
+01:58:46.000 --> 01:58:51.000
+Right. When I pass in a CSS selector here.
+
+01:58:51.000 --> 01:58:56.000
+It's not checking against all my other CSS to decide which ones to select.
+
+01:58:56.000 --> 01:58:59.000
+So in a way, specificity doesn't even come into it. Right.
+
+01:58:59.000 --> 01:59:08.000
+But what this will do is it will select for all of the events that match this particular selector.
+
+01:59:08.000 --> 01:59:11.000
+Yeah, but that that helped.
+
+01:59:11.000 --> 01:59:16.000
+As an answer. If not, feel free to, to ask it again.
+
+01:59:16.000 --> 01:59:18.000
+Perhaps by unmuted.
+
+01:59:18.000 --> 01:59:22.000
+There's one last thing I wanted to show you before we.
+
+01:59:22.000 --> 01:59:30.000
+Before we leave the topic of jQuery and and JavaScript on the front end.
+
+01:59:30.000 --> 01:59:36.000
+Do you really need jQuery there's a.
+
+01:59:36.000 --> 01:59:44.000
+This isn't quite the right thing. There it is. You might not need jQuery. Okay, here it is.
+
+01:59:44.000 --> 02:00:08.000
+You might not need jQuery, so jQuery is amazing, right. The, the amazing thing about jQuery is this precisely this bit about being able to call this function with a selector, with an object it's built into JavaScript, with a string that's new HTML, and
+
+02:00:08.000 --> 02:00:21.000
+this one function is going to figure out what you're talking about and returned to you, a DOM element, even if it's not in the page, yet, you can still have a DOM element.
+
+02:00:21.000 --> 02:00:37.000
+Then jQuery has this really awesome syntax, where it's super easy to add an event handler. To add a class to a DOM element to remove event handlers from that DOM element to query the DOM element for what is the content of it.
+
+02:00:37.000 --> 02:00:52.000
+Within the DOM, give me the contents, or to set the contents. There's so many things that you can do using that one function that it makes coding and jQuery actually quite easy at the end of the day.
+
+02:00:52.000 --> 02:01:08.000
+Now the penalty that you pay for having this lovely syntax. And this conceptually very easy way of doing DOM manipulation and Dom reversal and Dom querying for content and all that stuff.
+
+02:01:08.000 --> 02:01:24.000
+style setting and everything is that this syntax is quite unified like by the time now you go back to the jQuery documentation, you're off to the races, you can start calling all sorts of functions on all these DOM elements, and you're using a changeable
+
+02:01:24.000 --> 02:01:30.000
+syntax.
+
+02:01:30.000 --> 02:01:39.000
+The penalty for all that is that you have to load in the jQuery library, which we saw earlier.
+
+02:01:39.000 --> 02:01:41.000
+There's a bit to it.
+
+02:01:41.000 --> 02:01:44.000
+Right. This is a large function.
+
+02:01:44.000 --> 02:01:53.000
+It's some number of kilobytes worth of texts, right, that maybe that's large, maybe you don't want to have all that stuff.
+
+02:01:53.000 --> 02:01:59.000
+as a dependency of your code. Right.
+
+02:01:59.000 --> 02:02:07.000
+Everything that we've done here. You could have also done in pure JavaScript with no helper.
+
+02:02:07.000 --> 02:02:12.000
+Right.
+
+02:02:12.000 --> 02:02:28.000
+This page, you might not need jQuery shows you what you would do in jQuery and the equivalent of what you would do if you were just going to use pure JavaScript instead.
+
+02:02:28.000 --> 02:02:34.000
+So for example, if I am going to search for CSS related things.
+
+02:02:34.000 --> 02:02:49.000
+Now, it's showing me what I would need to do in jQuery, compared with what I would do in just pure JavaScript without the jQuery helper.
+
+02:02:49.000 --> 02:02:52.000
+So for example, you can see here.
+
+02:02:52.000 --> 02:03:03.000
+Here I am running jQuery right I call the jQuery function. I've got a particular element that I'm trying to do some CSS tricks to I call a function called dot CSS, and I passed to it.
+
+02:03:03.000 --> 02:03:08.000
+The name of the CSS style and trying to change and the value of trying to change it to.
+
+02:03:08.000 --> 02:03:13.000
+Right. Hopefully this is reminiscent of the kind of stuff that we did with our Tic Tac Toe game.
+
+02:03:13.000 --> 02:03:15.000
+Yeah.
+
+02:03:15.000 --> 02:03:19.000
+It turns out that to do this with just pure JavaScript.
+
+02:03:19.000 --> 02:03:31.000
+then I can actually do that this way instead. l dot style border with capital W here, equals, and then you just set the value as a string.
+
+02:03:31.000 --> 02:03:39.000
+Right. And so if if this was all you were doing with your custom JavaScript on the front end, why not do use this instead.
+
+02:03:39.000 --> 02:03:43.000
+That you don't even need to bring in the jQuery library.
+
+02:03:43.000 --> 02:03:45.000
+Okay.
+
+02:03:45.000 --> 02:03:48.000
+That's awfully tempting.
+
+02:03:48.000 --> 02:04:00.000
+Um, How about, oh I don't know, animation,
+
+02:04:00.000 --> 02:04:02.000
+in jQuery.
+
+02:04:02.000 --> 02:04:14.000
+I can fade a thing in so that it's slowly appears on the page. Here's how called the jQuery function, pass in your selector to that DOM elements, or just use the element itself in this case.
+
+02:04:14.000 --> 02:04:18.000
+call dot fade in
+
+02:04:18.000 --> 02:04:21.000
+the end.
+
+02:04:21.000 --> 02:04:26.000
+To do this, in
+
+02:04:26.000 --> 02:04:29.000
+JavaScript pure JavaScript.
+
+02:04:29.000 --> 02:04:33.000
+Now you need to be at IE version 10 or greater.
+
+02:04:33.000 --> 02:04:41.000
+In order for this trip trick to work, it'll work with Chrome and Firefox and all the rest.
+
+02:04:41.000 --> 02:04:49.000
+You've got one, two lines of JavaScript plus two lines of two styles to add to your CSS separately.
+
+02:04:49.000 --> 02:04:55.000
+But, this would achieve the same thing that this does.
+
+02:04:55.000 --> 02:04:59.000
+Without loading and jQuery, right, you have to have a transition.
+
+02:04:59.000 --> 02:05:18.000
+And if you tell how long the transition is going to take, that's the default value over here, perhaps, maybe it's one second, but whatever the transition time is for the Fade In, you'd need to have this CSS, and you would add the show.
+
+02:05:18.000 --> 02:05:28.000
+A class to your element, and then remove the hide from it.
+
+02:05:28.000 --> 02:05:39.000
+Right, let's deal with some other things. How about remove an event handler listener.
+
+02:05:39.000 --> 02:05:45.000
+I'm just searching hopefully this is coming up.
+
+02:05:45.000 --> 02:05:50.000
+Let's try it more
+
+02:05:50.000 --> 02:06:07.000
+general search events. Okay, so here's the jQuery, here's the pure JavaScript, you can see that the, do the equivalent thing in pure JavaScript is often quite a bit more complex.
+
+02:06:07.000 --> 02:06:11.000
+This is triggering events.
+
+02:06:11.000 --> 02:06:26.000
+Right. Window custom event, and type of window customer event, equals a function, then grab the event, make a new custom event, and so on.
+
+02:06:26.000 --> 02:06:37.000
+At the end, el dispatch event and so on, right, you can see that learning how to do all of this stuff is going to be quite a bit more to it, more to debug, whereas in jQuery it's super simple.
+
+02:06:37.000 --> 02:06:39.000
+Right.
+
+02:06:39.000 --> 02:06:44.000
+Give me the DOM element trigger this event, and then here's the value and so on.
+
+02:06:44.000 --> 02:06:55.000
+Yeah form submissions, we can look at the form elements of things.
+
+02:06:55.000 --> 02:07:05.000
+Wow, This is an alternative to a form submission. This is an Ajax thing we're going to learn more about this this week actually
+
+02:07:05.000 --> 02:07:14.000
+actually form submissions would be handled in a way that's very similar to what we just looked at for triggering events.
+
+02:07:14.000 --> 02:07:17.000
+Like so.
+
+02:07:17.000 --> 02:07:36.000
+But instead of you would actually this would be submit here triggers submit with some data. And so the Submit event is going to get fired when this dispatch event occurs, like that.
+
+02:07:36.000 --> 02:07:40.000
+Okay, good. I agree with, with David.
+
+02:07:40.000 --> 02:07:57.000
+Um, I. One time I was at a conference where the, the person who wrote jQuery, was there to present, and it was super fascinating, because of the effort around cross browser compatibility that was this big struggle of the day.
+
+02:07:57.000 --> 02:08:02.000
+And also it really did change the way that people were coding in JavaScript.
+
+02:08:02.000 --> 02:08:15.000
+By this kind of changeable syntax, every one of these functions, returns DOM elements, and you can just keep doing dot dot dot right super nice way to organize your code.
+
+02:08:15.000 --> 02:08:26.000
+Um, I think that, you know, if you're animating CSS styles, I think it's, it's quite difficult to do that. Outside of jQuery.
+
+02:08:26.000 --> 02:08:30.000
+Another one is removing event handlers.
+
+02:08:30.000 --> 02:08:46.000
+That, in pure JavaScript if you're removing an event handler. I mean we needed to do it even with our tech Tac Toe game that can be quite tricky, because you need to maintain an array of all of your event handlers as you create them.
+
+02:08:46.000 --> 02:08:59.000
+And then, from that reference that you've kept to the event handler then you can go back and remove it after the fact, it does add quite a bit of complexity to do things in a pure JavaScript way.
+
+02:08:59.000 --> 02:09:06.000
+In those cases, in particular.
+
+02:09:06.000 --> 02:09:15.000
+Okay, you know what I think I'm going to wrap it up there we are 10 minutes over I want to thank you for your time and attention.
+
+02:09:15.000 --> 02:09:25.000
+You know, hold my beer and watch this. Have a good time with your jQuery friend and stuff today. It's going to be a lot of fun learning it, I'm pretty sure this last question.
+
+02:09:25.000 --> 02:09:45.000
+Someone I'll get to that in a second. In fact to hang out if you've got extra questions will let everybody go, and then.
+
