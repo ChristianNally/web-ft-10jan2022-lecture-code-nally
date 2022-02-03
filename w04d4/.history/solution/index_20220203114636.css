@@ -8,7 +8,6 @@ body {
 
 nav {
  min-width: 230px;
- font-size: 1.6em;
 }
 
 #main {
@@ -25,7 +24,7 @@ nav {
 #main > aside {
   flex: 0 0 20vw;
   /* width: 15%; */
-  background: rgb(145, 31, 135);
+  background: beige;
 }
 
 #main > nav {
