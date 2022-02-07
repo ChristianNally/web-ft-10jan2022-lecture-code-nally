@@ -1,0 +1,40 @@
+00:28:30	Adrian To:	Is 'name' the primary key for this example?
+00:42:54	Jolin Zhang:	Can we write into SELECT id,day_id =21, question?
+00:43:52	tjphan:	can we see more nested queries
+00:58:38	Logan Woolf:	where does the term days come from in JOIN days ?
+00:58:57	Lindsay:	Could you go “by day_id” and then also alphabetical within question?
+00:59:06	Logan Woolf:	gotcha!
+01:03:49	Adrian To:	Yep. My Dad's a database administrator for PSN. The rabbit hole goes DEEEEEP.
+01:06:09	Jolin Zhang:	Why do we write Objectives.user_id = userID, why not Objectives.user_id
+01:06:16	Jolin Zhang:	It can also find it directly
+01:06:47	Chris Bell:	If it takes 10 minutes to pour a beer, that’s too long
+01:10:04	Christian Nally:	Maybe it can profitably take 10 minutes to make a cocktail?
+01:10:19	Christian Nally:	Or three cocktails?
+01:10:26	Christian Nally:	And one beer.
+01:17:12	Adrian To:	We won't be touching on relational algebra right?
+01:17:13	Casey Tite:	You could make one peeling bark
+01:18:14	Chris Bell:	Please no
+01:18:20	Matt Chisholm:	^^
+01:18:24	jiani:	^^^
+01:18:37	Muhammad Akbar:	^^^^
+01:19:02	Casey Tite:	hahaha
+01:19:53	Logan Woolf:	breakout on special relativity
+01:21:32	tjphan:	oh that’s why we write NOT NULL with primary keys?
+01:22:23	Adrian To:	Primary keys can never be null!
+01:25:30	Lee Pavelich:	OUTER needs LEFT or RIGHT, right?
+01:29:55	Casey Tite:	Could you put a round in the avg
+01:30:46	Jolin Zhang:	I should understand haha
+01:35:29	Gleb Shkut:	In which case Count(*) and Count(id) is gonna make any difference?
+01:36:22	Logan Woolf:	some fields might not be populated, would yield a lower count
+01:37:47	tjphan:	@Casey yeah we could ROUND(AVG(<x=column>), 0)
+01:43:35	Logan Woolf:	so functions can't ge used in the WHERE clause, must be used in HAVING  instead?
+01:47:03	Christian Nally:	https://app.diagrams.net/
+02:01:24	Logan Woolf:	DROP TABLE
+02:01:25	Casey Tite:	Drop table
+02:01:26	Lindsay:	DROP TABLE?
+02:04:24	Gleb Shkut:	thx
+02:04:24	Chris Rose:	Thank you!
+02:04:24	blakesartin:	thank you!
+02:04:26	Christian Girling:	Thanks Christian!
+02:04:27	Muhammad Akbar:	Thanks Nally
+02:04:28	tjphan:	thank you!

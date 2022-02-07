@@ -1,0 +1,2210 @@
+WEBVTT
+
+00:00:30.000 --> 00:00:34.000
+Good. So, your server is restarting. Right.
+
+00:00:34.000 --> 00:00:41.000
+And you guys are are fully capable of say, writing out your data to a JSON file.
+
+00:00:41.000 --> 00:00:46.000
+And then as the server reboots
+
+00:00:46.000 --> 00:00:51.000
+loading in that file and pulling in all of your data. Right.
+
+00:00:51.000 --> 00:01:13.000
+The problem with that approach is that it would be super slow and the file that you had written would be a massive number of bytes for the data that you're storing sequel servers have been around since the 70s since before the web, right, because people
+
+00:01:13.000 --> 00:01:32.000
+have been needing to store data and to optimize the storage of that data, since the beginning of thing of the all the internet, of all the computing, right, storing data efficiently, and being able to retrieve it reasonably quickly is a thing that requires
+
+00:01:32.000 --> 00:01:45.000
+purpose built code to do that right, if you want to work with websites that have millions of users or more millions of hits per day or more.
+
+00:01:45.000 --> 00:02:03.000
+Right, that's a lot of data, and you want to be in a position to be able to leverage the tools that make that kind of thing possible right database servers, enable scaling in ways that simple text file writing out would not do.
+
+00:02:03.000 --> 00:02:04.000
+Yeah.
+
+00:02:04.000 --> 00:02:17.000
+So today is kind of the day that you take a big step into the big leagues, right, being able to do this stuff is going to allow you to work with, with the gridiron and the high traffic and all that good stuff.
+
+00:02:17.000 --> 00:02:18.000
+Good.
+
+00:02:18.000 --> 00:02:28.000
+A Postgres is the rd BMS of choice that we're going to be using for the class there's a bunch of other ones, my sequel.
+
+00:02:28.000 --> 00:02:32.000
+Microsoft solutions and so on.
+
+00:02:32.000 --> 00:02:38.000
+Right, let's dig into some spots.
+
+00:02:38.000 --> 00:02:42.000
+Introduction to sequel.
+
+00:02:42.000 --> 00:02:58.000
+Why databases I've covered a bit of that database management systems relational databases in particular, this is where you store data in tables, kind of like a little miniature in Excel spreadsheet.
+
+00:02:58.000 --> 00:03:06.000
+Per widget per entity that you're dealing with tables, and then sequel Structured Query Language, get into that.
+
+00:03:06.000 --> 00:03:14.000
+It's a language for the storing and retrieval of data and management of data.
+
+00:03:14.000 --> 00:03:19.000
+Okay, why databases Excel is not a database Excel is a spreadsheet.
+
+00:03:19.000 --> 00:03:38.000
+Right, but it's very analogous to table based data storage systems, spreadsheets are awesome for their own right, right you can do amazing things with spreadsheets optimization calculations, machine learning, you know you can do you can program whatever
+
+00:03:38.000 --> 00:04:00.000
+into it. But the web, with its data storage abilities storage and retrieval is really based on a three tier architecture we've been working with two of those tears in depth, up to now in the boot camp and we're about to add the third of a three tier architecture.
+
+00:04:00.000 --> 00:04:18.000
+So the client tear the logic tier, where you've got your business logic right that's where the web server itself runs logic, that's going to serve the client stuff, but then behind that there's this data tier, where data is stored can be on a different
+
+00:04:18.000 --> 00:04:37.000
+computer all together, usually it's on the same land as the web server, so that it's fast to communicate between that server and the database server splitting it into different machines can be useful from a DevOps point of view, because you can make the
+
+00:04:37.000 --> 00:04:53.000
+database server be super highly performant because it needs to do this kind of stuff quickly right and by optimizing that machine, you end up with much faster queries, whereas the queries might be the rate determining step, ultimately for how fast that
+
+00:04:53.000 --> 00:05:12.000
+thing gets sent back to the user, and but you don't need to have, say, as fast a machine for the web backend itself, right, you might have, if you're doing load balancing you might have 10 web front end, sorry, Tim web web back end machines, and then
+
+00:05:12.000 --> 00:05:19.000
+one database server for all right, gives you options to split this out into another tier.
+
+00:05:19.000 --> 00:05:21.000
+Yeah.
+
+00:05:21.000 --> 00:05:23.000
+Okay.
+
+00:05:23.000 --> 00:05:35.000
+dB ms database management system software that provides efficient storage mechanism that allows organization manipulation protection of highly structured data.
+
+00:05:35.000 --> 00:05:48.000
+You'll often see rd BMS the art of RDVMS is relational database management systems and that's where you have tables that you're relating one table to another.
+
+00:05:48.000 --> 00:05:57.000
+dB MS is the more general acronym, and it includes things like Mongo DB which are not table based.
+
+00:05:57.000 --> 00:06:03.000
+Some folks get into MongoDB for their finals because they're interested in it
+
+00:06:03.000 --> 00:06:15.000
+asked me a bit about whether that's a good idea for your particular group when you come to that point. For now we're going to be dealing with rd BMS is table based stuff.
+
+00:06:15.000 --> 00:06:20.000
+So, with relational databases.
+
+00:06:20.000 --> 00:06:41.000
+As I've said, we're going to store the data in tables. Right. And this is where story at a table starts to make it feel like an Excel spreadsheet. Yeah, lots of businesses start out running their operation from something like a spreadsheet, and they treat
+
+00:06:41.000 --> 00:06:45.000
+it like a database that spreadsheet.
+
+00:06:45.000 --> 00:07:02.000
+You can even set up simple Google Forms that when people type something into a form it lands in a Google Sheet, as a spreadsheet. Yeah, so clearly tables are a natural way to store and retrieve data to keep it organized with different columns for different
+
+00:07:02.000 --> 00:07:04.000
+rows and so on.
+
+00:07:04.000 --> 00:07:11.000
+And you know that strategy is as old as the hills right older than me, right,
+
+00:07:11.000 --> 00:07:32.000
+that you can store rows in tables and get access to them. It's how sequel, The language is set up. It's how these already BMS is store the data behind the scenes, if you will, in binary files that are highly compacted.
+
+00:07:32.000 --> 00:07:35.000
+Yeah.
+
+00:07:35.000 --> 00:07:37.000
+Sam if you, if there are any questions.
+
+00:07:37.000 --> 00:07:41.000
+Today we're going to do a bit of a brain dump.
+
+00:07:41.000 --> 00:07:47.000
+Just like the matrix load you up with a bunch of sequel. Yeah, like Kung Fu.
+
+00:07:47.000 --> 00:07:50.000
+All right.
+
+00:07:50.000 --> 00:08:00.000
+sequel was initially called Structured Query Language developed by IBM in the early 70s sequel, you'll probably hear me, describing it that way.
+
+00:08:00.000 --> 00:08:03.000
+Other people might say SQL.
+
+00:08:03.000 --> 00:08:08.000
+It's a declarative language versus imperative.
+
+00:08:08.000 --> 00:08:17.000
+I always struggle with this distinction myself, if I say something like,
+
+00:08:17.000 --> 00:08:21.000
+Select star from table name.
+
+00:08:21.000 --> 00:08:26.000
+That seems to me to be an imperative statement but
+
+00:08:26.000 --> 00:08:29.000
+we can get into the details of that later.
+
+00:08:29.000 --> 00:08:42.000
+It says here that the language is grouped into two sections, there are in fact four sections. This isn't particularly important data Definition Language and data manipulation language, we're going to get into each of those pieces.
+
+00:08:42.000 --> 00:08:45.000
+Here's some data Definition Language.
+
+00:08:45.000 --> 00:08:53.000
+Here is an example sequel statement said the statements, got 41234 statements here.
+
+00:08:53.000 --> 00:08:59.000
+And this is defining how the data will be stored.
+
+00:08:59.000 --> 00:09:00.000
+Right.
+
+00:09:00.000 --> 00:09:04.000
+I'll talk about these drop tables in a minute.
+
+00:09:04.000 --> 00:09:15.000
+CREATE TABLE platforms with a column of ID that has these characteristics, a column called name which has these characteristics, a column called developer that etc etc.
+
+00:09:15.000 --> 00:09:21.000
+Right. Oh, create another table called games.
+
+00:09:21.000 --> 00:09:37.000
+And so, you know, old school video games whatever new school video games, and which platforms do they run on that type of data, you might build out a couple of tables like these.
+
+00:09:37.000 --> 00:09:43.000
+Here you're defining how the data will be stored CREATE TABLE such and such and so on.
+
+00:09:43.000 --> 00:09:55.000
+Here is some examples of how to manipulate those tables, right data manipulation language, also part of sequel, all of this stuff is sequel.
+
+00:09:55.000 --> 00:10:08.000
+Did people notice that some of it was capitalized. Right. Part of that is just standards, so that as you're reading it, it'll pop out at you like, Oh, This is sequel.
+
+00:10:08.000 --> 00:10:17.000
+Right. Doesn't look like JavaScript, which you have other another set of standards for. Right, doesn't mean that it strictly has to be capitalized.
+
+00:10:17.000 --> 00:10:25.000
+But I would recommend following the standards, just so that the code that you write is going to be like, Oh, that's sequel.
+
+00:10:25.000 --> 00:10:28.000
+Yeah.
+
+00:10:28.000 --> 00:10:37.000
+Here's some more sequel now we're manipulating the data, right. Check this out, insert into table name.
+
+00:10:37.000 --> 00:10:43.000
+Here are some columns, and the values are such and such and such and such.
+
+00:10:43.000 --> 00:10:55.000
+There might be more columns than this on the table I'm only inserting data into those three columns for each row that I make. So insert into makes a new row on that table.
+
+00:10:55.000 --> 00:11:04.000
+Here are three insert statements, where we get three rows by the time we're done. Finished.
+
+00:11:04.000 --> 00:11:26.000
+The CRUD operations right create, read, update, delete, they're all here, insert is how you create a row update is how you change your row that already exists, delete, is how you remove a row from a table, and select is how you read data out of a table,
+
+00:11:26.000 --> 00:11:32.000
+select, give me these rows.
+
+00:11:32.000 --> 00:11:33.000
+Good.
+
+00:11:33.000 --> 00:11:45.000
+So, we're going to get into the select statement in a little bit of detail but first, let's have a look at a little sequel inaction.
+
+00:11:45.000 --> 00:11:51.000
+I have a
+
+00:11:51.000 --> 00:11:59.000
+running database with learning objectives for the boot camp.
+
+00:11:59.000 --> 00:12:07.000
+So I'm going to connect to that database. So right now I'm on the command line right, this is my command line that you all know and love.
+
+00:12:07.000 --> 00:12:11.000
+I'm going to bring back a command on my history.
+
+00:12:11.000 --> 00:12:16.000
+That gives me a new command line.
+
+00:12:16.000 --> 00:12:25.000
+This will be a command line that allows me to interact with the database directly by typing. Yeah.
+
+00:12:25.000 --> 00:12:40.000
+So I go ahead and enter this, this is a set of options that I'm adding on to my command the command is p SQL, it's Postgres specific so this is going to start a Postgres client.
+
+00:12:40.000 --> 00:12:49.000
+By the way, all the talk that we've done about client server pairs for the web, right you got a web server your web client.
+
+00:12:49.000 --> 00:12:55.000
+Same deal with databases. We have a web server that's running in the background here.
+
+00:12:55.000 --> 00:13:01.000
+And now I'm about to start a client, which interacts with that particular database back end.
+
+00:13:01.000 --> 00:13:06.000
+So there we go, type in my super secret password which happens to be the default.
+
+00:13:06.000 --> 00:13:12.000
+And they're now I have a new command line.
+
+00:13:12.000 --> 00:13:20.000
+For those of you who attended my command line tips and tricks breakout which I highly recommend going back and watching again if you haven't.
+
+00:13:20.000 --> 00:13:39.000
+You'll notice, this has a lot of the same features right is it control out to clear the screen I can type a bunch of stuff here control a to go to the beginning control, he to go to the end, control a control K to delete the thing I can do things like,
+
+00:13:39.000 --> 00:13:43.000
+select star from.
+
+00:13:43.000 --> 00:14:03.000
+And by hitting the tab key. It did filename completion on the table name. This time, so I can, you know, do stuff like this, pull out four rows out of that thing up arrow to bring a command back from before, control, a and control, he to zip around on
+
+00:14:03.000 --> 00:14:04.000
+the thing.
+
+00:14:04.000 --> 00:14:10.000
+So all those tips and tricks that you may have been learning about command line up to now are going to help you going forward.
+
+00:14:10.000 --> 00:14:14.000
+It's all good.
+
+00:14:14.000 --> 00:14:28.000
+Right. So I have a database here that I'm connected to let me just show you that part of this. When I was connecting with this command on the command line to run the client to connect to the database.
+
+00:14:28.000 --> 00:14:31.000
+It was PSQL is the command.
+
+00:14:31.000 --> 00:14:42.000
+Minus dash use the username that I'm connecting with my client needs a username and password to allow that connection to occur.
+
+00:14:42.000 --> 00:14:59.000
+This one minus P is for the particular port that my database server happens to be running on if yours is running on the default of 5432, and then you won't need this.
+
+00:14:59.000 --> 00:15:01.000
+You can just leave it out.
+
+00:15:01.000 --> 00:15:04.000
+But, the final token.
+
+00:15:04.000 --> 00:15:12.000
+On this command line is the name of the database that I want to connect to.
+
+00:15:12.000 --> 00:15:19.000
+As I connect with the client, and so I'm connecting to a database called spot that I had made earlier.
+
+00:15:19.000 --> 00:15:29.000
+This is my name for my app that contains learning objectives for the boot camp right as a study tool.
+
+00:15:29.000 --> 00:15:35.000
+A tool you can use to practice for I don't know tech interviews or job interviews later on.
+
+00:15:35.000 --> 00:15:41.000
+That's the idea with it anyway so post grass, like that.
+
+00:15:41.000 --> 00:15:48.000
+And so here we are in the command line for this a client to a database.
+
+00:15:48.000 --> 00:15:55.000
+I can type question mark flips, can I know I can take back slash question mark.
+
+00:15:55.000 --> 00:16:03.000
+And I can get a bit of initial help with all the commands that are available to me here.
+
+00:16:03.000 --> 00:16:13.000
+There are two kinds of commands that you can put into this client into this command line.
+
+00:16:13.000 --> 00:16:18.000
+One of the sets of commands. Start with a backslash.
+
+00:16:18.000 --> 00:16:22.000
+So of all of the backslash commands, there are quite a few.
+
+00:16:22.000 --> 00:16:29.000
+This is enabling us to do all sorts of things with the tables all sorts of things with the databases.
+
+00:16:29.000 --> 00:16:45.000
+I can list things. There's lots of vocabulary in here that's Postgres specific one I'll just show you off the top here is backslash DT list lists the tables.
+
+00:16:45.000 --> 00:16:50.000
+Inside this particular database.
+
+00:16:50.000 --> 00:16:56.000
+The word relations is used within the Postgres world for tables.
+
+00:16:56.000 --> 00:17:04.000
+There's a lot of vocabulary going on within Postgres that doesn't quite match up with the rest of the rd BMS world.
+
+00:17:04.000 --> 00:17:14.000
+And you may need to be you know willing to learn a little Postgres specific vocabulary as we go.
+
+00:17:14.000 --> 00:17:26.000
+For example, users and Postgres are also called roles, which is weird because in other systems a role is a role in a user as a user, but in Postgres that have the same thing.
+
+00:17:26.000 --> 00:17:35.000
+But there, so I've done backslash DT shows me a listing of all the tables I happen to have defined for this database.
+
+00:17:35.000 --> 00:17:44.000
+I can show you a select sequel command. Select asterisk from objectives limit.
+
+00:17:44.000 --> 00:17:54.000
+Two is going to pull two rows, out of this table there.
+
+00:17:54.000 --> 00:17:58.000
+You can see here for this objectives table.
+
+00:17:58.000 --> 00:18:13.000
+I've got this funky ASCII representation of a table where there are so many columns that it's kind of bleeding around the edges of the thing, right, not lovely, but at least the data is there.
+
+00:18:13.000 --> 00:18:30.000
+Um, there are some tricks in Postgres for making this a little bit better. I can type backslash x. And now it says expanded display is now on. And so if I control l declare the screen up arrow twice bring back my old command hit enter.
+
+00:18:30.000 --> 00:18:43.000
+This expanded display changes that thing I had before, into a display where I've got column name and value for the first row, column name and value column name and value.
+
+00:18:43.000 --> 00:18:50.000
+And now I get to see all the column names and their values. And if this one happens to be extra long.
+
+00:18:50.000 --> 00:19:08.000
+You know, Soviet it scrolls around a bit, but for the most part I'm still able to see the values and where those values live column wise in that table, right, if you do backslash x, That's a toggle to decide to change those to display styles for your
+
+00:19:08.000 --> 00:19:10.000
+output.
+
+00:19:10.000 --> 00:19:13.000
+Okay, that's a bit about Postgres itself.
+
+00:19:13.000 --> 00:19:22.000
+Let's get back to a little bit more. Now, about sequel statements like this one.
+
+00:19:22.000 --> 00:19:26.000
+So
+
+00:19:26.000 --> 00:19:31.000
+here's the sequel statement, what this is one SQL statement now.
+
+00:19:31.000 --> 00:19:46.000
+It's got select column list with some extra functions, we'll talk about these aggregator functions later from a specific table. In this case I'm going to join that table with another table, the starting to get super complicated.
+
+00:19:46.000 --> 00:19:58.000
+Right. And this is how I'm going to join two tables together, then come some more clauses, a where clause to filter.
+
+00:19:58.000 --> 00:20:05.000
+A GROUP BY clause, which we'll talk about later and more tomorrow.
+
+00:20:05.000 --> 00:20:14.000
+I haven't clause which is related to the way functions work and order by as a way of sorting the data that comes back. So SELECT statements.
+
+00:20:14.000 --> 00:20:16.000
+There's a lot to them.
+
+00:20:16.000 --> 00:20:35.000
+And over the next few days. We're going to piece together, how each of these things can work to get some fairly complex logic built into how you extract data from a database.
+
+00:20:35.000 --> 00:20:41.000
+Okay, so to that end.
+
+00:20:41.000 --> 00:20:48.000
+Let's have a look through some of the notes that will go out as part of the sample data today.
+
+00:20:48.000 --> 00:20:58.000
+We've got basic sequel selection queries right so select, we're going to do some basics with that now.
+
+00:20:58.000 --> 00:21:02.000
+Um, for example.
+
+00:21:02.000 --> 00:21:17.000
+Here are some sample queries. And I'm using the particular database that I've got predefined to do with the learning objectives from boot camp web app that I've built.
+
+00:21:17.000 --> 00:21:21.000
+Um, so we've got.
+
+00:21:21.000 --> 00:21:25.000
+Simple queries, like this one.
+
+00:21:25.000 --> 00:21:39.000
+Here I'm limiting myself to two rows that come back, I can just change that to make it more rows right now you can see that I have lots, why don't I get rid of the LIMIT clause, and we'll see all the rows.
+
+00:21:39.000 --> 00:21:50.000
+I have to page through the data that I've got in here so far right, I see stuff about promises about CSS, lots of things. It should tell me by the time I get to the end of it, how many rows I have in here.
+
+00:21:50.000 --> 00:21:59.000
+There we go, hundred four rows. So I've got 104 separate learning objectives, I figure I'm about halfway in with the data entry on this.
+
+00:21:59.000 --> 00:22:05.000
+It's quite a few learning objectives you know you learn a lot through boot camp right.
+
+00:22:05.000 --> 00:22:16.000
+But I don't want to like have to get them all every time. Right. I'd like to be able to do some targeted selection of the rose out of my table.
+
+00:22:16.000 --> 00:22:27.000
+In particular, I might only be interested in the ID. And the question my learning objectives are stored as question answer Paris, right.
+
+00:22:27.000 --> 00:22:32.000
+So, if I do that this way now.
+
+00:22:32.000 --> 00:22:37.000
+Suddenly my data is a lot more readable because I'm not bringing back all the columns. Right.
+
+00:22:37.000 --> 00:22:45.000
+When I do it this way, this is a comma separated list of columns that I'm interested in looking at.
+
+00:22:45.000 --> 00:22:48.000
+So, you can see right away.
+
+00:22:48.000 --> 00:22:54.000
+Right, how do I establish a relationship between tables, there's going to be an answer column that contains a clue as to how to do that.
+
+00:22:54.000 --> 00:23:01.000
+What is the foreign key, what is any rd, we'll talk a little bit about that today.
+
+00:23:01.000 --> 00:23:09.000
+These other learning objectives are to do with CSS stuff, probably not what I was looking for.
+
+00:23:09.000 --> 00:23:13.000
+Today, we're not doing CSS things are we.
+
+00:23:13.000 --> 00:23:19.000
+So yeah, I can patch Nate through the list of results let's try this again.
+
+00:23:19.000 --> 00:23:27.000
+Select ID and question from objectives.
+
+00:23:27.000 --> 00:23:35.000
+Let's see here. I have Id let me also include day ID.
+
+00:23:35.000 --> 00:23:41.000
+Okay, so I've had a column on my rose called day underscore ID.
+
+00:23:41.000 --> 00:23:52.000
+That's telling me that these rows are all learning objectives that are specific to a certain day of boot camp.
+
+00:23:52.000 --> 00:24:09.000
+Okay, so now I can start to see, oh, there's more stuff down here and have a look at this day 21 seems to be today, because that's the stuff of today, right, what is the database.
+
+00:24:09.000 --> 00:24:13.000
+What is the where clause, what is the joint cause what is a query and so on.
+
+00:24:13.000 --> 00:24:15.000
+So day 21.
+
+00:24:15.000 --> 00:24:19.000
+Let's just go after those.
+
+00:24:19.000 --> 00:24:22.000
+Select ID day ID question.
+
+00:24:22.000 --> 00:24:33.000
+Sorry, select ID and daddy and question from objectives were day ID equals 21.
+
+00:24:33.000 --> 00:24:34.000
+There.
+
+00:24:34.000 --> 00:24:38.000
+So I've got 10 learning objectives from today.
+
+00:24:38.000 --> 00:24:48.000
+What is the database. What is a where clause. What is the joint clause and so on. Right How do I insert rows into a table and so on.
+
+00:24:48.000 --> 00:25:05.000
+This kind of a query is very common, right, you have a whole raft of data, and you want to find only the database, the data that satisfies certain criteria, right, you're filtering down a very long list into a much shorter list that has the stuff that
+
+00:25:05.000 --> 00:25:16.000
+you want, right, this is how, if you go to an e commerce store, with a database of products in it, those products are going to be categorized.
+
+00:25:16.000 --> 00:25:31.000
+And so, you know, dollars to doughnuts there's going to be a select query, like this, made of some form of table based already BMS that saying yeah give me all the products that match this category sort them by price.
+
+00:25:31.000 --> 00:25:40.000
+Yeah, we're going to get into how to do all those types of things. And so every time you see that there's a query that's happening.
+
+00:25:40.000 --> 00:25:49.000
+Um, any questions in what you're seeing so far. Pretty straightforward ultimately right john asks, Can we write into.
+
+00:25:49.000 --> 00:25:54.000
+Select ID day ID equal 21 comic question. Nope.
+
+00:25:54.000 --> 00:26:04.000
+syntactically not permitted at least not with this particular rd BMS, maybe there's some that would do that I think that breaks sequel syntax.
+
+00:26:04.000 --> 00:26:08.000
+Yeah, you need a where clause.
+
+00:26:08.000 --> 00:26:19.000
+Yeah, clauses on your sequel or how sequel works. If I go back to here, and I show you this more complex sequel statement where it's got things that I'm going to plug into all this stuff.
+
+00:26:19.000 --> 00:26:22.000
+Each one of these things is a clause.
+
+00:26:22.000 --> 00:26:28.000
+On my SELECT statement there's only one SELECT statement here. By the way, check it out, semi colon at the end.
+
+00:26:28.000 --> 00:26:29.000
+Yeah.
+
+00:26:29.000 --> 00:26:34.000
+Who's firmly on Team semi colon, by the way, with their JavaScript Yes. Good.
+
+00:26:34.000 --> 00:26:41.000
+Okay. Yeah, do it. Go Team semi colon. All right.
+
+00:26:41.000 --> 00:26:54.000
+Yes. Okay, one point about this very long sequel statement that I want to make about the client. So here's the client with the command line, right.
+
+00:26:54.000 --> 00:27:04.000
+This one lines worth of sequel is going to get old pretty quick. Right. I would like to be able to
+
+00:27:04.000 --> 00:27:17.000
+connect with this sequel in a way that allows me to have multiple lines on a single a query multiple lines for a single query.
+
+00:27:17.000 --> 00:27:32.000
+So, watch hold my beer and watch this right, if I do select star from objectives, but I don't put a semi colon.
+
+00:27:32.000 --> 00:27:37.000
+Look at how my props changed ever so subtly from here to here.
+
+00:27:37.000 --> 00:27:43.000
+This is an equal sign next to my hashtag This is a minus sign next to my hashtag.
+
+00:27:43.000 --> 00:27:46.000
+This is the clients way of saying to me.
+
+00:27:46.000 --> 00:27:52.000
+You didn't put a semi colon. I think you might have more to say here.
+
+00:27:52.000 --> 00:28:01.000
+And so I'm going to write, where de underscore ID equals 21 semi colon. Now it knows I'm finished.
+
+00:28:01.000 --> 00:28:02.000
+The line.
+
+00:28:02.000 --> 00:28:08.000
+And so that, two lines is actually one query.
+
+00:28:08.000 --> 00:28:10.000
+So that's how that holds together.
+
+00:28:10.000 --> 00:28:16.000
+I did select star so it gave me all my columns.
+
+00:28:16.000 --> 00:28:20.000
+Maybe I want to turn on my display to be nicer. Okay.
+
+00:28:20.000 --> 00:28:27.000
+Bring back my thing, I up arrow twice it brought me back the whole query, so that's nice.
+
+00:28:27.000 --> 00:28:29.000
+They're here my rose.
+
+00:28:29.000 --> 00:28:34.000
+What is the database, a database is a collection of tables.
+
+00:28:34.000 --> 00:28:44.000
+The collection is typically used as a set a connection to a database is granted via username and password,
+
+00:28:44.000 --> 00:28:48.000
+and so on.
+
+00:28:48.000 --> 00:28:57.000
+What is the where clause, now you know that write a query can filter or restrict information that results via a where clause.
+
+00:28:57.000 --> 00:29:01.000
+Great.
+
+00:29:01.000 --> 00:29:05.000
+I'm
+
+00:29:05.000 --> 00:29:12.000
+very good. Let's get back to some more sample queries.
+
+00:29:12.000 --> 00:29:14.000
+Here we see a where clause. Right.
+
+00:29:14.000 --> 00:29:23.000
+In fact, let's try this actual query. I'm getting question and answer from objectives were type equals performance.
+
+00:29:23.000 --> 00:29:29.000
+So if we look at all of our data.
+
+00:29:29.000 --> 00:29:43.000
+You can see that I've got types of queries of learning objectives, learning objectives and performance objectives performance objectives are intended for code snippets, so that we can make cheat sheets really easily.
+
+00:29:43.000 --> 00:29:45.000
+Right.
+
+00:29:45.000 --> 00:30:03.000
+And so instead of it, like for a learning objective, we have like a double us style question with why or what are those types of learning with performance objectives, it's how how do I insert rows into a table and so it gives you a, a sample code for
+
+00:30:03.000 --> 00:30:04.000
+that.
+
+00:30:04.000 --> 00:30:18.000
+So I can do that I can go, select star from objectives, where day ID equals this, and type equals.
+
+00:30:18.000 --> 00:30:20.000
+Learning.
+
+00:30:20.000 --> 00:30:23.000
+Now I'm only going to get back.
+
+00:30:23.000 --> 00:30:31.000
+And so let's actually let's let's only go for question and answer
+
+00:30:31.000 --> 00:30:38.000
+this, and I'd like to actually turn off that fancy thing there.
+
+00:30:38.000 --> 00:30:45.000
+So, these are the learning objectives, the ones that don't have code snippets. Yeah.
+
+00:30:45.000 --> 00:30:56.000
+Whereas I can redo this objective and go back here and go performance, again I'm only dealing with the ones from today from today's day.
+
+00:30:56.000 --> 00:31:01.000
+Now I'm getting the performance objectives.
+
+00:31:01.000 --> 00:31:05.000
+How do I insert rows into a table.
+
+00:31:05.000 --> 00:31:07.000
+How do I create a table.
+
+00:31:07.000 --> 00:31:11.000
+There's some sequel for how to create a table, little code snippet for it will do a bit of that later.
+
+00:31:11.000 --> 00:31:16.000
+We'll do a bit of that later.
+
+00:31:16.000 --> 00:31:25.000
+Ah, Good. TTS Can we see more nested queries.
+
+00:31:25.000 --> 00:31:33.000
+I don't know that we're going to get as fancy as nested queries a select within a select, but you can certainly see more.
+
+00:31:33.000 --> 00:31:41.000
+More clauses we're going to start attaching more and more clauses source equal to start with because one single sequel statement can get quite complex.
+
+00:31:41.000 --> 00:31:54.000
+So that was like a where clause, with a Boolean operator inside the where clause. Right. That's what I was doing here with the end.
+
+00:31:54.000 --> 00:31:56.000
+Okay.
+
+00:31:56.000 --> 00:32:03.000
+Join Now, this is super interesting.
+
+00:32:03.000 --> 00:32:14.000
+Because, join is a thing that allows you to connect two tables together.
+
+00:32:14.000 --> 00:32:22.000
+And so, I need to actually start talking about why we would want to join two tables together.
+
+00:32:22.000 --> 00:32:30.000
+And this database actually has one opportunity to do exactly that. Here's my list of tables again.
+
+00:32:30.000 --> 00:32:44.000
+I've got days and objectives users table understandings is the self reported extent to which a single user understands the learning objective.
+
+00:32:44.000 --> 00:32:56.000
+But let's have a look in what's going on in some of these tables. So we've got Select star from days. Let's go for a limit of three.
+
+00:32:56.000 --> 00:33:01.000
+Just to show some sample data coming out of the days table.
+
+00:33:01.000 --> 00:33:02.000
+Okay.
+
+00:33:02.000 --> 00:33:22.000
+Inside the days table we have the mnemonic for that row right woad five four week eight day five. And then we have a day description week a day five typed out in full, we've got both representations of that day.
+
+00:33:22.000 --> 00:33:29.000
+We also have a day ID, you'll remember before I was using day ID equal 21.
+
+00:33:29.000 --> 00:33:33.000
+Let's, let's do that here.
+
+00:33:33.000 --> 00:33:45.000
+Where day or sorry, Dave day ID is 21 I have to do it this way actually here, here's, here's row 21 out of the day table happens to be week five day one.
+
+00:33:45.000 --> 00:33:59.000
+And here it is written out week five day one. The title of that lecture is sequel intro. Okay, here we're seeing a row where we get a little bit more of the data in more detail.
+
+00:33:59.000 --> 00:34:04.000
+So, that's the entirety of the row coming out of the days table.
+
+00:34:04.000 --> 00:34:06.000
+Right.
+
+00:34:06.000 --> 00:34:10.000
+If I go back to hear.
+
+00:34:10.000 --> 00:34:14.000
+Where I pick out today's performance objectives.
+
+00:34:14.000 --> 00:34:24.000
+In fact, okay let's go back, get the table row out of days. And then this one I want here.
+
+00:34:24.000 --> 00:34:30.000
+Let's go for ID and question, and not the answer.
+
+00:34:30.000 --> 00:34:36.000
+Like so. Okay, here's a couple of rows from today's learning objectives.
+
+00:34:36.000 --> 00:34:39.000
+Out of the objectives table.
+
+00:34:39.000 --> 00:34:42.000
+I'm missing one piece of info I want to hear.
+
+00:34:42.000 --> 00:34:46.000
+Day underscore ID as well.
+
+00:34:46.000 --> 00:35:15.000
+Okay, now we can sort of see how rose in the objectives table are related to rose in the days table, because, yeah, these two rows happen to have their day underscore ID value set to 21 that value 21 matches the ID value in the first table.
+
+00:35:15.000 --> 00:35:17.000
+21.
+
+00:35:17.000 --> 00:35:26.000
+Only one row here in the days table that corresponds to this collection now that we're making. Right.
+
+00:35:26.000 --> 00:35:36.000
+But there's two rows in this subset that I've picked out with this SELECT statement. Right.
+
+00:35:36.000 --> 00:35:57.000
+But what if, when I get my question. Out of the data table for learning objectives. I also want to show, not the day as a number, because the numbers not meaningful to people, maybe I want to show like the full text description of that day.
+
+00:35:57.000 --> 00:36:00.000
+Here's where joins enter it.
+
+00:36:00.000 --> 00:36:15.000
+They allow us to query from this table, and this table. Simultaneously, and build an output table that's a combination of two tables.
+
+00:36:15.000 --> 00:36:19.000
+This is where stuff starts to get super powerful.
+
+00:36:19.000 --> 00:36:24.000
+So let's try this actually select.
+
+00:36:24.000 --> 00:36:35.000
+And what we'll do is select day, description, and question
+
+00:36:35.000 --> 00:36:40.000
+from objectives.
+
+00:36:40.000 --> 00:36:45.000
+Join
+
+00:36:45.000 --> 00:36:59.000
+days on it right. See how complex this is we're about to specify the condition where rows in one of the tables match rows of the other table.
+
+00:36:59.000 --> 00:37:05.000
+So join days on
+
+00:37:05.000 --> 00:37:20.000
+objective objectives.de underscore ID equals days.id.
+
+00:37:20.000 --> 00:37:23.000
+A. Are we done.
+
+00:37:23.000 --> 00:37:29.000
+We need a where clause. So this doesn't get too ridiculous because we would do it with the whole of the boot camp.
+
+00:37:29.000 --> 00:37:35.000
+I want where de underscore ID equals 21.
+
+00:37:35.000 --> 00:37:37.000
+And semicolon.
+
+00:37:37.000 --> 00:37:42.000
+Okay, there we go, a slightly more complex sequel statement.
+
+00:37:42.000 --> 00:37:43.000
+I'm sure you'll agree.
+
+00:37:43.000 --> 00:37:52.000
+When I hit Enter on this thing. We may or may not get an error, because you know, Sometimes I make mistakes. So let's try it.
+
+00:37:52.000 --> 00:37:59.000
+Oh, works this time we're okay is a particular kind of error which I'm going to show you next.
+
+00:37:59.000 --> 00:38:02.000
+But have a look at what it did.
+
+00:38:02.000 --> 00:38:09.000
+The output of this query is a table.
+
+00:38:09.000 --> 00:38:17.000
+Right, just like we had before, with a column and values underneath it and another column and values underneath it.
+
+00:38:17.000 --> 00:38:24.000
+Thing is, This table doesn't exist in the database.
+
+00:38:24.000 --> 00:38:32.000
+It's created on the fly, because of a particular kind of
+
+00:38:32.000 --> 00:38:35.000
+analysis that I'm doing.
+
+00:38:35.000 --> 00:38:45.000
+Basically, I want to pluck data from a variety of tables and sequel allows me to do that by doing this joint stuff.
+
+00:38:45.000 --> 00:38:54.000
+In particular, for every row where I have a question that corresponds to my learning objective for today.
+
+00:38:54.000 --> 00:39:01.000
+I've got the full text description of the particular day that it's on.
+
+00:39:01.000 --> 00:39:19.000
+Right. And so this might be more useful if I did something like where day ID equals 21, or day ID equals 22 or day ID equals 23.
+
+00:39:19.000 --> 00:39:22.000
+Okay, now I'm going to get three days worth of learning objectives.
+
+00:39:22.000 --> 00:39:27.000
+Whoops.
+
+00:39:27.000 --> 00:39:32.000
+Forgot my equal sign.
+
+00:39:32.000 --> 00:39:36.000
+I was kind of cool. Let's do that again, actually.
+
+00:39:36.000 --> 00:39:38.000
+Okay.
+
+00:39:38.000 --> 00:39:48.000
+Our first error message from sequel, let's celebrate this, right, because you all know by now that error messages are not a thing to be feared, but are in fact, super useful.
+
+00:39:48.000 --> 00:39:51.000
+Right. Okay, syntax error.
+
+00:39:51.000 --> 00:39:54.000
+That makes sense right this is my sequel thing I'm trying to do.
+
+00:39:54.000 --> 00:40:06.000
+It's telling me that I have a syntax error Mere 23 okay so I go out go out and I'm looking for 2323 23. Oh, there's only three there. Do I have a syntax error there clearly I dropped my equal sign, forgot it.
+
+00:40:06.000 --> 00:40:23.000
+Oh yeah, okay. Up arrow go back fix it. No problem, right. So, SQL has its own error messages that are distinct from JavaScript error messages. So, you're going to get into this, I promise you you'll make some syntax errors in your sequel, right, and
+
+00:40:23.000 --> 00:40:25.000
+it'll be the same sort of thing.
+
+00:40:25.000 --> 00:40:36.000
+This is where you're going to debug and solve this stuff is to try typing a query into the client directly see what kind of does it work. Right.
+
+00:40:36.000 --> 00:40:43.000
+Okay, so here's three days worth of learning objectives
+
+00:40:43.000 --> 00:40:50.000
+week five day one week five day two, and we provide a three. Oh, they're out of order.
+
+00:40:50.000 --> 00:40:53.000
+But they're here.
+
+00:40:53.000 --> 00:40:54.000
+Okay.
+
+00:40:54.000 --> 00:40:56.000
+Why don't we order them.
+
+00:40:56.000 --> 00:41:03.000
+By the way, that's just adding another clause to our sequel order by.
+
+00:41:03.000 --> 00:41:08.000
+We could go for j underscore ID.
+
+00:41:08.000 --> 00:41:10.000
+There.
+
+00:41:10.000 --> 00:41:25.000
+Now my data is ordered by day, week five day one group here, then we five day too few of those and then we five day three similar over here. And so now we're starting to get like the complete set of database.
+
+00:41:25.000 --> 00:41:27.000
+Learning Objectives.
+
+00:41:27.000 --> 00:41:31.000
+Yeah.
+
+00:41:31.000 --> 00:41:33.000
+Oh.
+
+00:41:33.000 --> 00:41:42.000
+Logan asks, Where does the term days come from enjoying days. So join days is here.
+
+00:41:42.000 --> 00:41:45.000
+This is a table.
+
+00:41:45.000 --> 00:41:49.000
+I have a days table.
+
+00:41:49.000 --> 00:41:53.000
+And I have objectives table.
+
+00:41:53.000 --> 00:42:01.000
+And so for this particular sequel statement with the join it needs one main table and then I joined on the other table as well. Yeah.
+
+00:42:01.000 --> 00:42:09.000
+Lindsay asks, could you go by day ID, and then also alphabetically within question. Absolutely.
+
+00:42:09.000 --> 00:42:15.000
+You can do multiple columns for your order.
+
+00:42:15.000 --> 00:42:36.000
+Let's do precisely what you have asked here as a sample Lindsay, if I go up, order by day ID, comma, question that now allows me to do alphabetically within day right this, so happens to have sorted my performance objectives first, because the question
+
+00:42:36.000 --> 00:42:39.000
+starts with h here. Right.
+
+00:42:39.000 --> 00:42:49.000
+Turns out I have another column for precisely this purpose, if I go back to my table.
+
+00:42:49.000 --> 00:42:56.000
+If I do select star from objectives limit, one, this is going to show me a sample row.
+
+00:42:56.000 --> 00:43:12.000
+You can see I've got columns iD iD type question, answer and sort the sort column is there, because some objectives depend on the knowledge of knowing the one prior.
+
+00:43:12.000 --> 00:43:13.000
+Right.
+
+00:43:13.000 --> 00:43:27.000
+And so, if I go back to my larger sequel statement here, and sort, not by question, but instead by sword, like this.
+
+00:43:27.000 --> 00:43:30.000
+Now, I get.
+
+00:43:30.000 --> 00:43:34.000
+What is it table, followed by, how do I create a table.
+
+00:43:34.000 --> 00:43:40.000
+Right, that's just a nice natural way to go through your learning objectives. I hope you'll agree.
+
+00:43:40.000 --> 00:43:54.000
+Third learning objective, what is the database. Right. Well, the reason that I did that in that order was because if I show the answers as well.
+
+00:43:54.000 --> 00:43:58.000
+You can see that.
+
+00:43:58.000 --> 00:44:01.000
+Let me turn this on lips with the better view.
+
+00:44:01.000 --> 00:44:19.000
+With the better view. What is it table, a table is this, how do I create a table, this way. What is a database you think of that as maybe a more fundamental question, but I actually used table in the definition, and I didn't want to be circular about
+
+00:44:19.000 --> 00:44:20.000
+it.
+
+00:44:20.000 --> 00:44:33.000
+So given that you know these things now you can read this definition and learn. Right. Every objective should build on the prior ones. Right. And so, yeah, there's a bit of strategy and how the database is constructed.
+
+00:44:33.000 --> 00:44:36.000
+I have this column where we can sort on stuff.
+
+00:44:36.000 --> 00:44:43.000
+And before you know it, you're going to have like by default, automated lists of learning objectives that are super useful for like breezing through the material.
+
+00:44:43.000 --> 00:44:46.000
+Yeah.
+
+00:44:46.000 --> 00:45:01.000
+Cool. By the way, all this is going to be included as part of the sample code that, like, is being given out as part of class, so you'll be able to run this thing, and look through it as the code evolves.
+
+00:45:01.000 --> 00:45:05.000
+Very good.
+
+00:45:05.000 --> 00:45:12.000
+Does it matter which tables that we joined first as the order matter.
+
+00:45:12.000 --> 00:45:31.000
+Table Table, or, you know, I hesitate to say no, it won't matter what the query that comes out of the end of the day, but it may be, depending on how each table is structured and which one you're, you're connecting to more often, there may be some speed
+
+00:45:31.000 --> 00:45:36.000
+implications in how fast the query runs.
+
+00:45:36.000 --> 00:45:46.000
+So, while no it does not matter which one is the primary and which one is the secondary in terms of the join.
+
+00:45:46.000 --> 00:45:59.000
+It would be interesting to do some benchmarking for those two types of queries. Right. And by the way, we're here to teach you to be a full stack developer
+
+00:45:59.000 --> 00:46:03.000
+database administrator is by itself.
+
+00:46:03.000 --> 00:46:05.000
+A job title.
+
+00:46:05.000 --> 00:46:14.000
+Right. That happens a lot. Within boot camp right, it's like as we go through these, these three months worth of learning and learning a lot, every day.
+
+00:46:14.000 --> 00:46:26.000
+Right. It's like a complete job description will just whizzed by, right, you can enjoy the sound of the job descriptions as they fly by, you know, like that right so database administrator.
+
+00:46:26.000 --> 00:46:44.000
+You can get so far down the rabbit hole of, of how to optimally run database storage and retrieval, that that's your job. Right. And so if you're really into this week, you know, maybe you're going to be like yeah I'm gonna go all about that right.
+
+00:46:44.000 --> 00:46:49.000
+Cool, yeah there's lots of, you know when you've got millions and millions of rows.
+
+00:46:49.000 --> 00:46:53.000
+That's a lot of optimizing to do. Yeah.
+
+00:46:53.000 --> 00:46:59.000
+We're not so much about trying to get you to optimize your queries at this stage of boot camp.
+
+00:46:59.000 --> 00:47:11.000
+But if you're interested in this sort of stuff. I highly recommend doing queries and seeing how long they take and running benchmarks and see what you can learn from that.
+
+00:47:11.000 --> 00:47:14.000
+There's an old saw and computing that goes like this.
+
+00:47:14.000 --> 00:47:18.000
+Don't optimize too soon.
+
+00:47:18.000 --> 00:47:30.000
+Right. The whole point with having a separate sequel database server is that it's actually super good at optimizing even if you're not.
+
+00:47:30.000 --> 00:47:46.000
+So, you may be like racking your brain about how to make this query faster and meanwhile the sequel server would have done that for you anyway. Right, but far better to actually do some benchmarks to see what your rate determining step is, if it's not
+
+00:47:46.000 --> 00:47:51.000
+the database query, don't worry about it.
+
+00:47:51.000 --> 00:47:59.000
+Good. Anyway, that's just like a hot pro tip for people who are learning how to allocate their time wisely. Yeah.
+
+00:47:59.000 --> 00:48:00.000
+Okay.
+
+00:48:00.000 --> 00:48:11.000
+I'm very good, you know, we're starting to make some complex sequel statements, even on day one of learning what sequel is like right with join tables.
+
+00:48:11.000 --> 00:48:16.000
+So if we go back to the slides here.
+
+00:48:16.000 --> 00:48:16.000
+joins.
+
+00:48:16.000 --> 00:48:31.000
+joins us when we come back from break, we'll talk about how there are actually different kinds of joins that you can do, depending on the kind of analysis that you're trying to do with the data that you have.
+
+00:48:31.000 --> 00:48:45.000
+Yeah, I can see that people's eyes are starting to glaze over. And so I think it's time to actually like take a break, right, go you know dance around the room, turn your video off, or leave it on you know whatever up to you.
+
+00:48:45.000 --> 00:48:49.000
+Were in focus mode so only I could see you dancing if you do that.
+
+00:48:49.000 --> 00:48:57.000
+Take a break, take a real break, come back with fresh minds and.
+
+00:48:57.000 --> 00:48:58.000
+Right.
+
+00:48:58.000 --> 00:49:06.000
+10 minutes.
+
+00:49:06.000 --> 00:49:15.000
+Gonna. I was gonna take beer for the thing, none, we need a beer one.
+
+00:49:15.000 --> 00:49:45.000
+Okay, seen 10 minutes.
+
+00:59:11.000 --> 00:59:17.000
+One. Welcome back, everybody.
+
+00:59:17.000 --> 00:59:22.000
+Hope you took a real break.
+
+00:59:22.000 --> 00:59:27.000
+Clear out some of the brain fog
+
+00:59:27.000 --> 00:59:33.000
+questions and what we've seen so far.
+
+00:59:33.000 --> 00:59:50.000
+Anybody want to submit videos for candidates to be used for the 10 minute breaks
+
+00:59:50.000 --> 01:00:07.000
+And you would like to get rose from those joins that end up looking something like this.
+
+01:00:07.000 --> 01:00:10.000
+Sorry, just one quick question we want to go right ahead.
+
+01:00:10.000 --> 01:00:15.000
+We won't be touching on relational algebra. All right.
+
+01:00:15.000 --> 01:00:21.000
+Um,
+
+01:00:21.000 --> 01:00:24.000
+You know, I'm not sure what you mean.
+
+01:00:24.000 --> 01:00:30.000
+Oh, okay, let's let's hear, just a little bit of detail about it, because I suspect we're going to hint at it.
+
+01:00:30.000 --> 01:00:34.000
+Even yeah yeah so can you give me an example.
+
+01:00:34.000 --> 01:00:43.000
+Basically you talking about joins and this and that and whatnot. There is a type of, if you go to a database courses in university higher level.
+
+01:00:43.000 --> 01:00:57.000
+They talk about a lot of these things as algebra, so they have pie as projection, sigma is the selection kind of thing. And yeah, basically just algebra for
+
+01:00:57.000 --> 01:01:11.000
+sequel, but I feel like that might be more confusing here then. Well, it's a set of language that's going to be useful so that you can make mathematics style proofs about completeness of your results and whatnot.
+
+01:01:11.000 --> 01:01:29.000
+Right. Whereas I think a lot of that sort of stuff, is basically just intuitive to most people in most cases Yeah, I like okay, don't get me wrong, I have a background in theoretical and experimental physics both right and I'm like all over that stuff,
+
+01:01:29.000 --> 01:01:40.000
+right, but the one great value about the approach that we take here at boot camp is is super vocational.
+
+01:01:40.000 --> 01:01:47.000
+Yeah, it's not about the proofs it's about the doing the proof is in the pudding or here. Yeah.
+
+01:01:47.000 --> 01:02:08.000
+So, yeah, yeah absolutely no no I mean to your to your point, right. I think that, you know, like a graphic like this one is clearly geometric like algebraic geometry made manifest, right, we just don't have to use those types of phrases over here right
+
+01:02:08.000 --> 01:02:22.000
+get the end result that we want right. Okay, very good. Don't get me wrong, I love that stuff right, it's like you know I could, I could show you in one page of algebra how to derive special relativity, from one thought experiment right if you're into
+
+01:02:22.000 --> 01:02:28.000
+that, let's talk okay but that's just it's not about what we're doing today, that's all.
+
+01:02:28.000 --> 01:02:37.000
+Cool. All right. Um, so, joins.
+
+01:02:37.000 --> 01:02:39.000
+Here's the punch line.
+
+01:02:39.000 --> 01:02:59.000
+Okay, there's a bunch of syntax in here about how to do any particular kind of join. What I really want you to take away at this point is just this, that there's different kinds of joins, and that there's one main fact that separates one kind of joined
+
+01:02:59.000 --> 01:03:11.000
+from another kind of joint, and it's this which rose from each table are going to survive into the result set.
+
+01:03:11.000 --> 01:03:26.000
+And what it depends on is whether or not the value that you're doing your join on that sorry the logic of your join here.
+
+01:03:26.000 --> 01:03:34.000
+What do you do with no values.
+
+01:03:34.000 --> 01:03:36.000
+I was gonna say what do you do with a drunken sailor.
+
+01:03:36.000 --> 01:03:39.000
+Not this kind of database.
+
+01:03:39.000 --> 01:03:44.000
+What do you do with no values for objectives day ID.
+
+01:03:44.000 --> 01:03:48.000
+What if this is no, and this has a value.
+
+01:03:48.000 --> 01:03:52.000
+I mean in in a JavaScript sense you'd say they're not equal, I'm not going to show those roles.
+
+01:03:52.000 --> 01:03:55.000
+Right.
+
+01:03:55.000 --> 01:03:59.000
+Um, and that's like the default.
+
+01:03:59.000 --> 01:04:10.000
+Actually, but if you're interested and This often happens when you're doing database analysis stuff.
+
+01:04:10.000 --> 01:04:24.000
+You want there to be more data that you can then filter out later if you have to, right so on your first query for a very large set of data, you might want a first pass of the data.
+
+01:04:24.000 --> 01:04:26.000
+And so if there are no values.
+
+01:04:26.000 --> 01:04:37.000
+Then give me all of them even if they're no, then at least I can see them, and then I can deal with them appropriately and filter them out on a second pass, that type of thing.
+
+01:04:37.000 --> 01:04:44.000
+So at least you can imagine the need for different kinds of joins. Right.
+
+01:04:44.000 --> 01:05:02.000
+For the one that we're doing here. The default is an inner join, and I recommend actually typing that into your query as well, because yeah it was there by default, but this is just more explicit doesn't change the behavior in any way.
+
+01:05:02.000 --> 01:05:12.000
+It just makes the syntax clearer, right, I'm going to get my same results I'm doing an Inner Join now Right. Okay, so let's look at the different types of joins here's an inner join.
+
+01:05:12.000 --> 01:05:22.000
+And it's kind of what you were thinking before without even thinking too hard about it, you're like, it's the event in the Venn diagram way of thinking about tables.
+
+01:05:22.000 --> 01:05:37.000
+It's the rows from a that match this condition, and the rows from be that also match that condition, and none of the rows that have no values for either of the two things that you're comparing to be equal.
+
+01:05:37.000 --> 01:05:44.000
+Right. And so an inner join this is what an inner join does.
+
+01:05:44.000 --> 01:05:49.000
+If you have a left join,
+
+01:05:49.000 --> 01:05:55.000
+then it's going to include rose from a
+
+01:05:55.000 --> 01:06:01.000
+that having a dot key value of know in the men's as well. Right.
+
+01:06:01.000 --> 01:06:19.000
+That's a different set of logic that you're doing if you're doing a left join left because it's the table. A is the base table and not the table that you're joining right so here we have from a left join be
+
+01:06:19.000 --> 01:06:25.000
+the word left means you're imagining a Venn diagram between A and B and A is on the left.
+
+01:06:25.000 --> 01:06:28.000
+That's all
+
+01:06:28.000 --> 01:06:45.000
+right, join, it's grabbing the one that's joined and not the base table. Right, so remember before where it was asked, doesn't matter which order you have the tables in no asterisk right it doesn't matter.
+
+01:06:45.000 --> 01:06:50.000
+But your syntax needs to be
+
+01:06:50.000 --> 01:07:09.000
+aware of which table is the base table and which table is the join table, because if you flip the base table in the join table left from right, then all of your left joins need to be switched to write joins, and so on.
+
+01:07:09.000 --> 01:07:10.000
+A very good.
+
+01:07:10.000 --> 01:07:26.000
+Okay, so, I think you know what, that's kind of enough for now is to basically just have been introduced to this idea of joins that there are many types of joins and.
+
+01:07:26.000 --> 01:07:36.000
+For starters, you're probably going to be wanting enter joins until you're interested in the ones that have no values on them.
+
+01:07:36.000 --> 01:07:45.000
+Right. For example, If I were to do an outer join here instead of an inner join.
+
+01:07:45.000 --> 01:07:52.000
+Then, we may get some rows that have no values for both things.
+
+01:07:52.000 --> 01:07:59.000
+We didn't even like my full join.
+
+01:07:59.000 --> 01:08:07.000
+Let's go for a full join our join, maybe I'm bringing that in from a different rd rd BMS like not Postgres.
+
+01:08:07.000 --> 01:08:11.000
+Okay, full join.
+
+01:08:11.000 --> 01:08:14.000
+We're getting everything.
+
+01:08:14.000 --> 01:08:28.000
+Yeah, you know what, it for this particular restriction with day IDs I don't happen to have any with no values.
+
+01:08:28.000 --> 01:08:38.000
+Yeah, I'm not sure actually without her Jones, but I don't want to go too far down it because I think we're good for having introduced joins as is.
+
+01:08:38.000 --> 01:08:39.000
+Okay.
+
+01:08:39.000 --> 01:08:50.000
+How do we prevent a sequel injection attack clearly that's for a couple of days from now, fine joins now you know all about joins.
+
+01:08:50.000 --> 01:08:55.000
+This is games DBS from a different data set, we're not dealing with that data set.
+
+01:08:55.000 --> 01:09:04.000
+Let's look at actually some more sequel query samples from our notes.
+
+01:09:04.000 --> 01:09:09.000
+So we've done where clauses with billions we've done joins.
+
+01:09:09.000 --> 01:09:19.000
+Next up, I want to start showing aggregation functions which are pretty cool things.
+
+01:09:19.000 --> 01:09:29.000
+And then how we can combine those aggregation functions with filters on the results from those aggregation functions. So I'm using a bunch of new words.
+
+01:09:29.000 --> 01:09:39.000
+Let's unfold each of these new words, in turn, an aggregation function, it's a function that I can apply to a column and get a result.
+
+01:09:39.000 --> 01:09:43.000
+So let's try a few of those.
+
+01:09:43.000 --> 01:09:49.000
+Select counts.
+
+01:09:49.000 --> 01:09:53.000
+Id from objectives.
+
+01:09:53.000 --> 01:09:55.000
+Done.
+
+01:09:55.000 --> 01:10:04.000
+So you saw before how I was getting 104 rows, out of my objectives table. Currently,
+
+01:10:04.000 --> 01:10:06.000
+here.
+
+01:10:06.000 --> 01:10:11.000
+I applied an aggregation function to any given column.
+
+01:10:11.000 --> 01:10:17.000
+And now it's going to do is start counting rows for me.
+
+01:10:17.000 --> 01:10:20.000
+Having done that
+
+01:10:20.000 --> 01:10:24.000
+sequel is all about tables.
+
+01:10:24.000 --> 01:10:31.000
+You've seen already how when I do a join the sequel returns to me, a table.
+
+01:10:31.000 --> 01:10:41.000
+But it's a table that's built on the fly. It's a table to store the result of a sequel statement.
+
+01:10:41.000 --> 01:10:52.000
+Turns out, that's how sequel speaks it, the lingua franca if you will, of SELECT statements our tables, right, and even here, I got a table.
+
+01:10:52.000 --> 01:11:01.000
+I got a table with a column called count, and one row with account value of 104.
+
+01:11:01.000 --> 01:11:10.000
+This is a table that does not exist in the database, it was produced by the sequel statement on the fly.
+
+01:11:10.000 --> 01:11:22.000
+I can add other columns to this generated table. How about max and min.
+
+01:11:22.000 --> 01:11:24.000
+Right.
+
+01:11:24.000 --> 01:11:34.000
+See how my output table has three columns now, where the column names match the function name that I'm using.
+
+01:11:34.000 --> 01:11:44.000
+In my SELECT clause that specifies the information I'm trying to get right.
+
+01:11:44.000 --> 01:11:53.000
+These bits of information don't exist directly in the database, they needed to be derived by the action of these functions.
+
+01:11:53.000 --> 01:11:59.000
+Turns out the maximum ID in my objectives table is 115.
+
+01:11:59.000 --> 01:12:05.000
+That's because I've added objectives in the past that I then subsequently deleted.
+
+01:12:05.000 --> 01:12:11.000
+So it's left some holes in the list from one 215.
+
+01:12:11.000 --> 01:12:19.000
+The minimum is one the lowest ID on my, that has actually has a row is one.
+
+01:12:19.000 --> 01:12:28.000
+Here's some more functions that I can use average AVG.
+
+01:12:28.000 --> 01:12:37.000
+Yeah. So of all of my ideas in the table, the average is 55.3653 etc.
+
+01:12:37.000 --> 01:12:45.000
+That's an interesting average. Notice that it's a floating point number that it goes way out to many many digits. Yeah.
+
+01:12:45.000 --> 01:12:48.000
+That's a product of my function.
+
+01:12:48.000 --> 01:12:51.000
+Average.
+
+01:12:51.000 --> 01:12:54.000
+I'm great.
+
+01:12:54.000 --> 01:12:58.000
+So that's how you use functions in your query.
+
+01:12:58.000 --> 01:13:06.000
+Oh, I did see a question go flying by earlier it was just before the break, sorry I want to circle back to that question.
+
+01:13:06.000 --> 01:13:15.000
+I'm right. So remember when we had the complex query that looked like this.
+
+01:13:15.000 --> 01:13:39.000
+And the syntax that I was using was specifying objectives.de ID and days.id like this, right, this syntax for this join logic is table name dot column name.
+
+01:13:39.000 --> 01:13:46.000
+And again on this side of the equals, days is table name dot column name.
+
+01:13:46.000 --> 01:13:58.000
+Now I didn't need to use table name column name over here, because for day underscore description, it's clear which table that came from.
+
+01:13:58.000 --> 01:14:03.000
+Because there's only one table that has that column on it.
+
+01:14:03.000 --> 01:14:14.000
+Similarly with question I've got only one table that has the question column in it. It's clear from this, which table I meant each column to come from.
+
+01:14:14.000 --> 01:14:17.000
+But what if I do something like this, ID.
+
+01:14:17.000 --> 01:14:24.000
+This is now in my select cause, cause I want to grab an ID value out.
+
+01:14:24.000 --> 01:14:30.000
+Here comes an error message that I thought we might trigger earlier.
+
+01:14:30.000 --> 01:14:33.000
+Column reference ID is ambiguous.
+
+01:14:33.000 --> 01:14:38.000
+And it even points with a little carrot to the particular ID that it's talking about.
+
+01:14:38.000 --> 01:14:47.000
+It's ambiguous because there's an ID in the days table and there's an ID in the learning objective stable.
+
+01:14:47.000 --> 01:14:55.000
+And so it wants me to now specify which table that I mean to grab this idea out of.
+
+01:14:55.000 --> 01:14:59.000
+I could go either way.
+
+01:14:59.000 --> 01:15:14.000
+I could go days, i.id, like that, in which case I get the day ID out in a column called ID here for. I could go
+
+01:15:14.000 --> 01:15:17.000
+objectives.id.
+
+01:15:17.000 --> 01:15:25.000
+And now it's giving me the objective ID under a column called ID.
+
+01:15:25.000 --> 01:15:33.000
+There you go. So that's the answer about why we needed the dots in some cases and not others.
+
+01:15:33.000 --> 01:15:37.000
+Good.
+
+01:15:37.000 --> 01:15:45.000
+Alright, so now we've had some samples where we're using aggregate functions.
+
+01:15:45.000 --> 01:15:49.000
+Right.
+
+01:15:49.000 --> 01:15:56.000
+Next, I'd like to show you what a GROUP BY clause does.
+
+01:15:56.000 --> 01:15:58.000
+This is super interesting.
+
+01:15:58.000 --> 01:16:08.000
+It's not the same as order by right with order by you're getting all the objectives, but they've been sorted.
+
+01:16:08.000 --> 01:16:24.000
+The reason that I call this an aggregate function or aggregation functions, is that they actually work on groups of rows, which is super useful to do.
+
+01:16:24.000 --> 01:16:37.000
+For example, if I'm doing queries that are trying to pull out learning objectives, and here I have like counts on various things.
+
+01:16:37.000 --> 01:16:52.000
+Let's go for a count on objectives that aggregate function is acting on a group, it's acting on all the rows, as one group.
+
+01:16:52.000 --> 01:16:58.000
+And it's giving me the result of its function for that group for that one group in this case.
+
+01:16:58.000 --> 01:17:08.000
+But what if I add a GROUP BY clause group by, say day ID.
+
+01:17:08.000 --> 01:17:26.000
+Now, the groups that are coming back in the SELECT clause are grouped by day ID, and my result is now going to be a count of objectives for each day.
+
+01:17:26.000 --> 01:17:41.000
+Now, this is by no means a complete set of learning objectives for the entirety of boot camp yet, but we've got eight learning objectives that are assigned to that particular day, eight.
+
+01:17:41.000 --> 01:17:43.000
+for that tricky way, and so on.
+
+01:17:43.000 --> 01:18:01.000
+Right. We've got 18 different days with learning objectives that have been entered in to the system so far. This table is not so useful because it's not actually showing that particular day ID. So why don't we grab it to, comma, day underscore ID there.
+
+01:18:01.000 --> 01:18:07.000
+Oh, here's a learning objectives that has an orphan, no value for day ID.
+
+01:18:07.000 --> 01:18:14.000
+That's super interesting. Right, we can find out which one it was,
+
+01:18:14.000 --> 01:18:19.000
+Let's grab the ID as well. Id commerce.
+
+01:18:19.000 --> 01:18:31.000
+Oops, objective, Id must appear in the group ID, right, okay that actually makes my point with having clauses which we'll get to in a second. We've got an error message, super interesting error message, actually, but for now that we've got our list of
+
+01:18:31.000 --> 01:18:34.000
+day it is ok.
+
+01:18:34.000 --> 01:18:43.000
+Glad asked, in which case, count asterisk and count ID is going to make any difference.
+
+01:18:43.000 --> 01:18:52.000
+In fact, I'm not sure. I don't know what we'll have to dig into the rabbit hole and try to ferret that out.
+
+01:18:52.000 --> 01:18:55.000
+Yeah.
+
+01:18:55.000 --> 01:18:57.000
+Okay.
+
+01:18:57.000 --> 01:19:00.000
+Um,
+
+01:19:00.000 --> 01:19:05.000
+so that's aggregate functions in fact, we're actually at a pretty good place.
+
+01:19:05.000 --> 01:19:12.000
+If I go select this and remember I wanted to see the day it here as well. Check this error message out.
+
+01:19:12.000 --> 01:19:24.000
+What it says is column objectives.id must appear in the GROUP BY clause, or be used in an aggregate function.
+
+01:19:24.000 --> 01:19:25.000
+Right.
+
+01:19:25.000 --> 01:19:39.000
+So, the Select, I can only include columns that appear in this, in order for this to work.
+
+01:19:39.000 --> 01:20:00.000
+Once you start moving down the path of using aggregate functions. It limits which columns you're able to use. And so this is an example of that. It's saying we can't get this objectives.id, unless it is included in the GROUP BY clause.
+
+01:20:00.000 --> 01:20:07.000
+Because the stuff that I get to show here
+
+01:20:07.000 --> 01:20:15.000
+is only the stuff that survives the group by.
+
+01:20:15.000 --> 01:20:22.000
+So, let's go ahead and add that I think it's going to actually wreck the particular analysis that we were doing.
+
+01:20:22.000 --> 01:20:38.000
+Right. Day ID and objective ID it now is grouping by objective ID but I only have one particular row for that. So I have to do something else with regard to counting whips LS, whether that is that ever a habit Hey, okay.
+
+01:20:38.000 --> 01:20:47.000
+I'm okay. So back to our samples.
+
+01:20:47.000 --> 01:20:57.000
+Here's another interesting example of the kinds of restrictions that you get into when you're doing aggregate functions. If I bring back to this one I get rid of it because I'm not allowed to use it.
+
+01:20:57.000 --> 01:21:01.000
+What if I do something like
+
+01:21:01.000 --> 01:21:13.000
+where let's say day ID equals 21.
+
+01:21:13.000 --> 01:21:28.000
+I'm actually it's a syntax error This is interesting. I'm going to copy this for a second, get rid of it from this part of the query. It turns out the that the, the order of the clauses matters.
+
+01:21:28.000 --> 01:21:30.000
+You can't get them out of order.
+
+01:21:30.000 --> 01:21:37.000
+And so this would actually work where day ID equals 21.
+
+01:21:37.000 --> 01:21:40.000
+Let's bring back our query.
+
+01:21:40.000 --> 01:21:45.000
+So now I'm only dealing with the day id 21.
+
+01:21:45.000 --> 01:21:49.000
+And that's the stuff that's
+
+01:21:49.000 --> 01:21:55.000
+survived. Let me get rid of that group by day ID there.
+
+01:21:55.000 --> 01:22:08.000
+So here I've only allowed day ID 21 to survive, and I'm doing day ID as a group by, and it gives me now the count of learning objectives that are available to us on day 21.
+
+01:22:08.000 --> 01:22:20.000
+So today's day has 10, learning objectives.
+
+01:22:20.000 --> 01:22:23.000
+Okay, so that's valid.
+
+01:22:23.000 --> 01:22:27.000
+But what if I try this.
+
+01:22:27.000 --> 01:22:45.000
+Where ID equals. This in fact I need to find out, particular IDs. OK, so now, where I have the ID equal 21, this is the learning objective ID happens to be for day id 19.
+
+01:22:45.000 --> 01:22:51.000
+And the group by has worked and we have only one saying,
+
+01:22:51.000 --> 01:22:57.000
+Okay.
+
+01:22:57.000 --> 01:23:17.000
+What if though I go back to my counts of days with one before that one actually.
+
+01:23:17.000 --> 01:23:19.000
+Okay, here we are.
+
+01:23:19.000 --> 01:23:26.000
+Here's the internet media table that I'm interested now in filtering.
+
+01:23:26.000 --> 01:23:43.000
+Let's say that I was only particularly interested in days that had a high number of
+
+01:23:43.000 --> 01:23:53.000
+a high number of objectives in the right I've got days with like 1456 and so on. Maybe I only want the ones that are like seven and above.
+
+01:23:53.000 --> 01:24:06.000
+days that are fully populated with learning objectives, or they have enough learning objectives, or maybe the inverse maybe I want only the ones that have a very low number of learning objectives, because clearly they need more data entry, something like
+
+01:24:06.000 --> 01:24:09.000
+that.
+
+01:24:09.000 --> 01:24:17.000
+If I want to filter on the result of the aggregate function.
+
+01:24:17.000 --> 01:24:27.000
+I don't get to use the where clause for that because we're only knows about columns, not the product of of aggregate functions.
+
+01:24:27.000 --> 01:24:40.000
+So in order to achieve that, if you're going to use an aggregate function in your filter. There's a new kind of claws to attach to your query. Having.
+
+01:24:40.000 --> 01:24:48.000
+And so, we'll use having with this.
+
+01:24:48.000 --> 01:25:02.000
+Right. And so what we are after is, show me the count, and the day ID from objectives GROUP BY THE DAY ID, so that the count happens over each day's worth looking for objectives within that day.
+
+01:25:02.000 --> 01:25:08.000
+And then I say, having count,
+
+01:25:08.000 --> 01:25:13.000
+greater than six.
+
+01:25:13.000 --> 01:25:17.000
+Right. See how it gave us a shorter list.
+
+01:25:17.000 --> 01:25:23.000
+Now these are the days that have lots of learning objectives on. If I reverse the sense of this.
+
+01:25:23.000 --> 01:25:37.000
+There. Here is a list of days that are candidates for going back and looking Do I have enough learning objectives tease out of that day maybe I need to reshuffle the learning objectives on a particular day to make that day, you know, a meteor lecture
+
+01:25:37.000 --> 01:25:48.000
+to load balance things better right you can imagine that this is going to be a useful tool for curriculum planning, or something like that.
+
+01:25:48.000 --> 01:26:04.000
+Very good. That that puts us in a position to understand quite a bit more complexity in your, in your SELECT statements. Now, right. In fact, if we go back to the notes and look at that sample query that we had way back here.
+
+01:26:04.000 --> 01:26:07.000
+Here's a sample SELECT statement.
+
+01:26:07.000 --> 01:26:18.000
+Now you've got a pretty good grasp actually on all of these different kinds of clauses that you can attach to a single SELECT statement, a single query.
+
+01:26:18.000 --> 01:26:21.000
+Yeah.
+
+01:26:21.000 --> 01:26:30.000
+Um, with that in mind,
+
+01:26:30.000 --> 01:26:39.000
+I'm
+
+01:26:39.000 --> 01:26:45.000
+great. I know I think we're done actually with SELECT statements. Sorry about that.
+
+01:26:45.000 --> 01:26:51.000
+And so, lastly,
+
+01:26:51.000 --> 01:26:58.000
+I'd like to be able to talk about something called an entity relationship diagram.
+
+01:26:58.000 --> 01:27:08.000
+Okay, this is a thing that you'll want to use when it comes to designing databases.
+
+01:27:08.000 --> 01:27:09.000
+Right.
+
+01:27:09.000 --> 01:27:13.000
+You're going to have a bunch of information that's associated with your web app.
+
+01:27:13.000 --> 01:27:25.000
+Right, even for this relatively simple learning objectives database I've got learning objectives. I've got days, because each of the learning objectives is on particular days.
+
+01:27:25.000 --> 01:27:37.000
+I've got users, right where I'm going to store usernames and passwords in them, hopefully hash so that they're not in plain text. Right.
+
+01:27:37.000 --> 01:27:43.000
+Yeah, lots of things to decide where each of the things goes.
+
+01:27:43.000 --> 01:28:02.000
+If you've got a to do list app with tasks that you're trying to do. This is an example of an entity relationship diagram that shows how projects and tasks are related to each other, which information should live on the project stable.
+
+01:28:02.000 --> 01:28:10.000
+Well, the name of the project who owns the project. And when the project is do the due date
+
+01:28:10.000 --> 01:28:35.000
+tasks on the other hand, it doesn't make sense to store the name of the project within the task stable, because you can just join these two tables if you need to have a text representation of the project name.
+
+01:28:35.000 --> 01:28:42.000
+Whether it's completed when it was completed when that individual task was due and so on,
+
+01:28:42.000 --> 01:28:47.000
+who it was completed by. Looks like we need to have another table for users or whatever.
+
+01:28:47.000 --> 01:28:56.000
+But when you're sitting down and you've just come up with the, you know, the most awesome idea for a new web app.
+
+01:28:56.000 --> 01:29:11.000
+One of the first steps, is to sit down and start to think through. Okay. Where am I going to store the various bits of information in each of my tables, within a fully fleshed out already BMS database design.
+
+01:29:11.000 --> 01:29:20.000
+Right. And so this thing this ERD is very useful when it comes to being able to do precisely that.
+
+01:29:20.000 --> 01:29:26.000
+So I'd like to demo for you, a tool that's used for this.
+
+01:29:26.000 --> 01:29:39.000
+It's available@diagrams.net, I think.
+
+01:29:39.000 --> 01:29:48.000
+Yeah. That's the one. I'll paste it into the chat so that y'all can do the same.
+
+01:29:48.000 --> 01:29:53.000
+diagram.net.
+
+01:29:53.000 --> 01:29:56.000
+Give it a shot.
+
+01:29:56.000 --> 01:30:02.000
+I'm going to say I'll decide later where I'm going to save my diagrams to here I'm just going to show you a bit of the user interface.
+
+01:30:02.000 --> 01:30:12.000
+And together we can design the database that we were using today, so that we have a design document.
+
+01:30:12.000 --> 01:30:15.000
+This diagram maker is pretty cool.
+
+01:30:15.000 --> 01:30:21.000
+In terms of all of the different varieties of things that you can include in your diagrams.
+
+01:30:21.000 --> 01:30:31.000
+The one that we're going to focus on is entity relation, but let me just give you a brief tour of some of the other stuff that you can do with something like this era arrows.
+
+01:30:31.000 --> 01:30:35.000
+You know who doesn't like a good arrow in their diagram. Right.
+
+01:30:35.000 --> 01:30:44.000
+You can have a call out with arrow, you can have arrows that go in multiple directions you can have arrows it's, you know, implied decision that needs to be made.
+
+01:30:44.000 --> 01:30:55.000
+Depends on the shape of the infographic you're making right. Lots of cool symbols and whatever flow charts, right where you've got squares and connections between them.
+
+01:30:55.000 --> 01:31:05.000
+There's a meaning for these like in some flow charts that's actually a valve.
+
+01:31:05.000 --> 01:31:21.000
+Yeah, in fact they've got names for each of this there's a piece of data and your flowchart here's something to display. These are old, best practices, so that people reading flow charts would share the meaning of particular shapes right decisions to
+
+01:31:21.000 --> 01:31:22.000
+be made.
+
+01:31:22.000 --> 01:31:33.000
+There we go. right so if you if you see the, the diamond shape you're like, oh the incoming flow goes this way and then you might go left or right depending on your particular decision.
+
+01:31:33.000 --> 01:31:38.000
+Right. All these things are available as part of this tour, a tool.
+
+01:31:38.000 --> 01:31:44.000
+Sorry, entity relation. This is exactly what we want to get into with database design.
+
+01:31:44.000 --> 01:31:49.000
+And so, there are some symbols. That means certain things.
+
+01:31:49.000 --> 01:31:53.000
+Here is a table.
+
+01:31:53.000 --> 01:32:00.000
+And so I might have a table called objectives, like so.
+
+01:32:00.000 --> 01:32:06.000
+and within the objectives table I've got an ID.
+
+01:32:06.000 --> 01:32:12.000
+You saw how I had things with question
+
+01:32:12.000 --> 01:32:24.000
+and answer, and type
+
+01:32:24.000 --> 01:32:28.000
+and sort.
+
+01:32:28.000 --> 01:32:29.000
+Right.
+
+01:32:29.000 --> 01:32:34.000
+So, this user interface can be a little bit clunky to get used to.
+
+01:32:34.000 --> 01:32:48.000
+As you start doing a database designs of your own playing around with this thing can be a bit of to sometimes I'd like to just show you a few tricks that are nice to simplify interacting with it.
+
+01:32:48.000 --> 01:33:01.000
+If I double click with this thing. Notice that the answer name is highlighted now I could change this maybe I had typos in here, whatever, try out the tab key on the tab key will move you.
+
+01:33:01.000 --> 01:33:05.000
+Whoops, sorry,
+
+01:33:05.000 --> 01:33:07.000
+the tab key.
+
+01:33:07.000 --> 01:33:27.000
+If you're not in the middle of typing text into a thing will move your height, your focus from one element to another. Shift Tab will back you up backwards through the list of things that you can select, whereas the tab without the tab, without the shift
+
+01:33:27.000 --> 01:33:37.000
+key will allow you to move from one to the next. Notice that I can select the stuff that's in this column, I can select the stuff that's in the previous column.
+
+01:33:37.000 --> 01:33:41.000
+I can select the pair.
+
+01:33:41.000 --> 01:33:55.000
+Both of them. Right. And so I might want to have another row in my table. What I can do is select the whole row, right click it and click Duplicate.
+
+01:33:55.000 --> 01:33:57.000
+And then it makes another row.
+
+01:33:57.000 --> 01:34:05.000
+And so if you're trying to add more data into a given table. Try that technique.
+
+01:34:05.000 --> 01:34:08.000
+What else do we have here,
+
+01:34:08.000 --> 01:34:11.000
+maybe nothing.
+
+01:34:11.000 --> 01:34:25.000
+What I would love actually is tab URLs, where on every one of my objectives, I've got a link that's going to be a deep link into a Vimeo video that shows, somebody lecturing about that exact learning objective.
+
+01:34:25.000 --> 01:34:35.000
+That's going to take a bit of data entry to get to that point but it's sort of the end goal of part of this way of organizing all the learning objectives in boot camp.
+
+01:34:35.000 --> 01:34:42.000
+So, oh by the way, with tools like this.
+
+01:34:42.000 --> 01:34:43.000
+Make your own.
+
+01:34:43.000 --> 01:34:55.000
+Make your own glossary tool for boot camp. It's great practice. Right. It's kind of a stretch goal, just build your own web apps, you're getting to the point where you can do that.
+
+01:34:55.000 --> 01:35:08.000
+Coming up, you've got the midterm, where those are prescribed builds where you're building to a set of requirements that's already established, but the gears can start running for you guys on what you'd like to do for your final project that's going to
+
+01:35:08.000 --> 01:35:21.000
+to be fun to bring these things out of the woodwork, I think you're already getting a sense for the fact that you're in a position to start building your own things very very soon.
+
+01:35:21.000 --> 01:35:24.000
+Good. Okay, so that's one table.
+
+01:35:24.000 --> 01:35:28.000
+I can move it around, nice graphical interface.
+
+01:35:28.000 --> 01:35:38.000
+By the way, if you know you're going to be making multiples of a thing. I just changed a bunch of thing about how this was represented. If I need another table.
+
+01:35:38.000 --> 01:35:49.000
+I don't want to have to redo those changes. You can use Command See, maybe it's going to be different for your particular OS maybe it's control see check out the hotkeys here.
+
+01:35:49.000 --> 01:35:54.000
+So you can use the keyboard because the keyboard is awesome, right.
+
+01:35:54.000 --> 01:35:58.000
+Command V to paste Now I have two versions of that table.
+
+01:35:58.000 --> 01:36:04.000
+And so, maybe now, I can just go in here.
+
+01:36:04.000 --> 01:36:07.000
+Change this today's.
+
+01:36:07.000 --> 01:36:14.000
+And I had day underscore number mnemonic.
+
+01:36:14.000 --> 01:36:24.000
+I also had day underscored description.
+
+01:36:24.000 --> 01:36:39.000
+I had title in here. And then this one. In fact, I don't need, and this one. In fact, I don't need also I'm using that tab key to select it and the delete key to get rid of it.
+
+01:36:39.000 --> 01:36:41.000
+Okay.
+
+01:36:41.000 --> 01:36:48.000
+Now, You will remember that in my objectives table.
+
+01:36:48.000 --> 01:37:01.000
+I had a row, called de underscore Id like this.
+
+01:37:01.000 --> 01:37:04.000
+So there's day ID.
+
+01:37:04.000 --> 01:37:13.000
+And it was in this case where the value of this column for any given row.
+
+01:37:13.000 --> 01:37:22.000
+Had a value that came out of this table.
+
+01:37:22.000 --> 01:37:27.000
+So for example,
+
+01:37:27.000 --> 01:37:33.000
+I would actually like to show that relationship here on this entity relationship diagram.
+
+01:37:33.000 --> 01:37:47.000
+And so for that, I'm going to go down into these symbols and grab 02 many optional. Hmm, let's just go for something simple one too many.
+
+01:37:47.000 --> 01:37:50.000
+And so with one too many.
+
+01:37:50.000 --> 01:37:55.000
+I actually want to put this one here.
+
+01:37:55.000 --> 01:38:01.000
+And this one here.
+
+01:38:01.000 --> 01:38:09.000
+And while this is highlighted, just to simplify the use of things. Here's my line here's the data about that one.
+
+01:38:09.000 --> 01:38:24.000
+I'm going to bump up the number of pixels in the size of it while I happen to be here. That's a nice trick for this particular UI, the arrow is cool, as is.
+
+01:38:24.000 --> 01:38:30.000
+What can I do about the size of the arrows, maybe not much for the moment.
+
+01:38:30.000 --> 01:38:32.000
+Let's leave it at that.
+
+01:38:32.000 --> 01:38:33.000
+Okay.
+
+01:38:33.000 --> 01:38:46.000
+So here you see now we've got these two tables are connected to each other. The particular symbol that I chose is evocative of many to one.
+
+01:38:46.000 --> 01:39:07.000
+In this case, what that means is that you can have many objectives that all have the same day ID value that is those many objectives court are related to one row in the days
+
+01:39:07.000 --> 01:39:09.000
+table.
+
+01:39:09.000 --> 01:39:21.000
+So such a statement would be something like, if your data is such that any one learning objective has the first day that it was taught in boot camp.
+
+01:39:21.000 --> 01:39:26.000
+And this would be a way to find that
+
+01:39:26.000 --> 01:39:45.000
+will learn more about the relationships that you can make manifest in your databases. Tomorrow, tomorrow's lecture is going to be on database design. We're going to kind of pick it up from this point where we start to talk about how databases hold together,
+
+01:39:45.000 --> 01:39:57.000
+how you can have related information various tables and the best practices when it comes to designing any given database.
+
+01:39:57.000 --> 01:40:10.000
+Very good at, you know what we've sort of run into the end of how the the particular things that I want to show you for the day, and I you know I see no reason to keep you here any longer.
+
+01:40:10.000 --> 01:40:29.000
+I would recommend playing around with App diagrams net a bit, and start to, you know, put objects onto there. And what this allows you to do with diagrams like this is communicate within a team, where one person can make a diagram like this, and then
+
+01:40:29.000 --> 01:40:40.000
+share it with somebody else, and then suddenly they know what to do with these diagrams to build out tables. Yeah.
+
+01:40:40.000 --> 01:40:52.000
+One more thing before I let you go I did want to show you a sample for how to create a table in the first place right we did a lot of select work where we're pulling that out.
+
+01:40:52.000 --> 01:41:03.000
+Let's do that. so example Postgres CREATE TABLE sequel.
+
+01:41:03.000 --> 01:41:09.000
+And so, the syntax is pretty straightforward.
+
+01:41:09.000 --> 01:41:21.000
+CREATE TABLE table name, and then columns inside.
+
+01:41:21.000 --> 01:41:27.000
+Some smooth parenthesis, with an ending semi colon.
+
+01:41:27.000 --> 01:41:37.000
+So we'll go back here and let's say I needed a new table right CREATE TABLE
+
+01:41:37.000 --> 01:41:40.000
+bulky files.
+
+01:41:40.000 --> 01:41:42.000
+Right.
+
+01:41:42.000 --> 01:41:44.000
+And that's the table name.
+
+01:41:44.000 --> 01:41:50.000
+And we need some columns in here.
+
+01:41:50.000 --> 01:41:54.000
+A name
+
+01:41:54.000 --> 01:41:56.000
+Bar car.
+
+01:41:56.000 --> 01:42:03.000
+30, comma, age,
+
+01:42:03.000 --> 01:42:07.000
+integer
+
+01:42:07.000 --> 01:42:08.000
+there.
+
+01:42:08.000 --> 01:42:11.000
+So that tables now created.
+
+01:42:11.000 --> 01:42:19.000
+If I do my command which shows me the listing of all the tables. Sure enough, there's the monkey boss table.
+
+01:42:19.000 --> 01:42:25.000
+Right. And I did that with that bit of sequel.
+
+01:42:25.000 --> 01:42:42.000
+What we'll learn more as the week goes on, is that you can have different kinds of columns, right, I've got two columns in my monkey fo stable, one with the stores strings, the other one is stores numbers.
+
+01:42:42.000 --> 01:42:57.000
+The first one is called name, and the second one is called age. So let's go ahead and add some stuff to this table, insert into
+
+01:42:57.000 --> 01:43:02.000
+monkey fuzz.
+
+01:43:02.000 --> 01:43:15.000
+And with inserts we've got name and age, values.
+
+01:43:15.000 --> 01:43:18.000
+What's the name in this table.
+
+01:43:18.000 --> 01:43:23.000
+Me, for lack of a better person.
+
+01:43:23.000 --> 01:43:25.000
+age, 50.
+
+01:43:25.000 --> 01:43:31.000
+There, that's now inserted into the table. Let's try the Select.
+
+01:43:31.000 --> 01:43:40.000
+Select star from monkey buzz. give me all the rows. There you go.
+
+01:43:40.000 --> 01:43:42.000
+All right.
+
+01:43:42.000 --> 01:43:53.000
+I'm just a few more queries, delete from monkey fuzz where age, equals 50.
+
+01:43:53.000 --> 01:43:59.000
+There. That got rid of the data from the table.
+
+01:43:59.000 --> 01:44:03.000
+Delete table.
+
+01:44:03.000 --> 01:44:06.000
+Monkey first.
+
+01:44:06.000 --> 01:44:08.000
+Whoops, doesn't like delete table.
+
+01:44:08.000 --> 01:44:10.000
+Hmm.
+
+01:44:10.000 --> 01:44:17.000
+Valley whatever you wanted to add a column ALTER TABLE drop Thank you drop table.
+
+01:44:17.000 --> 01:44:23.000
+instead of the table. Sorry about that. Got my deletes and drops mixed up DROP TABLE monkey has done.
+
+01:44:23.000 --> 01:44:24.000
+Cool.
+
+01:44:24.000 --> 01:44:29.000
+Yeah, what if you wanted to add a column, let's bring our table back
+
+01:44:29.000 --> 01:44:34.000
+like this.
+
+01:44:34.000 --> 01:44:45.000
+Actually while we're here, why don't we figure out a few more of the things about how to show stuff. So list, tables, described table that's a cool one slash dnn table name.
+
+01:44:45.000 --> 01:44:50.000
+So, in the full description of the monkey five table.
+
+01:44:50.000 --> 01:45:01.000
+This is showing me my columns, their types. And then, whether they're called aided, whether they can have no values and what the default value might be turns out you don't need semi colons for your backslash commands.
+
+01:45:01.000 --> 01:45:03.000
+Okay.
+
+01:45:03.000 --> 01:45:11.000
+You wanted to add, add a column to an already existing table ALTER TABLE.
+
+01:45:11.000 --> 01:45:16.000
+Add Column, I think it is we can look this up.
+
+01:45:16.000 --> 01:45:22.000
+name, age, favorite wine.
+
+01:45:22.000 --> 01:45:26.000
+And so,
+
+01:45:26.000 --> 01:45:30.000
+what bar car. 20
+
+01:45:30.000 --> 01:45:39.000
+didn't like that. Let's go back and find the exact syntax ALTER TABLE Postgres.
+
+01:45:39.000 --> 01:45:42.000
+Add Column to table.
+
+01:45:42.000 --> 01:45:51.000
+Example
+
+01:45:51.000 --> 01:45:56.000
+altar table table name. Add Column
+
+01:45:56.000 --> 01:46:11.000
+new column name data type and any constraints that are there. So, ALTER TABLE table name course need to have the table name, in order to know which table you're altering right.
+
+01:46:11.000 --> 01:46:17.000
+Add column, column name, and then the type.
+
+01:46:17.000 --> 01:46:22.000
+And so with that done, slash D monkey.
+
+01:46:22.000 --> 01:46:25.000
+There's now a new column on the table.
+
+01:46:25.000 --> 01:46:38.000
+Okay, great. Welcome to the wide world of sequel, there's a lot of it out there, you're already in a position to do some good googling with regard to flushing out the edges of what you need to know.
+
+01:46:38.000 --> 01:46:47.000
+Yeah, I probably should get rid of the drop. I probably should get rid of the monkey first table from my database because I really don't need it.
+
+01:46:47.000 --> 01:46:49.000
+Great.
+
+01:46:49.000 --> 01:46:49.000
+Let's all my tables, and then I'm back to normal.
+
+01:46:49.000 --> 01:47:16.000
+So my tables, and then I'm back to normal. Awesome. Okay, let's wrap it up, hang around if you got extra questions, click like and subscribe hold my beer and watch this. have a good day with the rest of your company thing.
+
