@@ -23,7 +23,7 @@
 * Table and field names are written in snake_case
 * Table names are always pluralized
 * The primary key for each table will simply be called id
-* A foreign key's name is the singular of the primary key's table appended with _id (eg. user_id is the foreign key pointing to the id field in the users table)
+* A foreign key's name is the singular of the primary key's table name appended with _id (eg. user_id is the foreign key pointing to the id field in the users table)
 
 # Data Types
 
@@ -34,7 +34,7 @@
 # Relationship Types
 
 * One-to-One: One record in the first table is related to one (and only one) record in the second table
-* One-to-Many: One record in the first table is related to one or more records in the second table
+* One-to-Many: One record in the first table is related to zero or more records in the second table
 * Many-to-Many: One or more records in the first table are related to one or more records in the second table
 
 It could be argued that there is really only one relationship type: One-to-Many as One-to-One's are extremely rare and Many-to-Many's are implemented using two One-to-Many's
