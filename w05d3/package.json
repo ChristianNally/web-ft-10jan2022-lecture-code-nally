@@ -1,0 +1,22 @@
+{
+  "name": "w05d3",
+  "version": "1.0.0",
+  "description": "Interacting with our Database from the commandline",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "DB",
+    "LHL"
+  ],
+  "author": "CWN",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3"
+  }
+}
