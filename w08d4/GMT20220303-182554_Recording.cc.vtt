@@ -1,0 +1,1442 @@
+WEBVTT
+
+00:00:07.000 --> 00:00:18.000
+resume recording welcome to class-based components week 8 day, 4 of react week, part 2.
+
+00:00:18.000 --> 00:00:38.000
+Today we're gonna be reviewing object-oriented programming and classes in javascript so that we can talk about class-based components in react and how react was originally written and the whole reason that we're
+
+00:00:38.000 --> 00:00:56.000
+looking at this is because, as you move out into the world of full step, stack development and react programming, you may very well like, run into a bunch of legacy code from before the dark ages of 2,019 right ancient history in the
+
+00:00:56.000 --> 00:01:07.000
+react world. And there's a lot of that code still out there. But frankly, I think it's a nice chance to review object-oriented programming in general, which is kind of a big deal.
+
+00:01:07.000 --> 00:01:13.000
+Something that it's a programming paradigm that that you know.
+
+00:01:13.000 --> 00:01:29.000
+Don't turn up a chance to get better at object-oriented programming. the slight downside to it is that you, javascript for all of its amazing awesomeness, and you know definitely the right language
+
+00:01:29.000 --> 00:01:34.000
+for the browser for reactant for the rest of it.
+
+00:01:34.000 --> 00:01:40.000
+Is that object-oriented programming in javascript is a bit of a bolt on afterthought.
+
+00:01:40.000 --> 00:01:46.000
+It's not at the roots of the language the way that it is in some other languages.
+
+00:01:46.000 --> 00:01:57.000
+Ruby, for example. or Java right? Java is a very object-oriented programming.
+
+00:01:57.000 --> 00:02:04.000
+You derived language. it's everything is an object everything comes from a class there.
+
+00:02:04.000 --> 00:02:15.000
+Right? So for today a review of classes, then an intro to class based components in react.
+
+00:02:15.000 --> 00:02:39.000
+Then basically just the basics of react. except from that class based point of view Props state, then, something about lifecycle methods which are the things where, with, when it comes to class based react lifecycle methods are kind, of like
+
+00:02:39.000 --> 00:02:44.000
+what came before Hooks hooks are the thing that replaced lifecycle methods.
+
+00:02:44.000 --> 00:03:05.000
+And so we'll look at how that works we'll see a little diagram about how the life cycle of class based components works in react first up, though, I want to show just some basic stuff with classes in javascript
+
+00:03:05.000 --> 00:03:20.000
+Yeah, So for example, class rectangle there that's it I made a class right?
+
+00:03:20.000 --> 00:03:31.000
+I'll prove it const r equals nu rectangle console dot log.
+
+00:03:31.000 --> 00:03:44.000
+Your favorite command in mine are there's my old trick with labels on the console logs, right so let's run it.
+
+00:03:44.000 --> 00:03:57.000
+The console log of R shows that is, of ass rectangle, and that this is a text representation of that class right?
+
+00:03:57.000 --> 00:04:05.000
+Not much to this class, because we haven't put any stuff in it, but it's valid and legal that's how you make a class.
+
+00:04:05.000 --> 00:04:13.000
+Once you have a class you can make objects out of that class.
+
+00:04:13.000 --> 00:04:33.000
+You can make as many objects out of that class as you want Here's another one. And now we'll see both When we run the code Rns as rectangles.
+
+00:04:33.000 --> 00:04:40.000
+Okay, But what's the point here? What are we trying to do Why object-oriented programming?
+
+00:04:40.000 --> 00:04:51.000
+Why classes? Well, when you make an object and now I'm speaking about Ruby Java, C.
+
+00:04:51.000 --> 00:04:55.000
+All the object-oriented programming languages right?
+
+00:04:55.000 --> 00:05:04.000
+The point of classes is to put storage and functionality under the same name.
+
+00:05:04.000 --> 00:05:17.000
+Under the same syntax. There are tremendous advantages to putting both variables and functions into the same thing.
+
+00:05:17.000 --> 00:05:25.000
+One of the advantages is it's more defensive from a scope point of view.
+
+00:05:25.000 --> 00:05:47.000
+Take, for example, a function called print Now think it matters a lot what you're trying to print right far better when you're writing the definition of your print function that it already know the kind of thing that it's trying to print
+
+00:05:47.000 --> 00:05:52.000
+otherwise you're passing stuff into the arguments of your print function.
+
+00:05:52.000 --> 00:05:56.000
+It has to figure out what it is, and then do a bunch of if fans. And is it a square?
+
+00:05:56.000 --> 00:06:01.000
+Is it a rectangle, is it? How am I going to print this thing? Is it Text: Is it something else? right?
+
+00:06:01.000 --> 00:06:12.000
+Before. you know your print function is crazy complex you're able to define function called print on every different class.
+
+00:06:12.000 --> 00:06:26.000
+Suddenly that print function starts to get much easier to understand because it's in the context of that class, right? and but you can use the exact same name print right?
+
+00:06:26.000 --> 00:06:43.000
+If I have a class sorry if I have an object let's take the this one here, and say I want to print this thing like that, right?
+
+00:06:43.000 --> 00:06:50.000
+This function can be different from another function also called print that's not attached to that class.
+
+00:06:50.000 --> 00:06:55.000
+Different functions. right? So there you go that's one major advantage of having classes?
+
+00:06:55.000 --> 00:07:03.000
+Is that the that the function that you write are in a specific context, right?
+
+00:07:03.000 --> 00:07:06.000
+It also allows you to gather variables to a place.
+
+00:07:06.000 --> 00:07:13.000
+And for the same reason those scope and name of those variables are protected from other contexts.
+
+00:07:13.000 --> 00:07:22.000
+Right. let's get down to business on this when you have a class.
+
+00:07:22.000 --> 00:07:31.000
+The class is, of course, a recipe for the creation of objects.
+
+00:07:31.000 --> 00:07:38.000
+Right that recipe has a function called a constructor, and this is across all the languages.
+
+00:07:38.000 --> 00:07:50.000
+Java ruby. This right in this constructor that's your chance to initialize variables. so for a rectangle.
+
+00:07:50.000 --> 00:08:10.000
+For example, we might like to take in width and as the creation of any given rectangle. We need those 2 parameters.
+
+00:08:10.000 --> 00:08:16.000
+So what you'll have inside here is code that goes something like this, and this is again across these many languages.
+
+00:08:16.000 --> 00:08:33.000
+This dot width equals width like so, and this dot height equals like so and so.
+
+00:08:33.000 --> 00:08:36.000
+Now our constructor will take 2 parameters.
+
+00:08:36.000 --> 00:08:43.000
+That means that down here I can pass in values for these things like so and like.
+
+00:08:43.000 --> 00:09:03.000
+So this token, the this token refers to the particular object that is being in instantiated right.
+
+00:09:03.000 --> 00:09:13.000
+If this is a recipe for the creation of an object, then when you create an object, this start width is being set to 3 and 4.
+
+00:09:13.000 --> 00:09:18.000
+In the case of R. but this dot, width and height are being set to 4 and 5.
+
+00:09:18.000 --> 00:09:23.000
+In the case of s right this is the particular object that you're talking about.
+
+00:09:23.000 --> 00:09:32.000
+So. by the way, it's super hard to teach about the word this, because you have to say this about 6 times in the same sentence.
+
+00:09:32.000 --> 00:09:42.000
+So laugh at me for that yeah you'll you'll feel it coming soon, Right? Okay, So here's the rectangle class here's a couple of rectangles.
+
+00:09:42.000 --> 00:09:46.000
+We don't have a print function to find that was just making a point earlier.
+
+00:09:46.000 --> 00:09:52.000
+Let's take a look now at what these things look like when they are console.
+
+00:09:52.000 --> 00:10:06.000
+Logged right now they have properties 3 and 4 like that but so far we've only added variables to this class.
+
+00:10:06.000 --> 00:10:21.000
+Let's also add some functions right and so area going to be a function, and this is a little bit different syntax in here.
+
+00:10:21.000 --> 00:10:33.000
+Right there's there's no word function yep you'll definitely use classes in ruby. So with area.
+
+00:10:33.000 --> 00:10:39.000
+This is now a function definition on this class: Ruby Ruby is very object-oriented.
+
+00:10:39.000 --> 00:11:09.000
+We're just going to return a value here return this dot width times this dot height like, so. And so now we can go this dot area like that.
+
+00:11:10.000 --> 00:11:16.000
+Now one thing to notice notice that i'm not passing any parameters into area.
+
+00:11:16.000 --> 00:11:25.000
+It is possible to pass for parameters in the thing is the whole point with classes is to store variables alongside.
+
+00:11:25.000 --> 00:11:41.000
+The methods. This method knows about its variables right that this object is will always be referring to the particular object that that area function was called on right.
+
+00:11:41.000 --> 00:11:46.000
+We don't need to tell area about its own variables It already knows about them. right?
+
+00:11:46.000 --> 00:11:53.000
+So I would reserve parameters in these things to take in information from outside the object.
+
+00:11:53.000 --> 00:12:00.000
+So let's see here, i'm gonna make see if I can do this side by each.
+
+00:12:00.000 --> 00:12:04.000
+So I don't have to flip back and forth between it all this time.
+
+00:12:04.000 --> 00:12:18.000
+There we go that's a bit better so if we run this Now you can see how our dot area it was producing 12, just as you would expect it to.
+
+00:12:18.000 --> 00:12:35.000
+So that's kind of a lot of the big deal around object-oriented stuff is that you can have variables and functions defined under the same name that they provide a context for those functions.
+
+00:12:35.000 --> 00:12:41.000
+Another big deal when it comes to object-oriented.
+
+00:12:41.000 --> 00:12:52.000
+Programming is the ability to create a subclass, to create a class that extends another class.
+
+00:12:52.000 --> 00:13:06.000
+So here we have rectangle let's make another class called Box.
+
+00:13:06.000 --> 00:13:12.000
+This is meant to be the three-dimensional version of this thing we're going to use.
+
+00:13:12.000 --> 00:13:32.000
+The keyword extends like, so so that we can take all of the things that are associated with direct rectangle class, and then add some more.
+
+00:13:32.000 --> 00:13:49.000
+And so this box class is going to have its own constructor like so, and we'll add in a new method a new function.
+
+00:13:49.000 --> 00:13:59.000
+This one called volume, like so and we'll show a few things about how these things work.
+
+00:13:59.000 --> 00:14:12.000
+So often it helps to see some code that you're building and how you hope it will work right.
+
+00:14:12.000 --> 00:14:22.000
+So, for example, if I go Const. B equals new box right now, it could take parameters.
+
+00:14:22.000 --> 00:14:32.000
+Say 6 and 7 like so so we'll try this and we'll go here.
+
+00:14:32.000 --> 00:14:34.000
+Actually we should console, load B as well as to look at it.
+
+00:14:34.000 --> 00:14:56.000
+We run and error my favorite particular, an error that uses weird phrases, so we can learn from it even better.
+
+00:14:56.000 --> 00:15:05.000
+This is a highly object-oriented programming specific error that's kind of peculiar to javascript.
+
+00:15:05.000 --> 00:15:13.000
+So error here is, must call super constructor in derived class.
+
+00:15:13.000 --> 00:15:25.000
+Before accessing this, or returning from the derived constructor, right, super object-oriented specific error.
+
+00:15:25.000 --> 00:15:34.000
+In particular an error that we want to know how to handle when we get into react-based components.
+
+00:15:34.000 --> 00:15:36.000
+It's Why, we're making this error happen here?
+
+00:15:36.000 --> 00:15:47.000
+So what does it mean? must call super constructor in derived class.
+
+00:15:47.000 --> 00:15:55.000
+So this is our derived class the box here. We have our constructor that we're going to do some stuff.
+
+00:15:55.000 --> 00:16:04.000
+We're going to record the depth of this box in here, but what it's saying is that we must call the super constructor.
+
+00:16:04.000 --> 00:16:15.000
+So the super constructor. is the constructor that's associated with the class from which box derives right rectangle is the super class.
+
+00:16:15.000 --> 00:16:34.000
+So there's a trick provided here where you can call whatever the super constructor of any given class is just by calling the special word super.
+
+00:16:34.000 --> 00:16:43.000
+And so, with that saved, now we can rerun this, and the error has gone away.
+
+00:16:43.000 --> 00:16:56.000
+Now we didn't pass in. any values. to the super constructor where it would collect the parameters. so we need to make those line up now.
+
+00:16:56.000 --> 00:17:05.000
+So let's do that. notice how box b is taking 6 and 7 as parameters.
+
+00:17:05.000 --> 00:17:21.000
+This constructor should bring in width and height, just like the parent does like, so so that we can refer to them. and then we should pass those down to the super constructor like this.
+
+00:17:21.000 --> 00:17:39.000
+Oops team Send me home now. my boxes got the value that it wants to have, except that boxes are 3 dimensional right, and so we should have a depth.
+
+00:17:39.000 --> 00:17:58.000
+Parameter as well. here on the box, constructor but we can't pass that back to the super constructor, because depth is peculiar to boxes right so we should set that up for ourselves.
+
+00:17:58.000 --> 00:18:14.000
+This dot depth equals depth. This is here this dot depth belongs to the object itself.
+
+00:18:14.000 --> 00:18:26.000
+So we'll save that. go back here rerun it Now you can see that the box B that is here's a very variable named B.
+
+00:18:26.000 --> 00:18:29.000
+That happens to be box valued right and when it hits console log.
+
+00:18:29.000 --> 00:18:38.000
+It shows it's type which is box and then the string representation of that of that box, and how it holds together.
+
+00:18:38.000 --> 00:18:55.000
+Now onto the volume method. we want to be able to run volume on this.
+
+00:18:55.000 --> 00:19:12.000
+So let's do a sample execution of that function here. here's volume like so keep the label up to date, save we run it now.
+
+00:19:12.000 --> 00:19:16.000
+Volume is just returning undefined so let's get some stuff in there again.
+
+00:19:16.000 --> 00:19:22.000
+I'm not going to pass parameters into volume, because it should already know all the values that it needs.
+
+00:19:22.000 --> 00:19:41.000
+What we can do, though, is return this dot width times this dot times, this dot depth like.
+
+00:19:41.000 --> 00:19:47.000
+So we run 210 must be 35 times 6.
+
+00:19:47.000 --> 00:20:03.000
+Oh, Yeah. 30 times 7. Glive asks. Can we reference area from volume?
+
+00:20:03.000 --> 00:20:07.000
+Yes, we can, and that was the very next step. So good.
+
+00:20:07.000 --> 00:20:16.000
+Question notice from inside volume. we've got returned this dot with times this dot height.
+
+00:20:16.000 --> 00:20:21.000
+But it turns out that that code is actually being calculated here in area as well.
+
+00:20:21.000 --> 00:20:29.000
+So this is a slightly better way to do it right if I take that out.
+
+00:20:29.000 --> 00:20:42.000
+And instead go this dot area and I think that's Glbb's question, How do we reference area from within this class?
+
+00:20:42.000 --> 00:20:50.000
+The box class, right? So every function that is available in this class can be available.
+
+00:20:50.000 --> 00:20:59.000
+In the subclass, now in more complex implementations of object-oriented programming.
+
+00:20:59.000 --> 00:21:10.000
+This is not always the case for all languages depending on How you define your functions, and there's a whole raft of ways of providing visibility into par classes.
+
+00:21:10.000 --> 00:21:14.000
+Typically so subclasses have access to the parent class methods.
+
+00:21:14.000 --> 00:21:23.000
+Right. there's private and public functions which may have some thing to do with this.
+
+00:21:23.000 --> 00:21:33.000
+The vast majority of the time the subclass needs to be able to call the functions that are built into a thing on a parent class.
+
+00:21:33.000 --> 00:22:02.000
+Great, so that's a pretty straightforward and example driven view of object-oriented programming within javascript, and how it all holds together any questions on anything that you've seen there I mean you know feel free to
+
+00:22:02.000 --> 00:22:10.000
+interrupt it. Any kind we could use, get and lose the parens.
+
+00:22:10.000 --> 00:22:26.000
+Yes, it is possible to write a getter and setter for functions in Javascript, where the then you wouldn't need to use that like that to me. that's just syntactic sugar could We
+
+00:22:26.000 --> 00:22:31.000
+press props to constructor and super instead of those params.
+
+00:22:31.000 --> 00:22:38.000
+So you can pass anything you want to a constructor because you're going to make your own thing.
+
+00:22:38.000 --> 00:22:49.000
+Everything that i've shown here is super abstract right when we get into react, then react is gonna provide us with the base class.
+
+00:22:49.000 --> 00:22:59.000
+That base class will have been written to have certain expectations in particular around props which will be an object right here.
+
+00:22:59.000 --> 00:23:05.000
+I've passed in individual primitives, which is typical for simple classes.
+
+00:23:05.000 --> 00:23:18.000
+But you can write your classes any way. you want and in react, wrote their class in a specific way where it took a whole object.
+
+00:23:18.000 --> 00:23:24.000
+That's part of the constructor but we're getting a little bit ahead of ourselves.
+
+00:23:24.000 --> 00:23:33.000
+Let's get into that part of things next must have been this toy.
+
+00:23:33.000 --> 00:23:52.000
+Okay, we will return to those examples a little later. Here is a bit of boilerplate.
+
+00:23:52.000 --> 00:24:10.000
+Create react app stuff. let's just bring it up i'll show you the code.
+
+00:24:10.000 --> 00:24:32.000
+Nothing in here yet. here's a sample app and we want to be on.
+
+00:24:32.000 --> 00:24:51.000
+So we're still starting the development. server I think Zoom is taking up a lot of my computer's resources today.
+
+00:24:51.000 --> 00:25:21.000
+There we go. sample app today. Thank you for your patience.
+
+00:25:30.000 --> 00:25:42.000
+Okay, So we've got some sample code in here that we can look at later.
+
+00:25:42.000 --> 00:25:55.000
+I'm going to start by building a new component the components folder called our component dot J.
+
+00:25:55.000 --> 00:26:16.000
+Sx. and let's see export default our component equals.
+
+00:26:16.000 --> 00:26:38.000
+And so this is the way that you have been doing things and have been getting more comfortable with up to now with your functional components in react return, a thing with the multi-line return put in place.
+
+00:26:38.000 --> 00:26:46.000
+And what's it going to return some jsx maybe a div like So right.
+
+00:26:46.000 --> 00:27:05.000
+So our component is going to say, have an h one on it, like so import react to react, etc.
+
+00:27:05.000 --> 00:27:35.000
+Then back here we can have our component like so it brought it in automatically up top.
+
+00:27:45.000 --> 00:28:08.000
+So we'll bring this up our component is not defined What am I missing here?
+
+00:28:08.000 --> 00:28:38.000
+Fung, export default const you know that's right cannot read properties of undefined reading create elements. All right.
+
+00:29:24.000 --> 00:29:31.000
+I'm gonna go grab some some sample code what is going on here.
+
+00:29:31.000 --> 00:30:01.000
+We stand by I think it's because you were having like a mix of a function, expression, and declaration in the same line.
+
+00:30:42.000 --> 00:30:57.000
+So it should be. export, default our component parens, and then curly braces it.
+
+00:30:57.000 --> 00:31:04.000
+Thank you. export default our component and no arrow.
+
+00:31:04.000 --> 00:31:34.000
+Something this up expert default function I know what it is you're importing, reacting curly braces online one there.
+
+00:31:45.000 --> 00:31:56.000
+It can't be encouraging this is here nice all right thank you for that.
+
+00:31:56.000 --> 00:32:14.000
+Good. Okay, where were we? This is the way that you've been doing it right, and we want to switch over to how we can do this in class based components instead.
+
+00:32:14.000 --> 00:32:30.000
+Now it turns out that with class based complexity. the move to functional components instead was bolted on, so that it wouldn't break all of the old code.
+
+00:32:30.000 --> 00:32:40.000
+For example. Okay, Now i've got to go back to where I was before.
+
+00:32:40.000 --> 00:33:10.000
+So, for example, class, our component extends react dot component like.
+
+00:33:22.000 --> 00:33:52.000
+So. And so now we're gonna comment out this way of doing things, and instead we will have an export of the class name like.
+
+00:34:05.000 --> 00:34:18.000
+So now classes can have constructors, and ours will like so.
+
+00:34:18.000 --> 00:34:28.000
+Except now in this case, given that we're extending
+
+00:34:28.000 --> 00:34:37.000
+Component we're extending a class that's already been written as part of react right.
+
+00:34:37.000 --> 00:34:49.000
+That class has functions and methods that are defined on it that the framework that is react in the library that's kind of like a framework.
+
+00:34:49.000 --> 00:34:57.000
+We're gonna play nice with how that thing has been set up with the expectations that we're now gonna fulfill.
+
+00:34:57.000 --> 00:35:04.000
+So that reacts can use these objects the way that that it it expects to right.
+
+00:35:04.000 --> 00:35:21.000
+And so what that means is that we're going to be defining a function called render, because that's the function that's going to get called when React wants to to render a component right So in the world that you've been
+
+00:35:21.000 --> 00:35:28.000
+working with with react. Now your functions return the Jsx.
+
+00:35:28.000 --> 00:35:42.000
+But with class based components. What you do is make a function called render, and that function can return.
+
+00:35:42.000 --> 00:36:05.000
+Jsx: Right. I am class based like so. And when the constructor is called for this component, this is where you get props.
+
+00:36:05.000 --> 00:36:25.000
+This is how props come in. So when we make our component in our app back here, we might choose, for example, to have something like thing.
+
+00:36:25.000 --> 00:36:36.000
+One as a prop thing. One is next character from that cartoon.
+
+00:36:36.000 --> 00:36:46.000
+That can be the value of the thing. one prop right so when you're working with a class based component like this.
+
+00:36:46.000 --> 00:36:53.000
+Here we have props coming in. We can do things with props now.
+
+00:36:53.000 --> 00:37:00.000
+As part of our constructor which we'll do a little bit of that later.
+
+00:37:00.000 --> 00:37:13.000
+Here we are within the return part of the class so let's try displaying something, maybe, in a paragraph tag.
+
+00:37:13.000 --> 00:37:27.000
+For example, i'll have to wrap this in a div so that it has only a single parent at the top, just like the 4.
+
+00:37:27.000 --> 00:37:39.000
+Put this stuff in here, and we can access this via this dot props.
+
+00:37:39.000 --> 00:37:49.000
+It turns out, is repopulated by the react system so we have thing one as a prop year.
+
+00:37:49.000 --> 00:38:00.000
+So let's try it out. Yeah sure enough character from a cartoon.
+
+00:38:00.000 --> 00:38:30.000
+That was the value right of this prop here. so at this point let's figure out state right, that's the other big part of how we're going to have all this stuff hold together. so with State State .
+
+00:38:46.000 --> 00:39:06.000
+Is How so? Down here, with our functional based components, state enters into the equation by the calls like const value.
+
+00:39:06.000 --> 00:39:13.000
+Set value right equal use, state like so and you give it a default value.
+
+00:39:13.000 --> 00:39:22.000
+Maybe it's one in the class based world we have access to a thing called State.
+
+00:39:22.000 --> 00:39:40.000
+This dot State, for example, straight away and it's an object it's an object within the class. So this dot state ready to go.
+
+00:39:40.000 --> 00:39:49.000
+We can actually set it. We can initialize it to its first value here in the constructor for the component that you're making.
+
+00:39:49.000 --> 00:39:59.000
+I would like to have counter right it's been a little while since we made a counter right one last chance before a kick at the can.
+
+00:39:59.000 --> 00:40:03.000
+I'm sure you'll get to make a counter in ruby
+
+00:40:03.000 --> 00:40:14.000
+This default value, something that we can do, modifying state directly. right?
+
+00:40:14.000 --> 00:40:26.000
+This is your first and last chance to do such a thing we're gonna have a set state way of doing things which we'll see in a moment.
+
+00:40:26.000 --> 00:40:39.000
+This object, this dot state this is your one and only chance to change it in the constructor of your class, so you know, Let's add our counter to it.
+
+00:40:39.000 --> 00:40:46.000
+Here we can add another paragraph tag counter, and then go.
+
+00:40:46.000 --> 00:40:56.000
+This dot state dot counter like. So now I saw a question earlier.
+
+00:40:56.000 --> 00:41:20.000
+Where do we call the render whoops? The Start State constructor is spelled wrong.
+
+00:41:20.000 --> 00:41:34.000
+Oh, thank you, Constructor. Nice. Try that again. Must call super class.
+
+00:41:34.000 --> 00:41:42.000
+Okay, this is really important. Right? you would have hit this error in the building of your constructors.
+
+00:41:42.000 --> 00:41:53.000
+And wondered. Okay, what's going on this is exactly the same error that we were seeing before in the basic classes about needing to call the super constructor.
+
+00:41:53.000 --> 00:41:56.000
+So yes, Logan that's exactly what's going on here.
+
+00:41:56.000 --> 00:42:14.000
+And so we're gonna put that in right at this point like So now there's also a bit of a thing with react and react based components and sorry with class based components and react about passing props to the super
+
+00:42:14.000 --> 00:42:20.000
+constructor there's it's actually kind of a deep weird issue.
+
+00:42:20.000 --> 00:42:29.000
+Doing it this way will save rare and weird bugs.
+
+00:42:29.000 --> 00:42:36.000
+Save you from having rare and weird bugs that's basically the impetus for doing this precisely in this way.
+
+00:42:36.000 --> 00:42:41.000
+Take in the props in your constructor. pass them up to the super constructor like.
+
+00:42:41.000 --> 00:42:49.000
+So So with that done that way, we get our class based component to work.
+
+00:42:49.000 --> 00:43:06.000
+And so the counters at and at this stage we're gonna want to look at adding some stuff so that we can control the State. And this will get us into set state calls and things like that.
+
+00:43:06.000 --> 00:43:21.000
+Okay, So the State was initialized as an object here and on our component.
+
+00:43:21.000 --> 00:43:44.000
+We're gonna want to have a button as usual we'll call it add one, and the button is going to have a click handler like So let's split that click handler out to be a function
+
+00:43:44.000 --> 00:44:01.000
+that's going to be defined outside here so we might do something like this dot click handler like that you'd think that this would be a reasonable thing to do.
+
+00:44:01.000 --> 00:44:18.000
+We're setting up an error by the way so for instance, click handler equals and let's start like this.
+
+00:44:18.000 --> 00:44:24.000
+A function definition with a semicolon to end the line.
+
+00:44:24.000 --> 00:44:35.000
+This is an anonymous function valued thing that's going to be put it into this variable out here.
+
+00:44:35.000 --> 00:44:48.000
+Like so. and then this function should be available at this point.
+
+00:44:48.000 --> 00:45:14.000
+Let's say, actually like this great like the class function syntax, right?
+
+00:45:14.000 --> 00:45:22.000
+And so inside this function we've got some state that we want to change.
+
+00:45:22.000 --> 00:45:39.000
+Now this is bad. This dot state equals this dot state plus one, Hopefully, that makes sense.
+
+00:45:39.000 --> 00:45:47.000
+Why, this is bad right, just from everything that you've understood already about functional react right?
+
+00:45:47.000 --> 00:45:53.000
+This is a direct modification of the state it's going to create tons of problems that are hard to debug.
+
+00:45:53.000 --> 00:46:14.000
+If you're doing something this way right so don't do that instead, you have access to set state, which is a function that's defined on your class because it extends react component.
+
+00:46:14.000 --> 00:46:32.000
+And so this dot state takes an object here where you include all of the properties that you want to change.
+
+00:46:32.000 --> 00:46:40.000
+It's not that this object is state itself it's the updates to state.
+
+00:46:40.000 --> 00:47:08.000
+And so, for example, if our state up above happened to have some other extra properties on it, like so like maybe I have a name value that's also included in the State must say first name like this Bob, right as i'm setting state here
+
+00:47:08.000 --> 00:47:15.000
+as a the of this click handler don't need to include all of the properties in state.
+
+00:47:15.000 --> 00:47:34.000
+I can just include the one that I want to change and So It is at this point that I can say this dot state dot counter plus one like so and so that's going to be.
+
+00:47:34.000 --> 00:47:42.000
+How we do it. Make sure that comment stays whole in one line.
+
+00:47:42.000 --> 00:47:49.000
+Okay, this dot state this dot set state and then it sets it to that counter is the one that's going to get updated.
+
+00:47:49.000 --> 00:48:00.000
+This gets folded together. No need for a spread operator here, basically. All right.
+
+00:48:00.000 --> 00:48:17.000
+Now let's generate this error and this is going to be a pretty weird One cannot read properties of undefined whoops.
+
+00:48:17.000 --> 00:48:33.000
+Something went away. This is not working and it's actually not working for a reason that's not react.
+
+00:48:33.000 --> 00:49:01.000
+Based. This is a javascript issue. and Basically, it's down to the value of the this token, because when this return value is passed back to react for react to handle the value of this has gone away this thing has been abstracted
+
+00:49:01.000 --> 00:49:09.000
+out this doesn't mean what it meant when it's in this file anymore. Right?
+
+00:49:09.000 --> 00:49:17.000
+Click handler isn't defined on this because this doesn't refer to this component anymore.
+
+00:49:17.000 --> 00:49:40.000
+So what would end up needing to do is figure out there's basically 3 ways to get around this and i'm gonna show several of them ultimately. So that you can see and there's an exercise in today's compass that you're
+
+00:49:40.000 --> 00:49:49.000
+going to want to figure out how to get through different ways of writing your code, so that your methods within the class are accessible to you.
+
+00:49:49.000 --> 00:50:18.000
+One of the ways to solve this problem goes a bit like this and it's one of these things that's kind of like boiler plate code that you would put in and just get kind of like event target value where you
+
+00:50:18.000 --> 00:50:23.000
+see it coming back over and over again, and after a while it becomes its own thing Right?
+
+00:50:23.000 --> 00:50:43.000
+This is a javascript solution to a javascript problem, and the way it works is this we're accessing a thing called Bind and it's setting you up so that the this on the Click handler
+
+00:50:43.000 --> 00:51:00.000
+here. I need to make sure that i'm writing this correctly. this stock click handler equals this dot click handler.
+
+00:51:00.000 --> 00:51:13.000
+There that's for our context. bind this okay so with that in place.
+
+00:51:13.000 --> 00:51:21.000
+It makes sure that click-andler always knows the context that it's working in.
+
+00:51:21.000 --> 00:51:28.000
+So now, if we go back here now, it works all right, so that may feel a little bit.
+
+00:51:28.000 --> 00:51:43.000
+Kluge right it's just a way to enforce that this dot click handler is going to work in contexts outside of this class definition, which, by the way, is precisely where render is getting called from
+
+00:51:43.000 --> 00:51:48.000
+renders getting called from react, not from within the class.
+
+00:51:48.000 --> 00:52:07.000
+Yeah, that's one way to handle this issue and in some kinds of code with some kinds of constructor, what you'll find is that this construct you'll find constructors that have a raft of these things like so
+
+00:52:07.000 --> 00:52:16.000
+with different function names here, one for each of the helper functions that you've got this find inside one of your classes right?
+
+00:52:16.000 --> 00:52:23.000
+Not the prettiest way of handling things but it's certainly very defensive.
+
+00:52:23.000 --> 00:52:49.000
+To do that. There are 2 other ways to handle this issue you'll want to be aware of those as well, one way is that instead of passing back the reference to the function for the on click this way, you can instead pass back
+
+00:52:49.000 --> 00:53:00.000
+arrow function precisely because of the way that arrow functions work with their this parameters right?
+
+00:53:00.000 --> 00:53:13.000
+You can pass back this encapsulating function to react and then we don't even need this line anymore.
+
+00:53:13.000 --> 00:53:23.000
+It'll still work this way. so just to prove it let's go back to the browser, let's try reloading this again.
+
+00:53:23.000 --> 00:53:42.000
+You know something's happening expected an assignment or a function call instead. saw an expression line 26 you have to call it.
+
+00:53:42.000 --> 00:53:49.000
+There we go add one. there's our counter back to life again.
+
+00:53:49.000 --> 00:53:58.000
+Okay, So right yeah, inside this click handler function, this is now going to be an arrow function.
+
+00:53:58.000 --> 00:54:04.000
+That itself actually executes the click handler that's what needed to happen here.
+
+00:54:04.000 --> 00:54:11.000
+It's not that it's passing this click handler back it's passing this callback that callback becomes the click handler right?
+
+00:54:11.000 --> 00:54:28.000
+And so it's going to call click handler for us So if you see that kind of a trick in your onclick set ups, then it's being defensive to that thing where the click handle itself would get unbound
+
+00:54:28.000 --> 00:54:37.000
+Okay, one more way while we're at it for solving this problem is a quick question about that.
+
+00:54:37.000 --> 00:54:44.000
+Yeah, please go ahead. You got curly braces around this dot click, handler on line 26.
+
+00:54:44.000 --> 00:54:52.000
+Yep like the pink ones. Oh, sorry this one here yeah That's right.
+
+00:54:52.000 --> 00:55:02.000
+Yeah, what do those ones do? They're not necessary do you remember with era functions that if you have a single line you can omit those curly braces work right?
+
+00:55:02.000 --> 00:55:09.000
+That's what those are. okay, and I think maybe it was strongly off, because I'm used to seeing a return statement there, too.
+
+00:55:09.000 --> 00:55:18.000
+So yeah, Okay, in general. So this is This is now an implied return. Yeah.
+
+00:55:18.000 --> 00:55:27.000
+Now what it what this this callback inside here the one that is becoming the onclick handler.
+
+00:55:27.000 --> 00:55:33.000
+Right we write it this way. there's an implied return it'll be whatever the click handler itself returns.
+
+00:55:33.000 --> 00:55:40.000
+Here is going to be the return value of that thing but we don't care about that at least.
+
+00:55:40.000 --> 00:55:58.000
+The click handler ran right. but with error functions in general, you know, you can have these curly braces inside here, and then it can be like a multiple line affair right where you're not using the implied return thing right?
+
+00:55:58.000 --> 00:56:13.000
+That would be legal right and in this case you would need these internal pink curlly braces, because there's more than one line here. right they can go away in the case where there's just the one Yes, this is
+
+00:56:13.000 --> 00:56:18.000
+implied return values territory Now but I don't care about the return value.
+
+00:56:18.000 --> 00:56:32.000
+Anyway, would they do. But we have an extra curly grace Okay, let's just go back here.
+
+00:56:32.000 --> 00:56:46.000
+Make sure it's working still. Yeah, got my counter going so fit were me making class based components these days.
+
+00:56:46.000 --> 00:56:53.000
+Oh, sorry. There was this one extra way that you can be defeated about.
+
+00:56:53.000 --> 00:57:02.000
+Preventing that decoupling of the helper functions from this variable right, and that is to actually define the variable itself.
+
+00:57:02.000 --> 00:57:09.000
+Sorry, define the function itself as an arrow function inside the class based components.
+
+00:57:09.000 --> 00:57:22.000
+So you might see it actually done this way. Instead, click handler equals an arrow function like so like a function expression. instead.
+
+00:57:22.000 --> 00:57:32.000
+So, instead of defining it that way, you might find that you see code that looks like this instead.
+
+00:57:32.000 --> 00:57:51.000
+And so now that way would also work right. I could go back to this style here, and it's going to call click handler.
+
+00:57:51.000 --> 00:57:59.000
+Why does this work? it's because of how arrow functions handle the this scoping right?
+
+00:57:59.000 --> 00:58:01.000
+Remember that distinction very early on from Boot Camp.
+
+00:58:01.000 --> 00:58:10.000
+Here we are, landing finally with week. 8 day 4, 5, right 4
+
+00:58:10.000 --> 00:58:21.000
+This arrow function has a definition for this inside of it and so that's going to stay stuck right We go back to the thing, reload it.
+
+00:58:21.000 --> 00:58:33.000
+We and the counter still works, I haven't applied this crazy boilerplate thing I haven't done this trick in the onclick handler itself, and yet the Click handler works this way.
+
+00:58:33.000 --> 00:58:36.000
+But not with the other way that I had defined functions from before.
+
+00:58:36.000 --> 00:58:41.000
+So so by the end of today you'll have gone through this a few times.
+
+00:58:41.000 --> 00:58:48.000
+A question. The Count seems to be adding by 2 are you lagging.
+
+00:58:48.000 --> 00:58:57.000
+Let's just see. Add 1 one why no const on line 21 good question.
+
+00:58:57.000 --> 00:59:04.000
+Because of this the syntax of classes.
+
+00:59:04.000 --> 00:59:09.000
+Actually I mean we can try it. but I don't think that that's the kind of thing that we've got here.
+
+00:59:09.000 --> 00:59:18.000
+Yeah, And if you tried doing that, isn't that funny right about the class syntax, we've got class our component extends such and such like.
+
+00:59:18.000 --> 00:59:26.000
+Even this. This is a function definition here, right? This was a function definition here from before right.
+
+00:59:26.000 --> 00:59:37.000
+This is how classes work, so that is how we're defining the class here.
+
+00:59:37.000 --> 00:59:44.000
+This click handler equals happens to be a class. specific syntax for the definition of member functions.
+
+00:59:44.000 --> 01:00:06.000
+Okay, so that's that's certainly a lot of detail when it comes to class-based components, and how you set up helper functions right Personally, I'm: not against you know a belt and suspenders approach
+
+01:00:06.000 --> 01:00:21.000
+to this avoiding that error right like you know let's keep our pants up with both a belt and with suspenders, by making this be an arrow function and defining this using this syntax and why not
+
+01:00:21.000 --> 01:00:29.000
+can't hurt. right Go back here, reload the whole thing.
+
+01:00:29.000 --> 01:00:35.000
+No, I broke something. Now you know i'm gonna blame this one Hold on!
+
+01:00:35.000 --> 01:00:46.000
+Oh, no, it's because I wasn't calling it same errors from before back here.
+
+01:00:46.000 --> 01:00:55.000
+Add one. Okay, yeah, counters back our counter is great for testing stuff like they're so visually and appealing and direct.
+
+01:00:55.000 --> 01:01:10.000
+Okay, all right. So back to our plan for lecture we've done a review of es 6 classes.
+
+01:01:10.000 --> 01:01:16.000
+We've done an introduction to class based components and passing props.
+
+01:01:16.000 --> 01:01:29.000
+We've done handling events and changes to state we've just got a bit to talk about with regard to lifecycle methods which are kind of a big part of class based.
+
+01:01:29.000 --> 01:01:59.000
+React. So after the break we'll come back to that I am going to bring up a counter, let's see here, let's give us 10 min, and here's a video of Snoopy the dog.
+
+01:02:05.000 --> 01:02:17.000
+That I will show for the 10 min take a real break very small. Where's your mom?
+
+01:02:17.000 --> 01:02:47.000
+Let him do his thing. Okay, Season. Welcome back, everybody. You can see me.
+
+01:12:08.000 --> 01:12:26.000
+Snoop dog, all right. We got our very fancy class based counter and last up for a topic.
+
+01:12:26.000 --> 01:12:35.000
+Let's talk about life cycles for react for classification.
+
+01:12:35.000 --> 01:12:55.000
+So one thing that's different between functional apps and functional components and class based components that when you were doing things this way.
+
+01:12:55.000 --> 01:13:06.000
+When you are doing things this way, when you're building your functions, and then returning things from functions, those things come into an existence really quickly.
+
+01:13:06.000 --> 01:13:12.000
+They do their rendering, they render the dom elements whenever they're updated, and then they blank out of existence.
+
+01:13:12.000 --> 01:13:32.000
+After that they're only available and alive in the time that It takes to render that thing one thing that's different about class based components is that the object that represents that component stays in memory and stays alive for
+
+01:13:32.000 --> 01:13:45.000
+the entire lifetime of the app, and that object has the constructor run populating some memory associated with it.
+
+01:13:45.000 --> 01:13:56.000
+The State lives in that class right? The helper functions are available on any one of the objects you can call it.
+
+01:13:56.000 --> 01:14:04.000
+It'll go find the source code from the class definition run that function on that object, and so on render included.
+
+01:14:04.000 --> 01:14:20.000
+And so this is slightly different, significantly different life cycle associated with how class-based react components work.
+
+01:14:20.000 --> 01:14:25.000
+And here's a diagram of how that all holds together.
+
+01:14:25.000 --> 01:14:33.000
+There's a lot of the same language so components mount on the page.
+
+01:14:33.000 --> 01:14:44.000
+They update the same way that you'd be familiar with from functional components, and then they unmount at the end of their lifetime.
+
+01:14:44.000 --> 01:14:50.000
+If they disappear from the page, they're gonna unmount on the way out the door right?
+
+01:14:50.000 --> 01:15:09.000
+What we're gonna do is define each of these functions on our component and put a console log in there to see how the thing will show up or not show up at various points through the life cycle.
+
+01:15:09.000 --> 01:15:19.000
+So let's go ahead and dig into that here's our class based component.
+
+01:15:19.000 --> 01:15:28.000
+We are going to add some lifecycle methods component.
+
+01:15:28.000 --> 01:15:55.000
+Did mount like so and so console log component did mount like that component did update.
+
+01:15:55.000 --> 01:16:24.000
+We want to have a similar thing like. So where we have component did update as a console log, and then finally component will unmount the as another.
+
+01:16:24.000 --> 01:16:54.000
+One component will unmount like so so now when we run our component like this. If we dig in, to for example, the and dev tools, we'll see at least on the console. these messages.
+
+01:17:13.000 --> 01:17:38.000
+Right. So if I refresh the page, we get component and did mount right away because the component was shown in the dove right as I click on the counter button, we get an update call each time because when the click handler
+
+01:17:38.000 --> 01:17:49.000
+runs we get a call to set state. And so, the set State having run the component needs that it needs to re-render.
+
+01:17:49.000 --> 01:17:54.000
+And so the render call gets called right that's Why, as i'm clicking.
+
+01:17:54.000 --> 01:18:09.000
+This I get more and more updates component. Did update lifecycle method gets called. Now, the one remaining lifecycle method that we want to show.
+
+01:18:09.000 --> 01:18:18.000
+Here is the component will unmount. That would happen if I close this tab right.
+
+01:18:18.000 --> 01:18:37.000
+But to actually show that happening that's no good because then the console's gone right So we're gonna make a thing in our app up at the level let's make and now we're back to functional
+
+01:18:37.000 --> 01:19:07.000
+components right side by side. let's put a button in here, where let's see button so on click and let's have some state actually inside our app const visible set visible you state and we'll start with
+
+01:19:25.000 --> 01:19:55.000
+true. and let's see here. we want our component to to show up visible double ampersand likes so, and that way we can have the thing disappear and reappear from the page, right and so the onclick is going
+
+01:20:14.000 --> 01:20:44.000
+to be set visible, and we can just set it directly to the opposite of whatever the visible state is at the moment like so import you state, for.
+
+01:20:56.000 --> 01:21:26.000
+React sorry about the camera. is it that's saying it's on the button needs some stuff in it doesn't it toggle me like. So all right So now you can see it starts out as visible when I click
+
+01:22:07.000 --> 01:22:16.000
+toggle, it shows the thing, or un shows the thing right.
+
+01:22:16.000 --> 01:22:24.000
+And so if when we unshow it, you can see at the end component will on mount ran just before it.
+
+01:22:24.000 --> 01:22:48.000
+The component disappeared as part of its life cycle Now that's super useful when it comes to things like side effects and set timeouts. and Api calls, and this should sound familiar with regard to the use effect hook right the way that you
+
+01:22:48.000 --> 01:22:54.000
+guys have been handling all that stuff up to now has been with the use effect hook.
+
+01:22:54.000 --> 01:23:12.000
+But now, for example, we could do set time out of calls here where we're going to do something like polling or something on a on a cycle right?
+
+01:23:12.000 --> 01:23:21.000
+And so set time out. The first thing is going to be callback, followed by Oh, I don't know every 2 s.
+
+01:23:21.000 --> 01:23:41.000
+We might console dot log, Paul the api for updates right, and so we should see after the component did Mount R.
+
+01:23:41.000 --> 01:23:57.000
+It's going to run. this thing well it's just show that in action here's a reload component did Mount pull the Api for updates.
+
+01:23:57.000 --> 01:24:07.000
+Oh, that was a set of timeout. Sorry I meant to make this an interval, so that it goes every 2 s.
+
+01:24:07.000 --> 01:24:14.000
+There we go. pull the Api for updates, pull the Api for updates, and so on.
+
+01:24:14.000 --> 01:24:27.000
+Now at this point, if I turn this thing on and off I Haven't turned off the set interval right same issue is like with use.
+
+01:24:27.000 --> 01:24:37.000
+Effect. And so every time I mount the component again and unmount and mount the component again and more and more.
+
+01:24:37.000 --> 01:24:41.000
+Now you can see that it's pulling for updates like 3, 4, 5, 6 that like way, too much.
+
+01:24:41.000 --> 01:24:54.000
+It's because every one of those set intervals is still alive after every one of the disappear and reappearance of that component right, not good holding the the Api way too much.
+
+01:24:54.000 --> 01:25:10.000
+Say so. What we want to do is, we want to keep a value around in our component, and it can be part of the sets of the State for this component right?
+
+01:25:10.000 --> 01:25:21.000
+That's a good place to keep it in fact so let's say this is the interval reference that would be the name for that to start with.
+
+01:25:21.000 --> 01:25:47.000
+We can start it out as null in our constructor, when we have component, did mount the set interval returns to us interval equals not in turnbow.
+
+01:25:47.000 --> 01:25:55.000
+Wow! with the typos today. Okay, interval he's gonna get returned from set interval like that.
+
+01:25:55.000 --> 01:26:05.000
+And then we can go. this dot so state we'll take an object, and again, we don't need the spread operator.
+
+01:26:05.000 --> 01:26:19.000
+This is just the one thing that we want to change this dot state, dot interval, reference.
+
+01:26:19.000 --> 01:26:33.000
+He holes interval like So sorry. this is
+
+01:26:33.000 --> 01:26:46.000
+This is not assigning it. This is the property there We are there's the property of State interval reference is going to be set to interval after this call.
+
+01:26:46.000 --> 01:27:09.000
+Then down here in component will unmount. We can call clear interval and take this dot state dot interval reference like.
+
+01:27:09.000 --> 01:27:24.000
+So okay, back to the component reload component did Mount component did update.
+
+01:27:24.000 --> 01:27:33.000
+Now we get one poll every 2 s, because that's say some reasonable number of times to be pulling the Api from.
+
+01:27:33.000 --> 01:27:42.000
+And as we toggle this thing, the component will out, mount, Unmount.
+
+01:27:42.000 --> 01:27:59.000
+It shuts off the polling, because when the component did unmount or sorry when the component will unmount lifecycle method runs, it clears the interval, bring the component back restarts up the intervals again, and
+
+01:27:59.000 --> 01:28:09.000
+Now the component can pull its Api over 2 s the way we want great.
+
+01:28:09.000 --> 01:28:18.000
+So does that give people a good perspective on how life cycle components work in a class based component.
+
+01:28:18.000 --> 01:28:32.000
+This is very different from the hooks that we were using before Logan asks, Is it strictly necessary to declare a property in state in order to set something there using set state?
+
+01:28:32.000 --> 01:28:52.000
+I don't know if it's certainly a best practice like by far a best practice, because if you don't, then you run into that issue of state being used, which you know States should be used in your component in your the
+
+01:28:52.000 --> 01:29:01.000
+Jsx right then, having that slash of it on its first render be undefined and causing a bug right?
+
+01:29:01.000 --> 01:29:17.000
+So it's super defensive to set up your state in the first place to be, I mean, i've heard this phrase to be the shape of what it will be always right and what that means basically is to include all of those
+
+01:29:17.000 --> 01:29:36.000
+properties so the reason that I don't know whether that'll work or not is because it's you shouldn't do it that way, you know I think I think it's a good learning to do because then whatever error
+
+01:29:36.000 --> 01:29:42.000
+message comes up in that moment will be an example to see that error message. and then you're going to be that much better a programmer, right?
+
+01:29:42.000 --> 01:29:51.000
+Okay. And so that that pretty much carries the day for us.
+
+01:29:51.000 --> 01:29:58.000
+Actually I can do a bit of review. Please feel free to hang around and ask more in-depth questions as we do.
+
+01:29:58.000 --> 01:30:04.000
+The review. But if you're good with it that's you know feel free to head off into compassite.
+
+01:30:04.000 --> 01:30:10.000
+Oh, one thing I noticed in slack conversation this morning was that compass may be missing.
+
+01:30:10.000 --> 01:30:18.000
+Some assign, some tasks, some assignments. And so, if you run into that problem, this happened.
+
+01:30:18.000 --> 01:30:30.000
+There was a late-breaking update either last night or early this morning, that removed some of the assignments from today to do with this.
+
+01:30:30.000 --> 01:30:33.000
+Now my sense is that this is being worked on in all due haste.
+
+01:30:33.000 --> 01:30:39.000
+Even during this lecture, and we'll see some fix to that very soon.
+
+01:30:39.000 --> 01:30:51.000
+But I will update the Channel when I learn you know this state of that affair set of affairs just so that you guys don't get like super confused by the lack of a of a task that it's being referred
+
+01:30:51.000 --> 01:30:58.000
+to. but other than that, i'm just gonna go back through the same set of code.
+
+01:30:58.000 --> 01:31:01.000
+Oh, thanks for the update, Matt says that yeast claims it's fixed.
+
+01:31:01.000 --> 01:31:05.000
+I'm just gonna go back and do a review of what we've covered today.
+
+01:31:05.000 --> 01:31:12.000
+Give people an opportunity to to ask questions again. but you know if you're. If you're happy with it, then yeah, thanks very much for your time and attention.
+
+01:31:12.000 --> 01:31:31.000
+Thanksgiving alright. So the faster version of the same lecture class definitions in Javascript Right.
+
+01:31:31.000 --> 01:31:40.000
+It's a slightly different syntax inside your class definition. Class definitions are so that you can spin up objects from that class. right?
+
+01:31:40.000 --> 01:31:42.000
+You can spin up as many objects as you like.
+
+01:31:42.000 --> 01:32:01.000
+When it comes to this base class right here's the constructor, when you extend the class, it's good to call the super constructor, it's good to call the constructor of the class from which this came
+
+01:32:01.000 --> 01:32:13.000
+and in general it's also good to pass in the parameters that you would expect to receive at the constructor on the parent class as well.
+
+01:32:13.000 --> 01:32:17.000
+Right past those same parameters into the super constructor.
+
+01:32:17.000 --> 01:32:24.000
+Call here. it's a defensive thing to do but it also makes sure that you're object is fully populated.
+
+01:32:24.000 --> 01:32:30.000
+The way that the parent class would want to populate that class bi extending classes.
+
+01:32:30.000 --> 01:32:41.000
+You can add extra parameters, you can add extra methods, and those methods have access to all the methods that were on the base class as well.
+
+01:32:41.000 --> 01:33:00.000
+We did spend a lot of time today in lecture, talking about how to get around a very weird and specific problem that happens when you unbind the value of this.
+
+01:33:00.000 --> 01:33:14.000
+And I, you can actually show that this is in a problem that can occur in just direct Javascript has nothing to do with react here. where here we've made a couple of rectangles here's a box this box
+
+01:33:14.000 --> 01:33:28.000
+has a volume method on it. right but there's nothing preventing me from say grabbing a reference to that function outside of the country of the class.
+
+01:33:28.000 --> 01:33:39.000
+So I could go external reference equals b dot volume like that.
+
+01:33:39.000 --> 01:33:46.000
+What I'm doing here is Yes, volume is a function that's defined on the B class.
+
+01:33:46.000 --> 01:33:50.000
+So on the B object right it's a box class It's a B object.
+
+01:33:50.000 --> 01:33:53.000
+Now I have an external reference to that function.
+
+01:33:53.000 --> 01:34:04.000
+How about I call it external reference like so and So I've called that function, and I put out of its context.
+
+01:34:04.000 --> 01:34:32.000
+Let's run it again over here like this node classes. dot js cannot read proof area of undefined right?
+
+01:34:32.000 --> 01:34:44.000
+So it is executing the volume function but it's doing so in this context that's outside of the the original context in which the class was defined.
+
+01:34:44.000 --> 01:34:48.000
+Right, so cannot read area property area of undefined.
+
+01:34:48.000 --> 01:34:53.000
+If you ran into this while you were doing react-based stuff, you'd think you know what's going on.
+
+01:34:53.000 --> 01:34:58.000
+It seems to me perfectly clear that from in here this should be defined.
+
+01:34:58.000 --> 01:35:07.000
+But the reason that it isn't is because of the way that it's being called like this outside of the context of that object.
+
+01:35:07.000 --> 01:35:15.000
+And so we talked about some fixes to that we'll get to that as part of this quick review.
+
+01:35:15.000 --> 01:35:25.000
+So let's have a look at app for today.
+
+01:35:25.000 --> 01:35:37.000
+This is in the functional react Style right that you've been used to up to now at that functional react style can live side by side with class based components.
+
+01:35:37.000 --> 01:35:52.000
+That's not a problem. we added a toggle button and a little bit of state to keep track of whether or not our component was gonna be visible. Right? using this trick with the double ampersands First, it
+
+01:35:52.000 --> 01:35:56.000
+says is visible. true? If so, then show our component right.
+
+01:35:56.000 --> 01:36:10.000
+This state starts out is true. This click handler on the button is set actually calling the setter directly with set visible to be the opposite of whatever it is.
+
+01:36:10.000 --> 01:36:13.000
+Now, if visible, is true. it's gonna set visible to false.
+
+01:36:13.000 --> 01:36:22.000
+That's what a toggle does and so it's going to show the component or not show the component as we click that button.
+
+01:36:22.000 --> 01:36:27.000
+So let's go back to the thing if I reload it.
+
+01:36:27.000 --> 01:36:40.000
+When we get in and look at how this class based component was created, we'll see a few things we'll see how to pass props to it.
+
+01:36:40.000 --> 01:36:47.000
+We'll see how to handle state within it which is slightly different from what you're used to.
+
+01:36:47.000 --> 01:36:56.000
+You know up to now, before dealing with class based components and we'll also see the life cycle compents in action as well.
+
+01:36:56.000 --> 01:37:07.000
+So let's go through and read those things we'll go back to our component dot jsx to see how it is defined.
+
+01:37:07.000 --> 01:37:13.000
+No curly braces around. react. Thank you very much thank you for your patience, and you're debugging help on that one.
+
+01:37:13.000 --> 01:37:24.000
+Here is a class definition. now right and you'll recognize from our little review of how object-oriented class definitions work in Javascript class.
+
+01:37:24.000 --> 01:37:33.000
+Our component extends react component. And so we get a new class definition.
+
+01:37:33.000 --> 01:37:49.000
+And in fact, the that is what is exported from this file, because when it's rendered by the app back here, the first thing react is going to do is say, oh, is there a class by that name Yep great
+
+01:37:49.000 --> 01:37:53.000
+instantiate it. let's make an object out of that thing right?
+
+01:37:53.000 --> 01:38:00.000
+I could have multiple of these by just you know instantiating multiple of those classes.
+
+01:38:00.000 --> 01:38:12.000
+So let's dig into how this is being written props come in as an argument to the constructor.
+
+01:38:12.000 --> 01:38:21.000
+Props is an object. You can see how it was used down here.
+
+01:38:21.000 --> 01:38:32.000
+This stop props. it's an object that's available to the class react component.
+
+01:38:32.000 --> 01:38:55.000
+The original parent class is what's handling all of that it's actually building access to a thing this dot props for you. and passing these parameters and setting that object to be the value of this stop props so props is going to come in
+
+01:38:55.000 --> 01:39:07.000
+with properties right if I go back here thing one equals. a character from a cartoon that's a prop that's getting passed into this component shows up here as that object.
+
+01:39:07.000 --> 01:39:10.000
+And so when I want to get at that value, I go.
+
+01:39:10.000 --> 01:39:29.000
+This dot props dot thing. one then let's have a look at how State is handled within a class based component.
+
+01:39:29.000 --> 01:39:38.000
+Similarly to props, this dot state is set up as part of their infrastructure.
+
+01:39:38.000 --> 01:39:50.000
+Here from this original react component. i'll come back to that point about it.
+
+01:39:50.000 --> 01:39:57.000
+This is crossed out because the system thinks that it's deprecated.
+
+01:39:57.000 --> 01:40:14.000
+But i'll come back to that in a moment so Here we are with setting state notice that state is an object, and that the object has properties, and that the properties are being set to some initial values here in the
+
+01:40:14.000 --> 01:40:28.000
+constructor. It is legal to set these directly rather than calling the set state function, which, but only in the constructor.
+
+01:40:28.000 --> 01:40:46.000
+Otherwise. this is a no-no yeah so don't copy and paste from here, and then have your helper functions do it in the same way, because that's like against the whole philosophy of react Yeah, instead when you're
+
+01:40:46.000 --> 01:41:07.000
+modifying state the set state has been provided. to you already because it's defined inside this class, and so you get to call this dot set state and pass it and object.
+
+01:41:07.000 --> 01:41:15.000
+Yes, you're passing it an object it's not the whole state object.
+
+01:41:15.000 --> 01:41:19.000
+It's it's an object that's going to get merged into state.
+
+01:41:19.000 --> 01:41:34.000
+It only needs to contain the updated values so there's that That's how you change state and within class based components.
+
+01:41:34.000 --> 01:41:44.000
+You have other methods that are defined on this class that are not
+
+01:41:44.000 --> 01:41:53.000
+They're not like hooks these are functions that are defined directly on the class they're called lif cycle methods.
+
+01:41:53.000 --> 01:41:59.000
+They're called by react at specific points in the lifecycle of the component right?
+
+01:41:59.000 --> 01:42:18.000
+So here we have 3 examples. If we go back to the diagram you'll see that there's sort of 3 phases for the life of a class based component in a react app one is when you first put the component on
+
+01:42:18.000 --> 01:42:27.000
+the page. it's mounted so you'll get the constructor that renders it will render the constructor will run right.
+
+01:42:27.000 --> 01:42:32.000
+The render function will run. Then you have react updates.
+
+01:42:32.000 --> 01:42:43.000
+Dom things happening and refs and so on finally you'll get a call to component Did mount that means the component is there.
+
+01:42:43.000 --> 01:42:50.000
+You're able to assume that it's there and that the initial values of state are set in all everything that you need. right.
+
+01:42:50.000 --> 01:43:11.000
+So component did mount will get run right and so we see that here component did mount It's the first thing that got console logged in our console coupon did update that's when it
+
+01:43:11.000 --> 01:43:31.000
+rendered, and in the updating sorry in the mounting we had set up an interval every 2 s we're going to call the interval pull the api updates. that was done here every time the component updates say
+
+01:43:31.000 --> 01:43:37.000
+we change the state by clicking the counter button we're going to get component. did update again.
+
+01:43:37.000 --> 01:43:41.000
+So here I am clicking the counter button. We get more component.
+
+01:43:41.000 --> 01:43:52.000
+Did update calls every time that happens. Finally, if I click the toggle me, and it goes away.
+
+01:43:52.000 --> 01:44:12.000
+You'll see that it runs component will unmount and that method, when you define it on your class based component is you chance to clean up whatever you need to clean up in terms of resources and side effects to prevent
+
+01:44:12.000 --> 01:44:36.000
+memory leaks, and to prevent resources from being consumed. in your when it comes to helper functions like click handler on your component based out, there are 3 different ways that you can make them work.
+
+01:44:36.000 --> 01:44:42.000
+One way is to you is to set them up to be arrow functions.
+
+01:44:42.000 --> 01:44:59.000
+And notice that the syntax is a little different that you're passing in an arrow function right as a function definition literal here, and it because it's inside a class definition.
+
+01:44:59.000 --> 01:45:14.000
+You just say function name equals, and then the arrow function that by itself will make it so that you can be a little sloppy down here and just pass click handler directly as the onclick function. But another way.
+
+01:45:14.000 --> 01:45:24.000
+To be defensive about this issue to prevent the uncoupling of this from the helper function, to actually pass in a callback.
+
+01:45:24.000 --> 01:45:34.000
+Here where this callback is itself an arrow function that calls the click handler for you. right?
+
+01:45:34.000 --> 01:45:49.000
+So when this callback is called the then it will call the click handler, and if that's an arrow function, then that's also going to prevent that problem with this decoupling, and then finally a technique for preventing
+
+01:45:49.000 --> 01:45:59.000
+that click handler from the decoupling, from the object you can put in a piece of boilerplate code like this, where it actually calls bind in the constructor.
+
+01:45:59.000 --> 01:46:14.000
+So if you see that that's what's going on with that that's a wrap. Thank you very much for your time and attention.
+
+01:46:14.000 --> 01:46:18.000
+Have a good time encompass today glad to hear that it's all back up.
+
+01:46:18.000 --> 01:46:28.000
+Why is Super crossed out? Yeah. So super is in some context considered deprecated?
+
+01:46:28.000 --> 01:46:34.000
+And so it's actually giving us a thing that we can go and look at
+
+01:46:34.000 --> 01:46:40.000
+See What's going on with that i'm happy to paste it into the zoom chat here while we're at it.
+
+01:46:40.000 --> 01:46:55.000
+I'm not seeing anything about super directly but that'll be the reference on it.
+
+01:46:55.000 --> 01:47:14.000
+Thanks very much. we'll wrap it up Oh, do we ever do anything and render besides return you shouldn't the equivalent like thinking of things in terms of like functional programming like with the functional react that we've been
+
+01:47:14.000 --> 01:47:18.000
+doing how you have the return at the bottom and that's where all your Jsx is right.
+
+01:47:18.000 --> 01:47:27.000
+React as a framework has recombined the separation of concerns.
+
+01:47:27.000 --> 01:47:36.000
+Right originally with multi-page apps. You had your html with the semantic markup around your information.
+
+01:47:36.000 --> 01:47:42.000
+You had css for styling that's in a separate file, because that was even a different job description.
+
+01:47:42.000 --> 01:47:46.000
+Right. If you're a front-end programmer you were all about the Css.
+
+01:47:46.000 --> 01:47:57.000
+Right. Then, even on a separate third file, you had Javascript where you had functionality and business logic and messing with the user experience on the browser.
+
+01:47:57.000 --> 01:48:06.000
+They were all kept in separate files, right in react all those things are back in one place again.
+
+01:48:06.000 --> 01:48:13.000
+Yes, it's all front end You've got html markup for semantics.
+
+01:48:13.000 --> 01:48:29.000
+You've got css styling can even be included with with styles put directly in those files as well, and Javascript right where you have business logic and all the rest of it planning out How your state
+
+01:48:29.000 --> 01:48:33.000
+is going to change when the state's going to change when re-renders need to happen.
+
+01:48:33.000 --> 01:48:47.000
+It's important to keep your return section of your file that's our last grasp of being able to have separation of concerns.
+
+01:48:47.000 --> 01:48:56.000
+So the return really is for the presentation layer if you will yes, it's all in one file.
+
+01:48:56.000 --> 01:49:00.000
+Yes, we're all modifying it all together but that presentation layer.
+
+01:49:00.000 --> 01:49:05.000
+It's really not about business logic and it's better to not have business logic in it.
+
+01:49:05.000 --> 01:49:28.000
+So I would say, render, just leave it be about display.
+

@@ -1,0 +1,11 @@
+What is Object Oriented Programming?
+
+How do you define a Class?
+
+How do you use Classes to define components in React?
+
+How are props handled in Class-based components?
+
+How is state handled in Class-based components?
+
+What are three main lifecycle methods with Class-based components?
