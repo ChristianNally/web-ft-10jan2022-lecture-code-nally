@@ -1,0 +1,11 @@
+body {
+  background-color: grey;
+}
+
+.planet, .trail, .fixed {
+  border-radius: 50%;
+}
+
+#deltat-value {
+  background-color: white;
+}
